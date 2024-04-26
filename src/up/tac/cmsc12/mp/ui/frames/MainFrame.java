@@ -1,4 +1,4 @@
-package up.tac.cmsc12.mp.ui;
+package up.tac.cmsc12.mp.ui.frames;
 
 import javax.swing.JFrame;
 

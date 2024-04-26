@@ -1,4 +1,4 @@
-import up.tac.cmsc12.mp.ui.MainFrame;
+import up.tac.cmsc12.mp.ui.frames.MainFrame;
 
 public class Main {
     /*
