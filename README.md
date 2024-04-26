@@ -1,5 +1,4 @@
 # CMSC 12 Machine Project - Minesweeper
-=======================================
 
 This is a repo for our UP Tacloban College CMSC 12 Machine Project
 using Java in which we're making Minesweeper.
