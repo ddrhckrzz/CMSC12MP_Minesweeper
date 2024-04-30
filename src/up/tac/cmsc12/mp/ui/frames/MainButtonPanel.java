@@ -1,12 +1,14 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class MainButtonPanel extends JPanel {
+public class MainButtonPanel extends JPanel{
     private GridLayout layout;
     private JButton startButton;
     private JButton scoreButton;
@@ -36,5 +38,6 @@ public class MainButtonPanel extends JPanel {
 
     protected void bind_buttons(){
         // TODO: finish logic of this, I'm not too sure if this'll be needed
+
     }
 }
