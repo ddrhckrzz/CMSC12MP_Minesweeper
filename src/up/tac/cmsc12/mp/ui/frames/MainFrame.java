@@ -1,5 +1,9 @@
 package up.tac.cmsc12.mp.ui.frames;
 
+import java.awt.BorderLayout;
+import java.awt.CardLayout;
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 public class MainFrame extends JFrame {
@@ -11,14 +15,43 @@ public class MainFrame extends JFrame {
      * ... a bit long may have to move the assets folder out of here later.
      * 
      */
-    private String title_name;
+    // environment constants
+    private final String TITLENAME = "Minesweeper!";
+    private final String MAIN_PANEL = "Main Menu";
+    private final String GAME_PANEL = "Game Panel";
+    private final String OPTIONS_PANEL = "Options Panel";
+    private final String SCORE_PANEL = "Score Panel";
+
+    // class variables
+    private CardLayout cardLayout;
+    private MainPanel mainMenu;
+    private OptionsPanel optionsPanel;
+    private GamePanel gamePanel;
+    private ScorePanel scorePanel;
+
     public MainFrame(){
         // TODO: Add other UI stuff here and in this folder in general.
-        title_name = "Minesweeper!";
-        setTitle(title_name);
+        setTitle(TITLENAME);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        init_layout();
+        init_panels();
+    }
+
+    private void init_layout(){
+        cardLayout = new CardLayout(10,10);
+        setLayout(cardLayout);
+        setPreferredSize(new Dimension(640, 480));
+        setSize(getPreferredSize());
+    }
+
+    private void init_panels(){
+        mainMenu = new MainPanel();
+        cardLayout.addLayoutComponent(mainMenu, MAIN_PANEL);
+        add(mainMenu);
     }
 
     public void start(){
+        cardLayout.show(getContentPane(), MAIN_PANEL);
         setVisible(true);
     }
 

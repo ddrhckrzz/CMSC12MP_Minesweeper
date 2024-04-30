@@ -6,6 +6,6 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         MainFrame mainframe = new MainFrame();
-        mainframe.start(); // doesn't really do anything right now.
+        mainframe.start();
     }
 }
