@@ -18,7 +18,7 @@ public class MainButtonPanel extends JPanel {
     }
 
     private void init_layout(){
-        layout = new GridLayout(0,1);
+        layout = new GridLayout(0,1, 20, 20);
         setLayout(layout);
         setBorder(new EmptyBorder(40, 20, 20 , 40));
     }
