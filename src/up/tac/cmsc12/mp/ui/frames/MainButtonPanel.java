@@ -34,6 +34,7 @@ public class MainButtonPanel extends JPanel{
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = 2;
         setGBC(0, 0, GridBagConstraints.CENTER, 0.8, 0.8, GridBagConstraints.BOTH);
+        logoPane.setHorizontalAlignment(JLabel.CENTER);
         add(logoPane, gbc);
         gbc.ipadx = 20;
         gbc.ipady = 30;
