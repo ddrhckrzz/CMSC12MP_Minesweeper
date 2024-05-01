@@ -16,11 +16,11 @@ public class MainFrame extends JFrame {
      * 
      */
     // environment constants
-    private final String TITLENAME = "Minesweeper!";
-    private final String MAIN_PANEL = "Main Menu";
-    private final String GAME_PANEL = "Game Panel";
-    private final String OPTIONS_PANEL = "Options Panel";
-    private final String SCORE_PANEL = "Score Panel";
+    private final static String TITLENAME = "Minesweeper!";
+    public final static String MAIN_PANEL = "Main Menu";
+    public final static String GAME_PANEL = "Game Panel";
+    public final static String OPTIONS_PANEL = "Options Panel";
+    public final static String SCORE_PANEL = "Score Panel";
 
     // class variables
     private CardLayout cardLayout;
@@ -55,4 +55,7 @@ public class MainFrame extends JFrame {
         setVisible(true);
     }
 
+    public void goTo(String key){
+        cardLayout.show(getContentPane(), key);
+    }
 }
