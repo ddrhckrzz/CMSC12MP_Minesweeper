@@ -28,6 +28,7 @@ public class MainFrame extends JFrame {
     private OptionsPanel optionsPanel;
     private GamePanel gamePanel;
     private ScorePanel scorePanel;
+    private int currentPage;
 
     public MainFrame(){
         // TODO: Add other UI stuff here and in this folder in general.
@@ -48,10 +49,15 @@ public class MainFrame extends JFrame {
         mainMenu = new MainPanel();
         cardLayout.addLayoutComponent(mainMenu, MAIN_PANEL);
         add(mainMenu);
+        mainMenu.bind_buttons(this);
+        gamePanel = new GamePanel();
+        cardLayout.addLayoutComponent(gamePanel, GAME_PANEL);
+        add(gamePanel);
     }
 
     public void start(){
         cardLayout.show(getContentPane(), MAIN_PANEL);
+        currentPage = 0;
         setVisible(true);
     }
 
