@@ -16,6 +16,12 @@ public class ButtonListener implements ActionListener {
         // TODO: finish action listener stuff
         if (key.equals("Exit")) {
             mainFrame.dispose();
+        } else if (key.equals("Start")) {
+            mainFrame.goTo(MainFrame.GAME_PANEL);
+        } else if (key.equals("Leaderboards")) {
+            mainFrame.goTo(MainFrame.SCORE_PANEL);
+        } else if (key.equals("Options")) {
+            mainFrame.goTo(MainFrame.OPTIONS_PANEL);
         }
     }
 
