@@ -1,12 +1,15 @@
 package up.tac.cmsc12.mp.ui.frames;
 
-import java.awt.GridLayout;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
+import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MainButtonPanel extends JPanel{
-    private GridLayout layout;
+    private GridBagLayout layout;
+    private GridBagConstraints gbc;
     private JButton startButton;
     private JButton scoreButton;
     private JButton optionsButton;
@@ -18,7 +21,8 @@ public class MainButtonPanel extends JPanel{
     }
 
     private void init_layout(){
-        layout = new GridLayout(0,1);
+        layout = new GridBagLayout();
+        gbc = new GridBagConstraints();
         setLayout(layout);
     }
 
@@ -27,15 +31,53 @@ public class MainButtonPanel extends JPanel{
         scoreButton = new JButton("Leaderboards");
         optionsButton = new JButton("Options");
         exitButton = new JButton("Exit");
-        add(logoPane);
-        add(startButton);
-        add(scoreButton);
-        add(optionsButton);
-        add(exitButton);
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridwidth = 2;
+        setGBC(0, 0, GridBagConstraints.CENTER, 0.8, 0.8, GridBagConstraints.BOTH);
+        add(logoPane, gbc);
+        gbc.ipadx = 20;
+        gbc.ipady = 30;
+        setGBC(0, 1, GridBagConstraints.CENTER, 0.4, 0.2, GridBagConstraints.BOTH);
+        add(startButton, gbc);
+        gbc.gridwidth = 1;
+        setGBC(0, 2, 0.2, 0.2);
+        add(scoreButton, gbc);
+        setGBC(1, 2);
+        add(optionsButton, gbc);
+        gbc.gridwidth = 2;
+        setGBC(0, 3, 0.4, 0.2);
+        add(exitButton, gbc);
     }
 
     protected void bind_buttons(){
         // TODO: finish logic of this, I'm not too sure if this'll be needed
 
+    }
+
+    private void setGBC(int gridx, int gridy, int anchor){
+        gbc.gridx = gridx;
+        gbc.gridy = gridy;
+        gbc.anchor = anchor;
+    }
+
+    private void setGBC(int gridx, int gridy){
+        gbc.gridx = gridx;
+        gbc.gridy = gridy;
+    }
+
+    private void setGBC(int gridx, int gridy, double weightx, double weighty){
+        gbc.gridx = gridx;
+        gbc.gridy = gridy;
+        gbc.weightx = weightx;
+        gbc.weighty = weighty;
+    }
+
+    private void setGBC(int gridx, int gridy, int anchor, double weightx, double weighty, int fill){
+        gbc.gridx = gridx;
+        gbc.gridy = gridy;
+        gbc.anchor = anchor;
+        gbc.weightx = weightx;
+        gbc.weighty = weighty;
+        gbc.fill = fill;
     }
 }
