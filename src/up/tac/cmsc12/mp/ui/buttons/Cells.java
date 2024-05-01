@@ -5,13 +5,9 @@ import java.awt.Insets;
 import javax.swing.JButton;
 
 public class Cells extends JButton {
-    private int row;
-    private int col;
     private int val; // 0 means empty, 9 means mine, everything else just tells how many mines there are around it
 
-    public Cells(int row, int col){
-        this.row = row;
-        this.col = col;
+    public Cells(){
         setFocusable(false);
         setMargin(new Insets(0, 0, 0, 0));
     }
