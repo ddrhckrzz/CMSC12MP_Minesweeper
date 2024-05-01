@@ -1,12 +1,14 @@
-package up.tac.cmsc12.mp.ui.frames;
+package up.tac.cmsc12.mp.ui.buttons;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ButtonListener implements ActionListener {
+import up.tac.cmsc12.mp.ui.frames.MainFrame;
+
+public class MainButtonListener implements ActionListener {
     private MainFrame mainFrame;
     
-    public ButtonListener(MainFrame mainFrame){
+    public MainButtonListener(MainFrame mainFrame){
         this.mainFrame = mainFrame;
     }
 
