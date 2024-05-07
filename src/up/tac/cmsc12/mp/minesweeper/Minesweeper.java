@@ -1,4 +1,5 @@
 package up.tac.cmsc12.mp.minesweeper;
+import up.tac.cmsc12.mp.ui.buttons.Cells;
 
 public class Minesweeper {
     /*
@@ -16,4 +17,34 @@ public class Minesweeper {
      * extensions it should automatically add the package line at
      * the very top for you.
      */
+    public static void autoClear(Cells[][] cells, int row, int col){
+        int[] xAdjacency = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
+        int[] yAdjacency = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
+        int rowToUpdate;
+        int colToUpdate;
+        int cellVal;
+        boolean isClear;
+        for(int i = 0; i<9; i++){
+            rowToUpdate = row;
+            colToUpdate = col;
+            try{ //works like an if statement to see if index is within bounds
+                rowToUpdate += xAdjacency[i];
+                colToUpdate += yAdjacency[i];
+                cellVal = cells[rowToUpdate][colToUpdate].getVal();
+                isClear = cells[rowToUpdate][colToUpdate].isClear();
+                if(cellVal != 9)
+                    cells[rowToUpdate][colToUpdate].updateText();
+                if(cellVal < 1){
+                    if(!isClear){
+                        autoClear(cells, rowToUpdate, colToUpdate);
+                    }
+                }    
+            }
+            catch(ArrayIndexOutOfBoundsException e){
+            }
+            catch(Exception e){
+                e.printStackTrace();
+            }
+        }
+    }
 }
