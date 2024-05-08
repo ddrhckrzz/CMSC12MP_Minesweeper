@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
     private JPanel boardPanel;
     private JPanel bottomPanel;
     private JLabel timer = new JLabel("timer"); //moved because they need to be global to be updated(cant change text)
-    private JLabel minesLeft = new JLabel("Mines Left: ");
+    private static JLabel minesLeft = new JLabel("Mines Left: ");
 
     /**
      * Default constructor that uses default board size
@@ -82,7 +82,7 @@ public class GamePanel extends JPanel {
 
             if(board[rowCoordinate][colCoordinate].getVal() != 9){ //checking if random coordinate is a duplicate
                 board[rowCoordinate][colCoordinate].setToMine(); //setting coordinates to be mines
-                //board[rowCoordinate][colCoordinate].updateText();
+                //board[rowCoordinate][colCoordinate].updateText();   //uncomment this to see mine placement
                 setAdjacency(rowCoordinate, colCoordinate);
                 minesToPlace--;
                 //System.out.println("mine: " + minesToPlace + " coordinate: " + rowCoordinate + ", " + colCoordinate);
@@ -91,8 +91,11 @@ public class GamePanel extends JPanel {
         }
     }
 
+    public static JLabel getMinesLabel(){
+        return minesLeft;
+    }
+
     private void setAdjacency(int rowCoordinate, int colCoordinate){
-        
         int rowToUpdate;
         int colToUpdate;
         for(int i = 0; i<9; i++){
@@ -104,7 +107,7 @@ public class GamePanel extends JPanel {
                 rowToUpdate += xAdjacency[i];
                 colToUpdate += yAdjacency[i];
                 board[rowToUpdate][colToUpdate].incrementVal();
-                //board[rowToUpdate][colToUpdate].updateText();
+                //board[rowToUpdate][colToUpdate].updateText(); //uncomment this to see mine adjacency
             }
             catch(ArrayIndexOutOfBoundsException e){
             }
