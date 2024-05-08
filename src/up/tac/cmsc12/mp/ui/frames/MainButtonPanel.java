@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import up.tac.cmsc12.mp.ui.buttons.MainButtonListener;
+
 public class MainButtonPanel extends JPanel{
     private GridBagLayout layout;
     private GridBagConstraints gbc;
@@ -34,6 +36,7 @@ public class MainButtonPanel extends JPanel{
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = 2;
         setGBC(0, 0, GridBagConstraints.CENTER, 0.8, 0.8, GridBagConstraints.BOTH);
+        logoPane.setHorizontalAlignment(JLabel.CENTER);
         add(logoPane, gbc);
         gbc.ipadx = 20;
         gbc.ipady = 30;
@@ -49,9 +52,12 @@ public class MainButtonPanel extends JPanel{
         add(exitButton, gbc);
     }
 
-    protected void bind_buttons(){
-        // TODO: finish logic of this, I'm not too sure if this'll be needed
-
+    protected void bind_buttons(MainFrame mainframe){
+        MainButtonListener mbl = new MainButtonListener(mainframe);
+        startButton.addActionListener(mbl);
+        // scoreButton.addActionListener(mbl);
+        // optionsButton.addActionListener(mbl);
+        exitButton.addActionListener(mbl);
     }
 
     private void setGBC(int gridx, int gridy, int anchor){

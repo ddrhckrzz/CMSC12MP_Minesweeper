@@ -20,4 +20,8 @@ public class MainPanel extends JPanel {
         buttons = new MainButtonPanel();
         add(buttons);
     }
+
+    public void bind_buttons(MainFrame mainFrame){
+        buttons.bind_buttons(mainFrame);
+    }
 }
