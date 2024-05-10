@@ -44,7 +44,7 @@ public class GamePanel extends JPanel {
      * Default constructor that uses default board size
      * of 9x9 and only having 10 mines total.
      * 
-     * Currently not fully implemented yet.
+     * Normally shouldn't be called.
      */
     public GamePanel(){
         difficulty = -1; // basically for default board aka beginner board
@@ -52,11 +52,25 @@ public class GamePanel extends JPanel {
     }
 
     /**
-     * Constructor for when choosing specific difficulties that isn't the CUSTOM diffuclty.
+     * Creates a minesweeper board with a specific difficulty that isn't the CUSTOM diffuclty.
      * @param difficulty {@code int} key for choosing specific board difficulty to generate board
      */
     public GamePanel(int difficulty) {
         this.difficulty = difficulty;
+        init_layout();
+    }
+
+    /**
+     * Creates a Minesweeper board with custom rows, columns, and total no of mines.
+     * @param rows no of rows to use in the board
+     * @param cols no of cols to use in the board
+     * @param totalMines total no of mines to generate in the board
+     */
+    public GamePanel(int rows, int cols, int totalMines){
+        difficulty = 0; // for custom difficulty
+        this.rows = rows;
+        this.cols = cols;
+        this.totalMines = totalMines;
         init_layout();
     }
 
@@ -85,6 +99,9 @@ public class GamePanel extends JPanel {
 
     private void init_board(){
         switch (difficulty) {
+            case 0:
+                // do nothing
+                break;
             case 1:
                 rows = BEGINNER_DIMENSIONS;
                 cols = BEGINNER_DIMENSIONS;
