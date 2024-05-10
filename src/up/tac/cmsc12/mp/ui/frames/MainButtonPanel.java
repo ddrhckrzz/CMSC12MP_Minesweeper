@@ -62,12 +62,6 @@ public class MainButtonPanel extends JPanel{
         exitButton.addActionListener(mbl);
     }
 
-    private void setGBC(int gridx, int gridy, int anchor){
-        gbc.gridx = gridx;
-        gbc.gridy = gridy;
-        gbc.anchor = anchor;
-    }
-
     private void setGBC(int gridx, int gridy){
         gbc.gridx = gridx;
         gbc.gridy = gridy;
