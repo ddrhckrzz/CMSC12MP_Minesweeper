@@ -11,8 +11,7 @@ public class MainFrame extends JFrame {
      * TODO: Complete this thing idk
      * 
      * To access the assets folder from here the path is:
-     * "../../../../../../assets/"
-     * ... a bit long may have to move the assets folder out of here later.
+     * "assets/"
      * 
      */
     // environment constants
