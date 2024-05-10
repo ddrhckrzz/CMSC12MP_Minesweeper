@@ -10,10 +10,25 @@ import up.tac.cmsc12.mp.ui.buttons.Cells;
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
 
 public class GamePanel extends JPanel {
-    // TODO: finish logic and stuff.
+    // TODO: add creation of different board sizes.
+    // ----------------- OVERALL BOARD CONSTANTS -------------------------- //
     private static final int DEFAULT_ROWS = 9;
     private static final int DEFAULT_COLS = 9;
     private static final int DEFAULT_NO_OF_MINES = 10;
+    public static final int MAX_DIMENSIONS = 250; // width and height
+    private static final int MAX_NO_OF_MINES = 62499;
+    // ---------------- BOARD DIFFICULTY CONSTANTS ------------------------ //
+    public static final int BEGINNER_DIMENSIONS = 9;
+    public static final int BEGINNER_NO_OF_MINES = 10;
+    public static final int INTERMEDIATE_DIMENSIONS = 16;
+    public static final int INTERMEDIATE_NO_OF_MINES = 40;
+    public static final int EXPERT_DIMENSIONS = 24;
+    public static final int EXPERT_NO_OF_MINES = 99;
+    public static final int MASTER_DIMENSIONS = 50;
+    public static final int MASTER_NO_OF_MINES = 450;
+    public static final int LEGEND_DIMENSIONS = 100;
+    public static final int LEGEND_NO_OF_MINES = 2000;
+    // ------------------------ class variables ---------------------------- //
     private int rows;
     private int cols;
     private int totalMines;
@@ -37,6 +52,44 @@ public class GamePanel extends JPanel {
         board = new Cells[rows][cols];
         init_layout();
         addMines();
+    }
+
+    /**
+     * Constructor for when choosing specific difficulties that isn't the CUSTOM diffuclty.
+     * @param difficulty {@code int} key for choosing specific board difficulty to generate board
+     */
+    public GamePanel(int difficulty) {
+        switch (difficulty) {
+            case 1:
+                rows = BEGINNER_DIMENSIONS;
+                cols = BEGINNER_DIMENSIONS;
+                totalMines = BEGINNER_NO_OF_MINES;
+                break;
+            
+            case 2:
+                rows = INTERMEDIATE_DIMENSIONS;
+                cols = INTERMEDIATE_DIMENSIONS;
+                totalMines = INTERMEDIATE_NO_OF_MINES;
+
+            case 3:
+                rows = EXPERT_DIMENSIONS;
+                cols = EXPERT_DIMENSIONS;
+                totalMines = EXPERT_NO_OF_MINES;
+
+            case 4:
+                rows = MASTER_DIMENSIONS;
+                cols = MASTER_DIMENSIONS;
+                totalMines = MASTER_NO_OF_MINES;
+
+            case 5:
+                rows = LEGEND_DIMENSIONS;
+                cols = LEGEND_DIMENSIONS;
+                totalMines = LEGEND_NO_OF_MINES;
+        
+            default:
+                // does nothing... though you can also troll and make this use the MAX constants lol
+                break;
+        }
     }
 
     private void init_layout(){
