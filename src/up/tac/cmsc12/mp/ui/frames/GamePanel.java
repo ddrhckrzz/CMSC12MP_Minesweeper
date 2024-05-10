@@ -10,10 +10,26 @@ import up.tac.cmsc12.mp.ui.buttons.Cells;
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
 
 public class GamePanel extends JPanel {
-    // TODO: finish logic and stuff.
+    // TODO: add creation of different board sizes.
+    // ----------------- OVERALL BOARD CONSTANTS -------------------------- //
     private static final int DEFAULT_ROWS = 9;
     private static final int DEFAULT_COLS = 9;
     private static final int DEFAULT_NO_OF_MINES = 10;
+    public static final int MAX_DIMENSIONS = 250; // width and height
+    private static final int MAX_NO_OF_MINES = 62499;
+    // ---------------- BOARD DIFFICULTY CONSTANTS ------------------------ //
+    public static final int BEGINNER_DIMENSIONS = 9;
+    public static final int BEGINNER_NO_OF_MINES = 10;
+    public static final int INTERMEDIATE_DIMENSIONS = 16;
+    public static final int INTERMEDIATE_NO_OF_MINES = 40;
+    public static final int EXPERT_DIMENSIONS = 24;
+    public static final int EXPERT_NO_OF_MINES = 99;
+    public static final int MASTER_DIMENSIONS = 50;
+    public static final int MASTER_NO_OF_MINES = 450;
+    public static final int LEGEND_DIMENSIONS = 100;
+    public static final int LEGEND_NO_OF_MINES = 2000;
+    // ------------------------ class variables ---------------------------- //
+    private int difficulty;
     private int rows;
     private int cols;
     private int totalMines;
@@ -28,15 +44,34 @@ public class GamePanel extends JPanel {
      * Default constructor that uses default board size
      * of 9x9 and only having 10 mines total.
      * 
-     * Currently not fully implemented yet.
+     * Normally shouldn't be called.
      */
     public GamePanel(){
-        rows = DEFAULT_ROWS;
-        cols = DEFAULT_COLS;
-        totalMines = DEFAULT_NO_OF_MINES;
-        board = new Cells[rows][cols];
+        difficulty = -1; // basically for default board aka beginner board
         init_layout();
-        addMines();
+    }
+
+    /**
+     * Creates a minesweeper board with a specific difficulty that isn't the CUSTOM diffuclty.
+     * @param difficulty {@code int} key for choosing specific board difficulty to generate board
+     */
+    public GamePanel(int difficulty) {
+        this.difficulty = difficulty;
+        init_layout();
+    }
+
+    /**
+     * Creates a Minesweeper board with custom rows, columns, and total no of mines.
+     * @param rows no of rows to use in the board
+     * @param cols no of cols to use in the board
+     * @param totalMines total no of mines to generate in the board
+     */
+    public GamePanel(int rows, int cols, int totalMines){
+        difficulty = 0; // for custom difficulty
+        this.rows = rows;
+        this.cols = cols;
+        this.totalMines = totalMines;
+        init_layout();
     }
 
     private void init_layout(){
@@ -47,6 +82,7 @@ public class GamePanel extends JPanel {
         add(boardPanel, BorderLayout.CENTER);
         init_bottomPanel();
         add(bottomPanel, BorderLayout.SOUTH);
+        addMines();
     }
 
     private void init_topPanel(){
@@ -62,6 +98,47 @@ public class GamePanel extends JPanel {
     }
 
     private void init_board(){
+        switch (difficulty) {
+            case 0:
+                // do nothing
+                break;
+            case 1:
+                rows = BEGINNER_DIMENSIONS;
+                cols = BEGINNER_DIMENSIONS;
+                totalMines = BEGINNER_NO_OF_MINES;
+                break;
+            
+            case 2:
+                rows = INTERMEDIATE_DIMENSIONS;
+                cols = INTERMEDIATE_DIMENSIONS;
+                totalMines = INTERMEDIATE_NO_OF_MINES;
+                break;
+
+            case 3:
+                rows = EXPERT_DIMENSIONS;
+                cols = EXPERT_DIMENSIONS;
+                totalMines = EXPERT_NO_OF_MINES;
+                break;
+
+            case 4:
+                rows = MASTER_DIMENSIONS;
+                cols = MASTER_DIMENSIONS;
+                totalMines = MASTER_NO_OF_MINES;
+                break;
+
+            case 5:
+                rows = LEGEND_DIMENSIONS;
+                cols = LEGEND_DIMENSIONS;
+                totalMines = LEGEND_NO_OF_MINES;
+                break;
+
+            default:
+                rows = DEFAULT_ROWS;
+                cols = DEFAULT_COLS;
+                totalMines = DEFAULT_NO_OF_MINES;
+                break;
+        }
+        board = new Cells[rows][cols];
         boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(rows, cols));
         for (int i = 0; i < rows; i++) {
@@ -110,6 +187,7 @@ public class GamePanel extends JPanel {
                 //board[rowToUpdate][colToUpdate].updateText(); //uncomment this to see mine adjacency
             }
             catch(ArrayIndexOutOfBoundsException e){
+                // just here to make it continue even if out of bounds.
             }
         }
     }
