@@ -85,11 +85,10 @@ public class GamePanel extends JPanel {
                 rows = LEGEND_DIMENSIONS;
                 cols = LEGEND_DIMENSIONS;
                 totalMines = LEGEND_NO_OF_MINES;
-        
-            default:
-                // does nothing... though you can also troll and make this use the MAX constants lol
-                break;
         }
+        board = new Cells[rows][cols];
+        init_layout();
+        addMines();
     }
 
     private void init_layout(){
