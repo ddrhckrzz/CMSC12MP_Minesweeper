@@ -70,21 +70,25 @@ public class GamePanel extends JPanel {
                 rows = INTERMEDIATE_DIMENSIONS;
                 cols = INTERMEDIATE_DIMENSIONS;
                 totalMines = INTERMEDIATE_NO_OF_MINES;
+                break;
 
             case 3:
                 rows = EXPERT_DIMENSIONS;
                 cols = EXPERT_DIMENSIONS;
                 totalMines = EXPERT_NO_OF_MINES;
+                break;
 
             case 4:
                 rows = MASTER_DIMENSIONS;
                 cols = MASTER_DIMENSIONS;
                 totalMines = MASTER_NO_OF_MINES;
+                break;
 
             case 5:
                 rows = LEGEND_DIMENSIONS;
                 cols = LEGEND_DIMENSIONS;
                 totalMines = LEGEND_NO_OF_MINES;
+                break;
         }
         board = new Cells[rows][cols];
         init_layout();
