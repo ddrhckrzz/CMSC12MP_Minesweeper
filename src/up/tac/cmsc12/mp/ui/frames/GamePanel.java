@@ -29,6 +29,7 @@ public class GamePanel extends JPanel {
     public static final int LEGEND_DIMENSIONS = 100;
     public static final int LEGEND_NO_OF_MINES = 2000;
     // ------------------------ class variables ---------------------------- //
+    private int difficulty;
     private int rows;
     private int cols;
     private int totalMines;
@@ -46,12 +47,8 @@ public class GamePanel extends JPanel {
      * Currently not fully implemented yet.
      */
     public GamePanel(){
-        rows = DEFAULT_ROWS;
-        cols = DEFAULT_COLS;
-        totalMines = DEFAULT_NO_OF_MINES;
-        board = new Cells[rows][cols];
+        difficulty = -1; // basically for default board aka beginner board
         init_layout();
-        addMines();
     }
 
     /**
@@ -59,6 +56,34 @@ public class GamePanel extends JPanel {
      * @param difficulty {@code int} key for choosing specific board difficulty to generate board
      */
     public GamePanel(int difficulty) {
+        this.difficulty = difficulty;
+        init_layout();
+    }
+
+    private void init_layout(){
+        setLayout(new BorderLayout());
+        init_topPanel();
+        add(topPanel, BorderLayout.NORTH);
+        init_board();
+        add(boardPanel, BorderLayout.CENTER);
+        init_bottomPanel();
+        add(bottomPanel, BorderLayout.SOUTH);
+        addMines();
+    }
+
+    private void init_topPanel(){
+        topPanel = new JPanel();
+        timer.setHorizontalAlignment(JLabel.CENTER);
+        topPanel.add(timer);
+    }
+
+    private void init_bottomPanel(){
+        bottomPanel = new JPanel();
+        minesLeft.setHorizontalAlignment(JLabel.CENTER);
+        bottomPanel.add(minesLeft);
+    }
+
+    private void init_board(){
         switch (difficulty) {
             case 1:
                 rows = BEGINNER_DIMENSIONS;
@@ -89,35 +114,14 @@ public class GamePanel extends JPanel {
                 cols = LEGEND_DIMENSIONS;
                 totalMines = LEGEND_NO_OF_MINES;
                 break;
+
+            default:
+                rows = DEFAULT_ROWS;
+                cols = DEFAULT_COLS;
+                totalMines = DEFAULT_NO_OF_MINES;
+                break;
         }
         board = new Cells[rows][cols];
-        init_layout();
-        addMines();
-    }
-
-    private void init_layout(){
-        setLayout(new BorderLayout());
-        init_topPanel();
-        add(topPanel, BorderLayout.NORTH);
-        init_board();
-        add(boardPanel, BorderLayout.CENTER);
-        init_bottomPanel();
-        add(bottomPanel, BorderLayout.SOUTH);
-    }
-
-    private void init_topPanel(){
-        topPanel = new JPanel();
-        timer.setHorizontalAlignment(JLabel.CENTER);
-        topPanel.add(timer);
-    }
-
-    private void init_bottomPanel(){
-        bottomPanel = new JPanel();
-        minesLeft.setHorizontalAlignment(JLabel.CENTER);
-        bottomPanel.add(minesLeft);
-    }
-
-    private void init_board(){
         boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(rows, cols));
         for (int i = 0; i < rows; i++) {
@@ -166,6 +170,7 @@ public class GamePanel extends JPanel {
                 //board[rowToUpdate][colToUpdate].updateText(); //uncomment this to see mine adjacency
             }
             catch(ArrayIndexOutOfBoundsException e){
+                // just here to make it continue even if out of bounds.
             }
         }
     }
