@@ -33,8 +33,8 @@ public class DifficultyPanel extends JPanel {
         cardLayout = new CardLayout();
         setLayout(cardLayout);
         difficultyPanel = makeDifficultyPanel();
-        cardLayout.addLayoutComponent(difficultyPanel, DIFFICULTY_PANEL);
         customDifficultyPanel = makeCustomDifficultyPanel();
+        cardLayout.addLayoutComponent(difficultyPanel, DIFFICULTY_PANEL);
         cardLayout.addLayoutComponent(customDifficultyPanel, CUSTOM_DIFFICULTY);
     }
 
@@ -80,12 +80,12 @@ public class DifficultyPanel extends JPanel {
 
     private JPanel makeCustomDifficultyPanel(){
         // even more panels within panels shenanigans
-        JPanel buttonsPanel = new JPanel();
+        JPanel fieldsPanel = new JPanel();
         JPanel wrapper = new JPanel();
         JPanel topPanel = new JPanel();
         wrapper.setLayout(new BorderLayout());
-        buttonsPanel.setLayout(new GridBagLayout());
-        buttonsPanel.setMaximumSize(new Dimension(360, 510));
+        fieldsPanel.setLayout(new GridBagLayout());
+        fieldsPanel.setMaximumSize(new Dimension(360, 510));
         JButton back = new JButton("Back");
         JButton home = new JButton("Main Menu");
         // the home button and back button on the top left
@@ -100,34 +100,39 @@ public class DifficultyPanel extends JPanel {
         JLabel rowsLabel = new JLabel("No. of Rows (max: 250): ");
         JLabel colsLabel = new JLabel("No. of Columns (max: 250): ");
         JLabel totalMinesLabel = new JLabel("No. of Mines (max: (rows * cols) - 1): ");
+        JButton startCustom = new JButton("START");
         rowsField = new JTextField(10);
         colsField = new JTextField(10);
         totalMinesField = new JTextField(10);
         c.gridwidth = 2;
         c.gridheight = 2;
         setGBC(c, 0, 0);
-        buttonsPanel.add(topLabel, c);
+        fieldsPanel.add(topLabel, c);
         c.gridheight = 1;
         c.gridwidth = 1;
         setGBC(c, 0, 1, 0.5, 0.5);
-        buttonsPanel.add(rowsLabel,c);
+        fieldsPanel.add(rowsLabel,c);
         setGBC(c, 1, 1);
-        buttonsPanel.add(rowsField, c);
+        fieldsPanel.add(rowsField, c);
         setGBC(c, 0, 2);
-        buttonsPanel.add(colsLabel, c);
+        fieldsPanel.add(colsLabel, c);
         setGBC(c, 1, 2);
-        buttonsPanel.add(colsField, c);
+        fieldsPanel.add(colsField, c);
         setGBC(c, 0, 3);
-        buttonsPanel.add(totalMinesLabel, c);
+        fieldsPanel.add(totalMinesLabel, c);
         setGBC(c, 1, 3);
-        buttonsPanel.add(totalMinesField, c);
+        fieldsPanel.add(totalMinesField, c);
+        c.gridwidth = 2;
+        setGBC(c, 0, 4);
+        fieldsPanel.add(startCustom, c);
         // finally
-        wrapper.add(buttonsPanel, BorderLayout.NORTH);
+        wrapper.add(fieldsPanel, BorderLayout.NORTH);
         return wrapper;
     }
 
     private void add_panels(){
         add(difficultyPanel);
+        add(customDifficultyPanel);
     }
 
     private void setGBC(GridBagConstraints gbc, int gridx, int gridy){
@@ -145,5 +150,15 @@ public class DifficultyPanel extends JPanel {
     private void setGBC(GridBagConstraints gbc, double weightx, double weighty){
         gbc.weightx = weightx;
         gbc.weighty = weighty;
+    }
+
+    public void goTo(String key){
+        cardLayout.show(this, key);
+    }
+
+    public void clearFields(){
+        rowsField.setText("");
+        colsField.setText("");
+        totalMinesField.setText("");
     }
 }
