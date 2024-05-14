@@ -16,7 +16,7 @@ public class MainButtonListener implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         String key = actionEvent.getActionCommand();
         if (key.equals("Exit")) {
-            System.exit(0);;
+            System.exit(0);
         } else if (key.equals("New Game")) {
             mainFrame.goTo(MainFrame.GAME_PANEL);
         } else if (key.equals("Leaderboards")) {
