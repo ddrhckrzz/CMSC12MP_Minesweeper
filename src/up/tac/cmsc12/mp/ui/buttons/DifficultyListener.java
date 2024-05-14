@@ -16,11 +16,11 @@ public class DifficultyListener implements ActionListener{
     public void actionPerformed(ActionEvent actionEvent) {
         String key = actionEvent.getActionCommand();
         if (key.equals("Back")) {
-            diffPanel.goBack();
+            diffPanel.goPrevious();
         } else if (key.equals("Main Menu")) {
             diffPanel.goHome();
         } else if (key.equals("CUSTOM")) {
-            diffPanel.goTo(DifficultyPanel.CUSTOM_PANEL);
+            diffPanel.goNext();
         } else if (key.equals("BEGINNER")) {
             diffPanel.generateGamePanel(1);
         } else if (key.equals("INTERMEDIATE")) {

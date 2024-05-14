@@ -122,7 +122,6 @@ public class DifficultyPanel extends JPanel {
         // gridbag stuff again wowee
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
-        setGBC(c, 1.0, 1.0);
         JLabel topLabel = new JLabel("CUSTOM GAME SETUP");
         JLabel rowsLabel = new JLabel("No. of Rows (max: 250): ");
         JLabel colsLabel = new JLabel("No. of Columns (max: 250): ");
@@ -132,7 +131,8 @@ public class DifficultyPanel extends JPanel {
         colsField = new JTextField(10);
         totalMinesField = new JTextField(10);
         c.gridwidth = 2;
-        c.gridheight = 2;
+        c.gridheight = 1;
+        setGBC(c, 1.0, 1.0);
         setGBC(c, 0, 0);
         fieldsPanel.add(topLabel, c);
         c.gridheight = 1;
@@ -155,7 +155,7 @@ public class DifficultyPanel extends JPanel {
         // add listeners to the start button
         startCustom.addActionListener(listener);
         // finally
-        wrapper.add(fieldsPanel, BorderLayout.NORTH);
+        wrapper.add(fieldsPanel, BorderLayout.CENTER);
         return wrapper;
     }
 
@@ -191,6 +191,14 @@ public class DifficultyPanel extends JPanel {
 
     public void goHome(){
         mainFrame.goTo(MainFrame.MAIN_PANEL);
+    }
+
+    public void goNext(){
+        cardLayout.next(this);
+    }
+
+    public void goPrevious(){
+        cardLayout.previous(this);
     }
 
     public void goTo(String key){
