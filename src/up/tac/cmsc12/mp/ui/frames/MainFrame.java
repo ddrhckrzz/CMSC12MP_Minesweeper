@@ -76,9 +76,6 @@ public class MainFrame extends JFrame {
         if(key.equals(DifficultyPanel.DIFFICULTY_PANEL)) {
             difficultyPanel.startPanel();
         }
-        if (key.equals(GAME_PANEL)) {
-            gamePanel = difficultyPanel.getGamePanel();
-        }
         cardLayout.show(getContentPane(), key);
         currentPage = key;
     }

@@ -215,7 +215,7 @@ public class DifficultyPanel extends JPanel {
                 if (totalMines > (rows * cols) - 1) {
                     throw new InputMismatchException();
                 }
-                gamePanel = new GamePanel(rows, cols, totalMines);
+                gamePanel.generate_board(rows, cols, totalMines);;
                 mainFrame.goTo(MainFrame.GAME_PANEL);
             } catch (InputMismatchException ime) {
                 JOptionPane.showMessageDialog(this, "Numbers must be within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
@@ -223,7 +223,7 @@ public class DifficultyPanel extends JPanel {
                 JOptionPane.showMessageDialog(this, "Input in the fields must be integers within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            gamePanel = new GamePanel(difficulty);
+            gamePanel.generate_board(difficulty);
             mainFrame.goTo(MainFrame.GAME_PANEL);
         }
     }

@@ -30,6 +30,10 @@ public class GamePanel extends JPanel {
     public static final int LEGEND_NO_OF_MINES = 2000;
     // ------------------------ class variables ---------------------------- //
     private int difficulty;
+    public int getDifficulty() {
+        return difficulty;
+    }
+
     private int rows;
     private int cols;
     private int totalMines;
@@ -51,6 +55,7 @@ public class GamePanel extends JPanel {
         init_layout();
     }
 
+    @Deprecated
     /**
      * Creates a minesweeper board with a specific difficulty that isn't the CUSTOM diffuclty.
      * @param difficulty {@code int} key for choosing specific board difficulty to generate board
@@ -60,6 +65,7 @@ public class GamePanel extends JPanel {
         init_layout();
     }
 
+    @Deprecated
     /**
      * Creates a Minesweeper board with custom rows, columns, and total no of mines.
      * @param rows no of rows to use in the board
@@ -78,11 +84,8 @@ public class GamePanel extends JPanel {
         setLayout(new BorderLayout());
         init_topPanel();
         add(topPanel, BorderLayout.NORTH);
-        init_board();
-        add(boardPanel, BorderLayout.CENTER);
         init_bottomPanel();
         add(bottomPanel, BorderLayout.SOUTH);
-        addMines();
     }
 
     private void init_topPanel(){
@@ -97,10 +100,9 @@ public class GamePanel extends JPanel {
         bottomPanel.add(minesLeft);
     }
 
-    private void init_board(){
+    public void generate_board(){
         switch (difficulty) {
             case 0:
-                // do nothing
                 break;
             case 1:
                 rows = BEGINNER_DIMENSIONS;
@@ -148,6 +150,21 @@ public class GamePanel extends JPanel {
                 boardPanel.add(board[i][j]);
             }
         }
+        add(boardPanel, BorderLayout.CENTER);
+        addMines();
+    }
+
+    public void generate_board(int difficulty) {
+        this.difficulty = difficulty;
+        generate_board();
+    }
+
+    public void generate_board(int rows, int cols, int totalMines) {
+        difficulty = 0;
+        this.rows = rows;
+        this.cols = cols;
+        this.totalMines = totalMines;
+        generate_board();
     }
 
     private void addMines(){
