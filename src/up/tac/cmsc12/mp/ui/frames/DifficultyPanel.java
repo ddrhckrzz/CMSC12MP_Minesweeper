@@ -20,7 +20,7 @@ import up.tac.cmsc12.mp.ui.buttons.DifficultyListener;
 
 public class DifficultyPanel extends JPanel {
     public static final String DIFFICULTY_PANEL = "DIFFICULTY";
-    public static final String CUSTOM_PANEL = "CUSTOM DIFFICULTY";
+    public static final String CUSTOM_PANEL = "CUSTOM";
     private CardLayout cardLayout;
     private JPanel difficultyPanel;
     private JPanel customDifficultyPanel;
@@ -226,10 +226,6 @@ public class DifficultyPanel extends JPanel {
             gamePanel.generate_board(difficulty);
             mainFrame.goTo(MainFrame.GAME_PANEL);
         }
-    }
-
-    public GamePanel getGamePanel() {
-        return gamePanel;
     }
 
     public void clearFields(){
