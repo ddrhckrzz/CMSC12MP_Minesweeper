@@ -7,26 +7,37 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.util.InputMismatchException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import up.tac.cmsc12.mp.ui.buttons.DifficultyListener;
+
 public class DifficultyPanel extends JPanel {
     public static final String DIFFICULTY_PANEL = "DIFFICULTY";
-    public static final String CUSTOM_DIFFICULTY = "CUSTOM DIFFICULTY";
+    public static final String CUSTOM_PANEL = "CUSTOM DIFFICULTY";
     private CardLayout cardLayout;
     private JPanel difficultyPanel;
     private JPanel customDifficultyPanel;
     private JTextField rowsField;
     private JTextField colsField;
     private JTextField totalMinesField;
+    @SuppressWarnings("unused") // no seriously gamePanel was used here. it's just modified cuz it just generates the board here
     private GamePanel gamePanel;
-    public DifficultyPanel(GamePanel gamePanel){
+    private DifficultyListener listener;
+    private MainFrame mainFrame;
+    private String currentPage;
+    public DifficultyPanel(MainFrame mainFrame, GamePanel gamePanel){
         this.gamePanel = gamePanel;
+        this.mainFrame = mainFrame;
+        listener = new DifficultyListener(this);
         init_layout();
+        add_panels();
     }
 
     private void init_layout(){
@@ -35,7 +46,8 @@ public class DifficultyPanel extends JPanel {
         difficultyPanel = makeDifficultyPanel();
         customDifficultyPanel = makeCustomDifficultyPanel();
         cardLayout.addLayoutComponent(difficultyPanel, DIFFICULTY_PANEL);
-        cardLayout.addLayoutComponent(customDifficultyPanel, CUSTOM_DIFFICULTY);
+        cardLayout.addLayoutComponent(customDifficultyPanel, CUSTOM_PANEL);
+        add_panels();
     }
 
     private JPanel makeDifficultyPanel(){
@@ -60,7 +72,14 @@ public class DifficultyPanel extends JPanel {
         JButton legend = new JButton("LEGEND");
         JButton custom = new JButton("CUSTOM");
         // TODO: add actonlisteners to all of these
-
+        back.addActionListener(listener);
+        home.addActionListener(listener);
+        beginner.addActionListener(listener);
+        intermediate.addActionListener(listener);
+        expert.addActionListener(listener);
+        master.addActionListener(listener);
+        legend.addActionListener(listener);
+        custom.addActionListener(listener);
         // adding buttons to the button panel
         // GridBagConstraints is amazing but man...
         GridBagConstraints c = new GridBagConstraints();
@@ -125,6 +144,8 @@ public class DifficultyPanel extends JPanel {
         c.gridwidth = 2;
         setGBC(c, 0, 4);
         fieldsPanel.add(startCustom, c);
+        // add listeners to the start button
+        startCustom.addActionListener(listener);
         // finally
         wrapper.add(fieldsPanel, BorderLayout.NORTH);
         return wrapper;
@@ -152,8 +173,51 @@ public class DifficultyPanel extends JPanel {
         gbc.weighty = weighty;
     }
 
+    public void goBack(){
+        if (currentPage.equals(CUSTOM_PANEL)) {
+            cardLayout.last(this);
+        } else {
+            goHome();
+        }
+    }
+
+    public void goHome(){
+        mainFrame.goTo(MainFrame.MAIN_PANEL);
+    }
+
     public void goTo(String key){
         cardLayout.show(this, key);
+        currentPage = key;
+    }
+
+    public void startPanel(){
+        cardLayout.show(this, DIFFICULTY_PANEL);
+        currentPage = DIFFICULTY_PANEL;
+    }
+
+    public void generateGamePanel(int difficulty) {
+        if (difficulty == 0) {
+            try {
+                int rows = Integer.parseInt(rowsField.getText());
+                int cols = Integer.parseInt(colsField.getText());
+                int totalMines = Integer.parseInt(totalMinesField.getText());
+                if (rows <= 0 | rows > GamePanel.MAX_DIMENSIONS | cols <= 0 | cols > GamePanel.MAX_DIMENSIONS) {
+                    throw new InputMismatchException();
+                }
+                if (totalMines > (rows * cols) - 1) {
+                    throw new InputMismatchException();
+                }
+                gamePanel = new GamePanel(rows, cols, totalMines);
+                mainFrame.goTo(MainFrame.GAME_PANEL);
+            } catch (InputMismatchException ime) {
+                JOptionPane.showMessageDialog(this, "Numbers must be within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+            } catch (NumberFormatException nfe) {
+                JOptionPane.showMessageDialog(this, "Input in the fields must be integers within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+        } else {
+            gamePanel = new GamePanel(difficulty);
+            mainFrame.goTo(MainFrame.GAME_PANEL);
+        }
     }
 
     public void clearFields(){
