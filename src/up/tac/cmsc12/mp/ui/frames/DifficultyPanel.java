@@ -52,6 +52,7 @@ public class DifficultyPanel extends JPanel {
 
     private JPanel makeDifficultyPanel(){
         // panels within panels within panels holy f*ck
+        JPanel buttonsWrapperPanel = new JPanel(); // seriously f*ck Swing
         JPanel buttonsPanel = new JPanel();
         JPanel wrapper = new JPanel();
         JPanel topPanel = new JPanel();
@@ -86,14 +87,21 @@ public class DifficultyPanel extends JPanel {
         c.insets = new Insets(12, 12, 12, 12);
         c.fill = GridBagConstraints.BOTH;
         setGBC(c, 1.0, 1.0);
+        setGBC(c, 0, 0);
         buttonsPanel.add(beginner, c);
+        setGBC(c, 0, 1);
         buttonsPanel.add(intermediate, c);
+        setGBC(c, 0, 2);
         buttonsPanel.add(expert, c);
+        setGBC(c, 0, 3);
         buttonsPanel.add(master, c);
+        setGBC(c, 0, 4);
         buttonsPanel.add(legend, c);
+        setGBC(c, 0, 5);
         buttonsPanel.add(custom, c);
+        buttonsWrapperPanel.add(buttonsPanel);
         // finally...
-        wrapper.add(buttonsPanel, BorderLayout.CENTER);
+        wrapper.add(buttonsWrapperPanel, BorderLayout.CENTER);
         return wrapper;
     }
 
@@ -218,6 +226,10 @@ public class DifficultyPanel extends JPanel {
             gamePanel = new GamePanel(difficulty);
             mainFrame.goTo(MainFrame.GAME_PANEL);
         }
+    }
+
+    public GamePanel getGamePanel() {
+        return gamePanel;
     }
 
     public void clearFields(){

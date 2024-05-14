@@ -3,6 +3,7 @@ package up.tac.cmsc12.mp.ui.buttons;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import up.tac.cmsc12.mp.ui.frames.DifficultyPanel;
 import up.tac.cmsc12.mp.ui.frames.MainFrame;
 
 public class MainButtonListener implements ActionListener {
@@ -18,7 +19,7 @@ public class MainButtonListener implements ActionListener {
         if (key.equals("Exit")) {
             System.exit(0);
         } else if (key.equals("New Game")) {
-            mainFrame.goTo(MainFrame.GAME_PANEL);
+            mainFrame.goTo(DifficultyPanel.DIFFICULTY_PANEL);
         } else if (key.equals("Leaderboards")) {
             mainFrame.goTo(MainFrame.SCORE_PANEL);
         } else if (key.equals("Options")) {
