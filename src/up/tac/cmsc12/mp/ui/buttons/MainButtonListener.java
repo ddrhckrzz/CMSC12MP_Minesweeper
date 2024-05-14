@@ -15,7 +15,6 @@ public class MainButtonListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String key = actionEvent.getActionCommand();
-        // TODO: finish action listener stuff
         if (key.equals("Exit")) {
             System.exit(0);;
         } else if (key.equals("New Game")) {
@@ -24,6 +23,10 @@ public class MainButtonListener implements ActionListener {
             mainFrame.goTo(MainFrame.SCORE_PANEL);
         } else if (key.equals("Options")) {
             mainFrame.goTo(MainFrame.OPTIONS_PANEL);
+        } else if (key.equals("Back")) {
+            mainFrame.goBack();
+        } else if (key.equals("Main Menu")) {
+            mainFrame.goHome();
         }
     }
 

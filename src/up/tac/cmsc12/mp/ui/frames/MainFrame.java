@@ -27,7 +27,7 @@ public class MainFrame extends JFrame {
     private OptionsPanel optionsPanel;
     private GamePanel gamePanel;
     private ScorePanel scorePanel;
-    private int currentPage;
+    private String currentPage;
 
     public MainFrame(){
         // TODO: Add other UI stuff here and in this folder in general.
@@ -56,11 +56,20 @@ public class MainFrame extends JFrame {
 
     public void start(){
         cardLayout.show(getContentPane(), MAIN_PANEL);
-        currentPage = 0;
+        currentPage = MAIN_PANEL;
         setVisible(true);
+    }
+
+    public void goBack(){
+        cardLayout.last(getContentPane());
+    }
+
+    public void goHome(){
+        goTo(MAIN_PANEL);
     }
 
     public void goTo(String key){
         cardLayout.show(getContentPane(), key);
+        currentPage = key;
     }
 }
