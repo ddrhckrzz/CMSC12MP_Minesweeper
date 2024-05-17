@@ -107,12 +107,14 @@ public class DifficultyPanel extends JPanel {
 
     private JPanel makeCustomDifficultyPanel(){
         // even more panels within panels shenanigans
+        JPanel gridwrapper = new JPanel();
         JPanel fieldsPanel = new JPanel();
         JPanel wrapper = new JPanel();
         JPanel topPanel = new JPanel();
         wrapper.setLayout(new BorderLayout());
         fieldsPanel.setLayout(new GridBagLayout());
         fieldsPanel.setMaximumSize(new Dimension(360, 510));
+        gridwrapper.setLayout(new BoxLayout(gridwrapper, BoxLayout.Y_AXIS));
         JButton back = new JButton("Back");
         JButton home = new JButton("Main Menu");
         // the home button and back button on the top left
@@ -154,8 +156,11 @@ public class DifficultyPanel extends JPanel {
         fieldsPanel.add(startCustom, c);
         // add listeners to the start button
         startCustom.addActionListener(listener);
+        back.addActionListener(listener);
+        home.addActionListener(listener);
         // finally
-        wrapper.add(fieldsPanel, BorderLayout.CENTER);
+        gridwrapper.add(fieldsPanel);
+        wrapper.add(gridwrapper, BorderLayout.CENTER);
         return wrapper;
     }
 
