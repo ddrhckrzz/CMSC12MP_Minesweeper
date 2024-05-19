@@ -5,9 +5,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class ScoreHandler {
-    final static String PATH = "src\\up\\tac\\cmsc12\\mp\\scorefiles\\SampleDiffultyScores.txt";
+    final static String PATH = "src\\up\\tac\\cmsc12\\mp\\scorefiles\\";
     public ScoreHandler(){
-        File file = new File(PATH);
+        File file = new File(PATH + "SampleDifficultyScores.txt");
         try {
             file.createNewFile();
         } catch (IOException e) {
@@ -21,7 +21,7 @@ public class ScoreHandler {
     }
 
     public void newScore(String name, int time){
-        try (FileWriter writer = new FileWriter(PATH, true)) {
+        try (FileWriter writer = new FileWriter(PATH + "SampleDifficultyScores.txt", true)) {
             writer.write(time + ", " + name + "\n");
         } catch (IOException e) {
             // TODO Auto-generated catch block
