@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.buttons.Cells;
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
+import up.tac.cmsc12.mp.minesweeper.ScoreHandler;
+import up.tac.cmsc12.mp.minesweeper.Timer;
 
 public class GamePanel extends JPanel {
     // TODO: finish logic and stuff.
@@ -21,7 +24,7 @@ public class GamePanel extends JPanel {
     private JPanel topPanel;
     private JPanel boardPanel;
     private JPanel bottomPanel;
-    private JLabel timer = new JLabel("timer"); //moved because they need to be global to be updated(cant change text)
+    private JLabel timer = new JLabel("Time Elapsed: 0s"); //moved because they need to be global to be updated(cant change text)
     private static JLabel minesLeft = new JLabel("Mines Left: ");
 
     /**
@@ -34,6 +37,19 @@ public class GamePanel extends JPanel {
         rows = DEFAULT_ROWS;
         cols = DEFAULT_COLS;
         totalMines = DEFAULT_NO_OF_MINES;
+        board = new Cells[rows][cols];
+        init_layout();
+        addMines();
+        Timer Timer = new Timer(timer);
+        Minesweeper.giveTimer(Timer);
+        ScoreHandler sh = new ScoreHandler();
+        Minesweeper.giveScoreHandler(sh);
+    }
+
+    public GamePanel(int rows, int cols, int totalMines){
+        this.rows = rows;
+        this.cols = cols;
+        this.totalMines = totalMines;
         board = new Cells[rows][cols];
         init_layout();
         addMines();

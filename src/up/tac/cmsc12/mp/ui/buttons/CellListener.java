@@ -5,12 +5,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.SwingUtilities;
 
-import up.tac.cmsc12.mp.minesweeper.Minesweeper;
+import up.tac.cmsc12.mp.minesweeper.*;
 
 public class CellListener extends MouseAdapter{
     private Cells[][] board;
     private Cells cell;
     private int row, col;
+    private static boolean first_clicked = false;
 
     public CellListener(Cells[][] board, Cells cell, int row, int col){
         this.board = board;
@@ -22,10 +23,13 @@ public class CellListener extends MouseAdapter{
 
     public void mousePressed(MouseEvent e) {
         if(SwingUtilities.isLeftMouseButton(e)){
-            clearCell();
+            clearCell();          
         }
-        if(SwingUtilities.isRightMouseButton(e)){
-            flagCell();
+        else if(SwingUtilities.isRightMouseButton(e)){
+            flagCell();            
+        }
+        if(!first_clicked){
+            first_clicked = true;
         }
     }
 
@@ -40,5 +44,9 @@ public class CellListener extends MouseAdapter{
     }
     public void flagCell(){
         cell.setFlagged();
+    }
+
+    public static boolean getFirstClicked(){
+        return first_clicked;
     }
 }
