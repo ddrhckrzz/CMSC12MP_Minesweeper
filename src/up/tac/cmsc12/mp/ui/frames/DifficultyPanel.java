@@ -72,7 +72,6 @@ public class DifficultyPanel extends JPanel {
         JButton master = new JButton("MASTER");
         JButton legend = new JButton("LEGEND");
         JButton custom = new JButton("CUSTOM");
-        // TODO: add actonlisteners to all of these
         back.addActionListener(listener);
         home.addActionListener(listener);
         beginner.addActionListener(listener);
@@ -200,10 +199,16 @@ public class DifficultyPanel extends JPanel {
 
     public void goNext(){
         cardLayout.next(this);
+        currentPage = CUSTOM_PANEL;
     }
 
     public void goPrevious(){
-        cardLayout.previous(this);
+        if (currentPage.equals(DIFFICULTY_PANEL)) {
+            goHome();
+        } else {
+            cardLayout.previous(this);
+            currentPage = DIFFICULTY_PANEL;
+        }
     }
 
     public void goTo(String key){

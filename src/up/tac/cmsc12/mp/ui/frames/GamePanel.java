@@ -48,13 +48,10 @@ public class GamePanel extends JPanel {
     private static JLabel minesLeft = new JLabel("Mines Left: ");
 
     /**
-     * Default constructor that uses default board size
-     * of 9x9 and only having 10 mines total.
-     * Normally shouldn't be called.
+     * Default constructor to initialize the GamePanel
      */
     public GamePanel(){
         init_layout();
-        addMines();
         Timer Timer = new Timer(timer);
         Minesweeper.giveTimer(Timer);
         ScoreHandler sh = new ScoreHandler();
