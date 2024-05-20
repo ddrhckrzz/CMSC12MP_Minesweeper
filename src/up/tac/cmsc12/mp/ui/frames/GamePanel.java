@@ -8,6 +8,9 @@ import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.buttons.Cells;
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
+import up.tac.cmsc12.mp.minesweeper.ScoreHandler;
+import up.tac.cmsc12.mp.minesweeper.Timer;
 
 public class GamePanel extends JPanel {
     // TODO: add creation of different board sizes.
@@ -41,18 +44,22 @@ public class GamePanel extends JPanel {
     private JPanel topPanel;
     private JPanel boardPanel;
     private JPanel bottomPanel;
-    private JLabel timer = new JLabel("timer"); //moved because they need to be global to be updated(cant change text)
+    private JLabel timer = new JLabel("Time Elapsed: 0s"); //moved because they need to be global to be updated(cant change text)
     private static JLabel minesLeft = new JLabel("Mines Left: ");
 
     /**
      * Default constructor that uses default board size
      * of 9x9 and only having 10 mines total.
-     * 
      * Normally shouldn't be called.
      */
     public GamePanel(){
-        difficulty = -1; // basically for default board aka beginner board
+        board = new Cells[rows][cols];
         init_layout();
+        addMines();
+        Timer Timer = new Timer(timer);
+        Minesweeper.giveTimer(Timer);
+        ScoreHandler sh = new ScoreHandler();
+        Minesweeper.giveScoreHandler(sh);
     }
 
     @Deprecated
@@ -62,7 +69,7 @@ public class GamePanel extends JPanel {
      */
     public GamePanel(int difficulty) {
         this.difficulty = difficulty;
-        init_layout();
+        this();
     }
 
     @Deprecated
@@ -77,7 +84,7 @@ public class GamePanel extends JPanel {
         this.rows = rows;
         this.cols = cols;
         this.totalMines = totalMines;
-        init_layout();
+        this();
     }
 
     private void init_layout(){
@@ -140,7 +147,6 @@ public class GamePanel extends JPanel {
                 totalMines = DEFAULT_NO_OF_MINES;
                 break;
         }
-        board = new Cells[rows][cols];
         boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(rows, cols));
         for (int i = 0; i < rows; i++) {
@@ -204,7 +210,6 @@ public class GamePanel extends JPanel {
                 //board[rowToUpdate][colToUpdate].updateText(); //uncomment this to see mine adjacency
             }
             catch(ArrayIndexOutOfBoundsException e){
-                // just here to make it continue even if out of bounds.
             }
         }
     }

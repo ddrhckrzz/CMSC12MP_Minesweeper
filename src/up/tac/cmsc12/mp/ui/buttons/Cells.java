@@ -32,10 +32,10 @@ public class Cells extends JButton {
 
     public void setFlagged(){
         Minesweeper.flagging(this, isClear);
-        if(noOfFound == noOfMines){
-            System.out.println("You Win");
-            return;
-        }
+        // if(noOfFound == noOfMines){
+        //     Minesweeper.victory();
+        //     return;
+        // }
     }
 
     public void revFlag(){
@@ -110,6 +110,7 @@ public class Cells extends JButton {
             setText(String.valueOf(val));
         } else {
             setText("💣");
+            Minesweeper.defeat();
         }
         setEnabled(false);
         isClear = true;
