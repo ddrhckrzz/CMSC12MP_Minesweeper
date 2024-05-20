@@ -1,4 +1,7 @@
 package up.tac.cmsc12.mp.minesweeper;
+
+import java.util.Scanner;
+
 import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.buttons.Cells;
@@ -20,6 +23,17 @@ public class Minesweeper {
      * extensions it should automatically add the package line at
      * the very top for you.
      */
+    public static Timer timer;
+    public static ScoreHandler scoreHandler;
+
+    public static void giveTimer(Timer givenTimer){
+        timer = givenTimer;
+    }
+
+    public static void giveScoreHandler(ScoreHandler givenScoreHandler){
+        scoreHandler = givenScoreHandler;
+    }
+  
     public static void autoClear(Cells[][] cells, int row, int col){
         int[] xAdjacency = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
         int[] yAdjacency = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
@@ -88,7 +102,24 @@ public class Minesweeper {
         noOfFlags = Cells.getNoOfFlags();
         minesLeft.setText("Mines Left: " + (noOfMines - noOfFlags));
         cell.revFlag(); //reverses boolean flag value
+        if(Cells.getNoOfFound() == Cells.getNoOfMines()){
+            victory();
+        }
     }
 
+    public static void victory(){
+        System.out.println("you won");
+        timer.stopTimer();
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Input Name to be Displayed on the LeaderBoards");
+        String name = scan.nextLine();
+        scoreHandler.newScore(name, timer.getTime());
+        scan.close();
+    }
 
+    public static void defeat(){
+        System.out.println("you lost");
+        timer.stopTimer();
+    }
 }
+
