@@ -53,7 +53,6 @@ public class GamePanel extends JPanel {
      * Normally shouldn't be called.
      */
     public GamePanel(){
-        board = new Cells[rows][cols];
         init_layout();
         addMines();
         Timer Timer = new Timer(timer);
@@ -68,8 +67,8 @@ public class GamePanel extends JPanel {
      * @param difficulty {@code int} key for choosing specific board difficulty to generate board
      */
     public GamePanel(int difficulty) {
-        this.difficulty = difficulty;
         this();
+        this.difficulty = difficulty;
     }
 
     @Deprecated
@@ -80,11 +79,11 @@ public class GamePanel extends JPanel {
      * @param totalMines total no of mines to generate in the board
      */
     public GamePanel(int rows, int cols, int totalMines){
+        this();
         difficulty = 0; // for custom difficulty
         this.rows = rows;
         this.cols = cols;
         this.totalMines = totalMines;
-        this();
     }
 
     private void init_layout(){
@@ -147,6 +146,7 @@ public class GamePanel extends JPanel {
                 totalMines = DEFAULT_NO_OF_MINES;
                 break;
         }
+        board = new Cells[rows][cols];
         boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(rows, cols));
         for (int i = 0; i < rows; i++) {
