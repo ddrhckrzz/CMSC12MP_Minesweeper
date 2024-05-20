@@ -1,4 +1,5 @@
 package up.tac.cmsc12.mp.minesweeper;
+
 import java.util.Scanner;
 
 import javax.swing.JLabel;
@@ -32,7 +33,7 @@ public class Minesweeper {
     public static void giveScoreHandler(ScoreHandler givenScoreHandler){
         scoreHandler = givenScoreHandler;
     }
-
+  
     public static void autoClear(Cells[][] cells, int row, int col){
         int[] xAdjacency = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
         int[] yAdjacency = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
@@ -101,7 +102,6 @@ public class Minesweeper {
         noOfFlags = Cells.getNoOfFlags();
         minesLeft.setText("Mines Left: " + (noOfMines - noOfFlags));
         cell.revFlag(); //reverses boolean flag value
-
         if(Cells.getNoOfFound() == Cells.getNoOfMines()){
             victory();
         }
