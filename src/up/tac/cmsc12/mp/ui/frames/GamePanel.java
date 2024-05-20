@@ -43,7 +43,12 @@ public class GamePanel extends JPanel {
         Timer Timer = new Timer(timer);
         Minesweeper.giveTimer(Timer);
         ScoreHandler sh = new ScoreHandler();
+
+        sh.newScore("newest", 20);
+
+
         Minesweeper.giveScoreHandler(sh);
+
     }
 
     public GamePanel(int rows, int cols, int totalMines){

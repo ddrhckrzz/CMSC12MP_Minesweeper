@@ -114,6 +114,7 @@ public class Minesweeper {
         System.out.println("Input Name to be Displayed on the LeaderBoards");
         String name = scan.nextLine();
         scoreHandler.newScore(name, timer.getTime());
+        scan.close();
     }
 
     public static void defeat(){
