@@ -15,7 +15,7 @@ public class MainFrame extends JFrame {
      * 
      */
     // environment constants
-    private final static String TITLENAME = "Minesweeper!";
+    private final static String TITLENAME = "Minesweeper! In Java™";
     public final static String MAIN_PANEL = "Main Menu";
     public final static String GAME_PANEL = "Game Panel";
     public final static String OPTIONS_PANEL = "Options Panel";
@@ -26,8 +26,9 @@ public class MainFrame extends JFrame {
     private MainPanel mainMenu;
     private OptionsPanel optionsPanel;
     private GamePanel gamePanel;
+    private DifficultyPanel difficultyPanel;
     private ScorePanel scorePanel;
-    private int currentPage;
+    private String currentPage;
 
     public MainFrame(){
         // TODO: Add other UI stuff here and in this folder in general.
@@ -52,15 +53,30 @@ public class MainFrame extends JFrame {
         gamePanel = new GamePanel();
         cardLayout.addLayoutComponent(gamePanel, GAME_PANEL);
         add(gamePanel);
+        difficultyPanel = new DifficultyPanel(this, gamePanel);
+        cardLayout.addLayoutComponent(difficultyPanel, DifficultyPanel.DIFFICULTY_PANEL);
+        add(difficultyPanel);
     }
 
     public void start(){
         cardLayout.show(getContentPane(), MAIN_PANEL);
-        currentPage = 0;
+        currentPage = MAIN_PANEL;
         setVisible(true);
     }
 
+    public void goBack(){
+        cardLayout.last(getContentPane());
+    }
+
+    public void goHome(){
+        goTo(MAIN_PANEL);
+    }
+
     public void goTo(String key){
+        if(key.equals(DifficultyPanel.DIFFICULTY_PANEL)) {
+            difficultyPanel.startPanel();
+        }
         cardLayout.show(getContentPane(), key);
+        currentPage = key;
     }
 }
