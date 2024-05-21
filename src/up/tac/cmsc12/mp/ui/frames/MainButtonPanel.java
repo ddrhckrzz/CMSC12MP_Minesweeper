@@ -2,6 +2,7 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -26,6 +27,7 @@ public class MainButtonPanel extends JPanel{
         layout = new GridBagLayout();
         gbc = new GridBagConstraints();
         setLayout(layout);
+        setMaximumSize(new Dimension(390, 540));
     }
 
     private void init_buttons(){
@@ -58,12 +60,6 @@ public class MainButtonPanel extends JPanel{
         // scoreButton.addActionListener(mbl);
         // optionsButton.addActionListener(mbl);
         exitButton.addActionListener(mbl);
-    }
-
-    private void setGBC(int gridx, int gridy, int anchor){
-        gbc.gridx = gridx;
-        gbc.gridy = gridy;
-        gbc.anchor = anchor;
     }
 
     private void setGBC(int gridx, int gridy){
