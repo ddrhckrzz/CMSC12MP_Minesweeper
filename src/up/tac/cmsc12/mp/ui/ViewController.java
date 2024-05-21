@@ -72,10 +72,12 @@ public class ViewController {
         currentView = null;
         previousViews.clear();
         getCardLayout().show(getParent(), HOME);
-        if (navPanel.isVisible()) {
-            navPanel.setVisible(false);
-            parent.revalidate();
-            parent.repaint();
+        if (navPanel != null) {
+            if (navPanel.isVisible()) {
+                navPanel.setVisible(false);
+                parent.revalidate();
+                parent.repaint();
+            }
         }
     }
 
@@ -97,10 +99,12 @@ public class ViewController {
             }
             getCardLayout().show(getParent(), name);
             currentView = name;
-            if (!navPanel.isVisible()) {
-                navPanel.setVisible(true);
-                parent.revalidate();
-                parent.repaint();
+            if (navPanel != null) {
+                if (!navPanel.isVisible()) {
+                    navPanel.setVisible(true);
+                    parent.revalidate();
+                    parent.repaint();
+                }
             }
         }
     }
