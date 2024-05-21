@@ -54,8 +54,6 @@ public class GamePanel extends JPanel {
         init_layout();
         Timer Timer = new Timer(timer);
         Minesweeper.giveTimer(Timer);
-        ScoreHandler sh = new ScoreHandler();
-        Minesweeper.giveScoreHandler(sh);
     }
 
     @Deprecated
@@ -143,6 +141,11 @@ public class GamePanel extends JPanel {
                 totalMines = DEFAULT_NO_OF_MINES;
                 break;
         }
+        ScoreHandler sh = new ScoreHandler(difficulty);   //moved here so the scorehandle is able to accept difficulty as a parameter
+        Minesweeper.giveScoreHandler(sh);
+        sh.newScore("test2", 20);
+
+        board = new Cells[rows][cols];
         boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(rows, cols));
         for (int i = 0; i < rows; i++) {
