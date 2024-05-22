@@ -116,8 +116,10 @@ public class Minesweeper {
     public static void victory(){
         timer.stopTimer();
         String name = controller.victory();
-        scoreHandler.newScore(name, timer.getTime());
-        controller.updateScores();
+        if (name != null) {
+            scoreHandler.newScore(name, timer.getTime());
+            controller.updateScores();
+        }
     }
 
     public static void defeat(){

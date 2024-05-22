@@ -65,6 +65,22 @@ public class ViewController {
 
     public String victory() {
         String name = JOptionPane.showInputDialog("Enter name here:");
+        boolean bool = true;
+        while (bool) {
+            if (name == null) {
+                int c;
+                c = JOptionPane.showConfirmDialog(null,
+                    "Are you sure you want to cancel this operation?\n(Your score will not be recorded)", 
+                    "Confirm", 
+                    JOptionPane.YES_NO_OPTION);
+                if (c == JOptionPane.YES_OPTION) {
+                    bool = false;
+                }
+                if (bool) {
+                    name = JOptionPane.showInputDialog("Enter name here:");
+                }
+            }
+        }
         return name;
     }
 
