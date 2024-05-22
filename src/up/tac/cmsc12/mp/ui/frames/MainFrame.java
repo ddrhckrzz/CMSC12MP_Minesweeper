@@ -31,10 +31,12 @@ public class MainFrame extends JFrame {
     // class variables
     private ViewController viewController;
     private CardLayout cardLayout;
+    private JPanel cardPanel;
+    private JPanel navPanel;
     private MainPanel mainMenu;
     private OptionsPanel optionsPanel;
     private GamePanel gamePanel;
-    private ChooseDifficulty difficultyPanel;
+    private ChooseDifficulty difficultyChooser;
     private ScorePanel scorePanel;
     private String currentView;
 
@@ -44,27 +46,51 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         init_layout();
         add_panels();
+        toggleNavVisiblity(); // navigation panel is invisble by default
+    }
+
+    public JPanel getCardPanel() {
+        return cardPanel;
+    }
+
+    public boolean isNavVisible() {
+        return navPanel.isVisible();
+    }
+
+    public void toggleNavVisiblity() {
+        if (navPanel.isVisible()) {
+            navPanel.setVisible(false);
+        } else {
+            navPanel.setVisible(true);
+        }
+        revalidate();
+        repaint();
     }
 
     private void init_layout(){
         cardLayout = new CardLayout(10,10);
-        setLayout(cardLayout);
-        viewController = new ViewController(getContentPane(), cardLayout);
+        cardPanel = new JPanel(cardLayout);
+        viewController = new ViewController(this, cardLayout);
         setPreferredSize(new Dimension(640, 480));
         setSize(getPreferredSize());
+        setLocationRelativeTo(null);
     }
 
 
     private void add_panels() {
-        viewController.setNavPanel(makeNavPanel());
         mainMenu = new MainPanel();
         gamePanel = new GamePanel();
-        difficultyPanel = new ChooseDifficulty(viewController);
+        difficultyChooser = new ChooseDifficulty(viewController);
         mainMenu.bind_buttons(viewController);
+        navPanel = makeNavPanel();
 
         // add to controller
         viewController.addView(mainMenu, ViewController.HOME);
         viewController.addView(gamePanel, GAME_PANEL);
+
+        // add cardPanel and navPanel to the frame
+        add(cardPanel);
+        add(navPanel, BorderLayout.NORTH);
     }
 
     private JPanel makeNavPanel() {
@@ -84,6 +110,7 @@ public class MainFrame extends JFrame {
             }
         });
         navPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        navPanel.applyComponentOrientation(navPanel.getComponentOrientation());
         navPanel.add(back);
         navPanel.add(home);
         return navPanel;

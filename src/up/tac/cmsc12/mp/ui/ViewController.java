@@ -21,16 +21,16 @@ public class ViewController {
     private List<String> previousViews;
     private Map<String, Component> mapNames;
 
+    private MainFrame mainFrame;
     private Container parent;
-    private Container navPanel;
     private CardLayout cardLayout;
 
-    public ViewController(Container parent, CardLayout cardLayout) {
-        this.parent = parent;
+    public ViewController(MainFrame mainFrame, CardLayout cardLayout) {
+        this.mainFrame = mainFrame;
+        parent = mainFrame.getCardPanel();
         this.cardLayout = cardLayout;
         previousViews = new ArrayList<>(5);
         mapNames = new HashMap<>(10);
-        navPanel = null;
     }
 
     public Container getParent() {
@@ -72,12 +72,8 @@ public class ViewController {
         currentView = null;
         previousViews.clear();
         getCardLayout().show(getParent(), HOME);
-        if (navPanel != null) {
-            if (navPanel.isVisible()) {
-                navPanel.setVisible(false);
-                parent.revalidate();
-                parent.repaint();
-            }
+        if (mainFrame.isNavVisible()) {
+            mainFrame.toggleNavVisiblity();
         }
     }
 
@@ -99,20 +95,9 @@ public class ViewController {
             }
             getCardLayout().show(getParent(), name);
             currentView = name;
-            if (navPanel != null) {
-                if (!navPanel.isVisible()) {
-                    navPanel.setVisible(true);
-                    parent.revalidate();
-                    parent.repaint();
-                }
-            }
         }
-    }
-
-    public void setNavPanel(Container navPanel) {
-        if (this.navPanel == null) {
-            this.navPanel = navPanel;
-            parent.add(this.navPanel, BorderLayout.NORTH);
+        if (!mainFrame.isNavVisible()) {
+            mainFrame.toggleNavVisiblity();
         }
     }
 
