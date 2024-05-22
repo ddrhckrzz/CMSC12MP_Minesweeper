@@ -3,6 +3,8 @@ package up.tac.cmsc12.mp.ui.frames;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
+import up.tac.cmsc12.mp.ui.ViewController;
+
 public class MainPanel extends JPanel {
     private MainButtonPanel buttons;
 
@@ -21,7 +23,7 @@ public class MainPanel extends JPanel {
         add(buttons);
     }
 
-    public void bind_buttons(MainFrame mainFrame){
-        buttons.bind_buttons(mainFrame);
+    public void bind_buttons(ViewController controller){
+        buttons.bind_buttons(controller);
     }
 }

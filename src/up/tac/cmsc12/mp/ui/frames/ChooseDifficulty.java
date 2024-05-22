@@ -1,12 +1,12 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.InputMismatchException;
 
 import javax.swing.BoxLayout;
@@ -16,55 +16,33 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import up.tac.cmsc12.mp.ui.buttons.DifficultyListener;
+import up.tac.cmsc12.mp.ui.ViewController;
 
-public class DifficultyPanel extends JPanel {
-    public static final String DIFFICULTY_PANEL = "DIFFICULTY";
-    public static final String CUSTOM_PANEL = "CUSTOM";
-    private CardLayout cardLayout;
+public class ChooseDifficulty {
+    public static final String DIFFICULTY_PANEL = "Difficulty Panel";
+    public static final String CUSTOM_PANEL = "Custom Difficulty Panel";
     private JPanel difficultyPanel;
     private JPanel customDifficultyPanel;
     private JTextField rowsField;
     private JTextField colsField;
     private JTextField totalMinesField;
-    @SuppressWarnings("unused") // no seriously gamePanel was used here. it's just modified cuz it just generates the board here
-    private GamePanel gamePanel;
-    private DifficultyListener listener;
-    private MainFrame mainFrame;
-    private String currentPage;
-    public DifficultyPanel(MainFrame mainFrame, GamePanel gamePanel){
-        this.gamePanel = gamePanel;
-        this.mainFrame = mainFrame;
-        listener = new DifficultyListener(this);
-        init_layout();
-        add_panels();
-    }
+    private ViewController controller;
 
-    private void init_layout(){
-        cardLayout = new CardLayout();
-        setLayout(cardLayout);
+    public ChooseDifficulty(ViewController controller) {
+        this.controller = controller;
         difficultyPanel = makeDifficultyPanel();
         customDifficultyPanel = makeCustomDifficultyPanel();
-        cardLayout.addLayoutComponent(difficultyPanel, DIFFICULTY_PANEL);
-        cardLayout.addLayoutComponent(customDifficultyPanel, CUSTOM_PANEL);
-        add_panels();
+        controller.addView(difficultyPanel, DIFFICULTY_PANEL);
+        controller.addView(customDifficultyPanel, CUSTOM_PANEL);
     }
 
     private JPanel makeDifficultyPanel(){
         // panels within panels within panels holy f*ck
-        JPanel buttonsWrapperPanel = new JPanel(); // seriously f*ck Swing
         JPanel buttonsPanel = new JPanel();
         JPanel wrapper = new JPanel();
-        JPanel topPanel = new JPanel();
-        wrapper.setLayout(new BorderLayout());
+        wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.Y_AXIS));
         buttonsPanel.setLayout(new GridBagLayout());
         buttonsPanel.setMaximumSize(new Dimension(360, 510));
-        JButton back = new JButton("Back");
-        JButton home = new JButton("Main Menu");
-        // the home button and back button on the top left
-        topPanel.add(back);
-        topPanel.add(home);
-        wrapper.add(topPanel, BorderLayout.NORTH);
         // making the different buttons
         JButton beginner = new JButton("BEGINNER");
         JButton intermediate = new JButton("INTERMEDIATE");
@@ -72,14 +50,43 @@ public class DifficultyPanel extends JPanel {
         JButton master = new JButton("MASTER");
         JButton legend = new JButton("LEGEND");
         JButton custom = new JButton("CUSTOM");
-        back.addActionListener(listener);
-        home.addActionListener(listener);
-        beginner.addActionListener(listener);
-        intermediate.addActionListener(listener);
-        expert.addActionListener(listener);
-        master.addActionListener(listener);
-        legend.addActionListener(listener);
-        custom.addActionListener(listener);
+        // set ActionListeners
+        beginner.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateGamePanel(1);
+            }
+        });
+        intermediate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateGamePanel(2);
+            }
+        });
+        expert.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateGamePanel(3);
+            }
+        });
+        master.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateGamePanel(4);
+            }
+        });
+        legend.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateGamePanel(5);
+            }
+        });
+        custom.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.view(CUSTOM_PANEL);
+            }
+        });
         // adding buttons to the button panel
         // GridBagConstraints is amazing but man...
         GridBagConstraints c = new GridBagConstraints();
@@ -98,9 +105,8 @@ public class DifficultyPanel extends JPanel {
         buttonsPanel.add(legend, c);
         setGBC(c, 0, 5);
         buttonsPanel.add(custom, c);
-        buttonsWrapperPanel.add(buttonsPanel);
         // finally...
-        wrapper.add(buttonsWrapperPanel, BorderLayout.CENTER);
+        wrapper.add(buttonsPanel);
         return wrapper;
     }
 
@@ -109,23 +115,15 @@ public class DifficultyPanel extends JPanel {
         JPanel gridwrapper = new JPanel();
         JPanel fieldsPanel = new JPanel();
         JPanel wrapper = new JPanel();
-        JPanel topPanel = new JPanel();
-        wrapper.setLayout(new BorderLayout());
         fieldsPanel.setLayout(new GridBagLayout());
         fieldsPanel.setMaximumSize(new Dimension(360, 510));
         gridwrapper.setLayout(new BoxLayout(gridwrapper, BoxLayout.Y_AXIS));
-        JButton back = new JButton("Back");
-        JButton home = new JButton("Main Menu");
-        // the home button and back button on the top left
-        topPanel.add(back);
-        topPanel.add(home);
-        wrapper.add(topPanel, BorderLayout.NORTH);
         // gridbag stuff again wowee
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.BOTH;
         JLabel topLabel = new JLabel("CUSTOM GAME SETUP");
-        JLabel rowsLabel = new JLabel("No. of Rows (max: 250): ");
-        JLabel colsLabel = new JLabel("No. of Columns (max: 250): ");
+        JLabel rowsLabel = new JLabel("No. of Rows (max: " + GamePanel.MAX_DIMENSIONS + "): ");
+        JLabel colsLabel = new JLabel("No. of Columns (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel totalMinesLabel = new JLabel("No. of Mines (max: (rows * cols) - 1): ");
         JButton startCustom = new JButton("START");
         rowsField = new JTextField(10);
@@ -154,18 +152,16 @@ public class DifficultyPanel extends JPanel {
         setGBC(c, 0, 4);
         fieldsPanel.add(startCustom, c);
         // add listeners to the start button
-        startCustom.addActionListener(listener);
-        back.addActionListener(listener);
-        home.addActionListener(listener);
+        startCustom.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                generateGamePanel(0);
+            }
+        });
         // finally
         gridwrapper.add(fieldsPanel);
         wrapper.add(gridwrapper, BorderLayout.CENTER);
         return wrapper;
-    }
-
-    private void add_panels(){
-        add(difficultyPanel);
-        add(customDifficultyPanel);
     }
 
     private void setGBC(GridBagConstraints gbc, int gridx, int gridy){
@@ -185,42 +181,6 @@ public class DifficultyPanel extends JPanel {
         gbc.weighty = weighty;
     }
 
-    public void goBack(){
-        if (currentPage.equals(CUSTOM_PANEL)) {
-            cardLayout.last(this);
-        } else {
-            goHome();
-        }
-    }
-
-    public void goHome(){
-        mainFrame.goTo(MainFrame.MAIN_PANEL);
-    }
-
-    public void goNext(){
-        cardLayout.next(this);
-        currentPage = CUSTOM_PANEL;
-    }
-
-    public void goPrevious(){
-        if (currentPage.equals(DIFFICULTY_PANEL)) {
-            goHome();
-        } else {
-            cardLayout.previous(this);
-            currentPage = DIFFICULTY_PANEL;
-        }
-    }
-
-    public void goTo(String key){
-        cardLayout.show(this, key);
-        currentPage = key;
-    }
-
-    public void startPanel(){
-        cardLayout.show(this, DIFFICULTY_PANEL);
-        currentPage = DIFFICULTY_PANEL;
-    }
-
     public void generateGamePanel(int difficulty) {
         if (difficulty == 0) {
             try {
@@ -233,22 +193,16 @@ public class DifficultyPanel extends JPanel {
                 if (totalMines > (rows * cols) - 1) {
                     throw new InputMismatchException();
                 }
-                gamePanel.generate_board(rows, cols, totalMines);;
-                mainFrame.goTo(MainFrame.GAME_PANEL);
+                controller.generateGameBoard(rows, cols, totalMines);
+                controller.view(MainFrame.GAME_PANEL);
             } catch (InputMismatchException ime) {
-                JOptionPane.showMessageDialog(this, "Numbers must be within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(controller.getParent(), "Numbers must be within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(this, "Input in the fields must be integers within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(controller.getParent(), "Input in the fields must be integers within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
             }
         } else {
-            gamePanel.generate_board(difficulty);
-            mainFrame.goTo(MainFrame.GAME_PANEL);
+            controller.generateGameBoard(difficulty);
+            controller.view(MainFrame.GAME_PANEL);
         }
-    }
-
-    public void clearFields(){
-        rowsField.setText("");
-        colsField.setText("");
-        totalMinesField.setText("");
     }
 }

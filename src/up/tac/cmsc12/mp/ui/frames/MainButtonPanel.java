@@ -2,13 +2,15 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import up.tac.cmsc12.mp.ui.buttons.MainButtonListener;
+import up.tac.cmsc12.mp.ui.ViewController;
 
 public class MainButtonPanel extends JPanel{
     private GridBagLayout layout;
@@ -54,12 +56,21 @@ public class MainButtonPanel extends JPanel{
         add(exitButton, gbc);
     }
 
-    protected void bind_buttons(MainFrame mainframe){
-        MainButtonListener mbl = new MainButtonListener(mainframe);
-        startButton.addActionListener(mbl);
+    protected void bind_buttons(ViewController controller){
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.view(ChooseDifficulty.DIFFICULTY_PANEL);
+            }
+        });
         // scoreButton.addActionListener(mbl);
         // optionsButton.addActionListener(mbl);
-        exitButton.addActionListener(mbl);
+        exitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
     }
 
     private void setGBC(int gridx, int gridy){

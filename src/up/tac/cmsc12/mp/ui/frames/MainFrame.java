@@ -2,9 +2,17 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.text.View;
+
+import up.tac.cmsc12.mp.ui.ViewController;
 
 public class MainFrame extends JFrame {
     /*
@@ -16,67 +24,100 @@ public class MainFrame extends JFrame {
      */
     // environment constants
     private final static String TITLENAME = "Minesweeper! In Java™";
-    public final static String MAIN_PANEL = "Main Menu";
     public final static String GAME_PANEL = "Game Panel";
     public final static String OPTIONS_PANEL = "Options Panel";
     public final static String SCORE_PANEL = "Score Panel";
 
     // class variables
+    private ViewController viewController;
     private CardLayout cardLayout;
+    private JPanel cardPanel;
+    private JPanel navPanel;
     private MainPanel mainMenu;
     private OptionsPanel optionsPanel;
     private GamePanel gamePanel;
-    private DifficultyPanel difficultyPanel;
+    private ChooseDifficulty difficultyChooser;
     private ScorePanel scorePanel;
-    private String currentPage;
+    private String currentView;
 
     public MainFrame(){
         // TODO: Add other UI stuff here and in this folder in general.
         setTitle(TITLENAME);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         init_layout();
-        init_panels();
+        add_panels();
+        toggleNavVisiblity(); // navigation panel is invisble by default
+    }
+
+    public JPanel getCardPanel() {
+        return cardPanel;
+    }
+
+    public boolean isNavVisible() {
+        return navPanel.isVisible();
+    }
+
+    public void toggleNavVisiblity() {
+        if (navPanel.isVisible()) {
+            navPanel.setVisible(false);
+        } else {
+            navPanel.setVisible(true);
+        }
+        revalidate();
+        repaint();
     }
 
     private void init_layout(){
         cardLayout = new CardLayout(10,10);
-        setLayout(cardLayout);
+        cardPanel = new JPanel(cardLayout);
+        viewController = new ViewController(this, cardLayout);
         setPreferredSize(new Dimension(640, 480));
         setSize(getPreferredSize());
+        setLocationRelativeTo(null);
     }
 
-    private void init_panels(){
+
+    private void add_panels() {
         mainMenu = new MainPanel();
-        cardLayout.addLayoutComponent(mainMenu, MAIN_PANEL);
-        add(mainMenu);
-        mainMenu.bind_buttons(this);
         gamePanel = new GamePanel();
-        cardLayout.addLayoutComponent(gamePanel, GAME_PANEL);
-        add(gamePanel);
-        difficultyPanel = new DifficultyPanel(this, gamePanel);
-        cardLayout.addLayoutComponent(difficultyPanel, DifficultyPanel.DIFFICULTY_PANEL);
-        add(difficultyPanel);
+        difficultyChooser = new ChooseDifficulty(viewController);
+        mainMenu.bind_buttons(viewController);
+        navPanel = makeNavPanel();
+
+        // add to controller
+        viewController.addView(mainMenu, ViewController.HOME);
+        viewController.addView(gamePanel, GAME_PANEL);
+
+        // add cardPanel and navPanel to the frame
+        add(cardPanel);
+        add(navPanel, BorderLayout.NORTH);
+    }
+
+    private JPanel makeNavPanel() {
+        JPanel navPanel = new JPanel();
+        JButton back = new JButton("Back");
+        JButton home = new JButton("Main Menu");
+        back.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewController.previous();
+            }
+        });
+        home.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                viewController.home();
+            }
+        });
+        navPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        navPanel.applyComponentOrientation(navPanel.getComponentOrientation());
+        navPanel.add(back);
+        navPanel.add(home);
+        return navPanel;
     }
 
     public void start(){
-        cardLayout.show(getContentPane(), MAIN_PANEL);
-        currentPage = MAIN_PANEL;
+        viewController.home();
         setVisible(true);
-    }
-
-    public void goBack(){
-        cardLayout.last(getContentPane());
-    }
-
-    public void goHome(){
-        goTo(MAIN_PANEL);
-    }
-
-    public void goTo(String key){
-        if(key.equals(DifficultyPanel.DIFFICULTY_PANEL)) {
-            difficultyPanel.startPanel();
-        }
-        cardLayout.show(getContentPane(), key);
-        currentPage = key;
     }
 }

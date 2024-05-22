@@ -19,7 +19,6 @@ public class GamePanel extends JPanel {
     private static final int DEFAULT_COLS = 9;
     private static final int DEFAULT_NO_OF_MINES = 10;
     public static final int MAX_DIMENSIONS = 250; // width and height
-    private static final int MAX_NO_OF_MINES = 62499;
     // ---------------- BOARD DIFFICULTY CONSTANTS ------------------------ //
     public static final int BEGINNER_DIMENSIONS = 9;
     public static final int BEGINNER_NO_OF_MINES = 10;
@@ -33,15 +32,10 @@ public class GamePanel extends JPanel {
     public static final int LEGEND_NO_OF_MINES = 2000;
     // ------------------------ class variables ---------------------------- //
     private int difficulty;
-    public int getDifficulty() {
-        return difficulty;
-    }
-
     private int rows;
     private int cols;
     private int totalMines;
     private Cells[][] board;
-    private JPanel topPanel;
     private JPanel boardPanel;
     private JPanel bottomPanel;
     private JLabel timer = new JLabel("Time Elapsed: 0s"); //moved because they need to be global to be updated(cant change text)
@@ -56,52 +50,24 @@ public class GamePanel extends JPanel {
         Minesweeper.giveTimer(Timer);
     }
 
-    @Deprecated
-    /**
-     * Creates a minesweeper board with a specific difficulty that isn't the CUSTOM diffuclty.
-     * @param difficulty {@code int} key for choosing specific board difficulty to generate board
-     */
-    public GamePanel(int difficulty) {
-        this();
-        this.difficulty = difficulty;
-    }
-
-    @Deprecated
-    /**
-     * Creates a Minesweeper board with custom rows, columns, and total no of mines.
-     * @param rows no of rows to use in the board
-     * @param cols no of cols to use in the board
-     * @param totalMines total no of mines to generate in the board
-     */
-    public GamePanel(int rows, int cols, int totalMines){
-        this();
-        difficulty = 0; // for custom difficulty
-        this.rows = rows;
-        this.cols = cols;
-        this.totalMines = totalMines;
-    }
-
     private void init_layout(){
         setLayout(new BorderLayout());
-        init_topPanel();
-        add(topPanel, BorderLayout.NORTH);
         init_bottomPanel();
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
-    private void init_topPanel(){
-        topPanel = new JPanel();
-        timer.setHorizontalAlignment(JLabel.CENTER);
-        topPanel.add(timer);
-    }
-
     private void init_bottomPanel(){
         bottomPanel = new JPanel();
+        timer.setHorizontalAlignment(JLabel.CENTER);
         minesLeft.setHorizontalAlignment(JLabel.CENTER);
+        bottomPanel.add(timer);
         bottomPanel.add(minesLeft);
     }
 
     public void generate_board(){
+        if (boardPanel != null) {
+            remove(boardPanel);
+        }
         switch (difficulty) {
             case 0:
                 break;
@@ -157,6 +123,8 @@ public class GamePanel extends JPanel {
         }
         add(boardPanel, BorderLayout.CENTER);
         addMines();
+        revalidate();
+        repaint();
     }
 
     public void generate_board(int difficulty) {
@@ -188,6 +156,10 @@ public class GamePanel extends JPanel {
             }
             minesLeft.setText("Mines Left: " + totalMines);
         }
+    }
+
+    public int getDifficulty() {
+        return difficulty;
     }
 
     public static JLabel getMinesLabel(){
