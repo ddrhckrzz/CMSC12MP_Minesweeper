@@ -20,15 +20,15 @@ public class Timer extends Thread{
     }
 
     public void rerun(){
+        running = true;
         timeSeconds = 0;
         CellListener.resetFirstClicked();
     }
 
     @Override
     public void run(){
-        running = true;
-        while(running){
-            if(paused || !CellListener.getFirstClicked()){//essentially disables the thread when paused
+        while(true){
+            if(!running || paused || !CellListener.getFirstClicked()){//essentially disables the thread when paused
                 System.out.print(""); //i have no idea why i need this line of code im losing it
                 continue;
             }

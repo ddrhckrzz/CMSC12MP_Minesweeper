@@ -187,8 +187,8 @@ public class GamePanel extends JPanel {
     }
 
     public void resetBoard(){
-        Timer.rerun();
         timer.setText("Time Elapsed: 0s");
+        Timer.rerun();
         Cells.resetBoard();
     }
 }
