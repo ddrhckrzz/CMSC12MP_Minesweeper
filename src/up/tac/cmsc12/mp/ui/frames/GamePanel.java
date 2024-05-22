@@ -32,10 +32,6 @@ public class GamePanel extends JPanel {
     public static final int LEGEND_NO_OF_MINES = 2000;
     // ------------------------ class variables ---------------------------- //
     private int difficulty;
-    public int getDifficulty() {
-        return difficulty;
-    }
-
     private int rows;
     private int cols;
     private int totalMines;
