@@ -38,6 +38,7 @@ public class GamePanel extends JPanel {
     private Cells[][] board;
     private JPanel boardPanel;
     private JPanel bottomPanel;
+    private Timer Timer;
     private JLabel timer = new JLabel("Time Elapsed: 0s"); //moved because they need to be global to be updated(cant change text)
     private static JLabel minesLeft = new JLabel("Mines Left: ");
 
@@ -46,7 +47,7 @@ public class GamePanel extends JPanel {
      */
     public GamePanel(){
         init_layout();
-        Timer Timer = new Timer(timer);
+        Timer = new Timer(timer);
         Minesweeper.giveTimer(Timer);
     }
 
@@ -65,6 +66,7 @@ public class GamePanel extends JPanel {
     }
 
     public void generate_board(){
+        resetBoard();
         if (boardPanel != null) {
             remove(boardPanel);
         }
@@ -109,7 +111,6 @@ public class GamePanel extends JPanel {
         }
         ScoreHandler sh = new ScoreHandler(difficulty);   //moved here so the scorehandle is able to accept difficulty as a parameter
         Minesweeper.giveScoreHandler(sh);
-        sh.newScore("test2", 20);
 
         board = new Cells[rows][cols];
         boardPanel = new JPanel();
@@ -183,5 +184,11 @@ public class GamePanel extends JPanel {
             catch(ArrayIndexOutOfBoundsException e){
             }
         }
+    }
+
+    public void resetBoard(){
+        Timer.rerun();
+        timer.setText("Time Elapsed: 0s");
+        Cells.resetBoard();
     }
 }
