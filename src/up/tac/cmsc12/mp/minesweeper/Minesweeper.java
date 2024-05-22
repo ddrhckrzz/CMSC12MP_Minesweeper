@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import javax.swing.JLabel;
 
+import up.tac.cmsc12.mp.ui.ViewController;
 import up.tac.cmsc12.mp.ui.buttons.Cells;
 import up.tac.cmsc12.mp.ui.frames.GamePanel;
 
@@ -23,15 +24,20 @@ public class Minesweeper {
      * extensions it should automatically add the package line at
      * the very top for you.
      */
-    public static Timer timer;
-    public static ScoreHandler scoreHandler;
+    private static Timer timer;
+    private static ScoreHandler scoreHandler;
+    private static ViewController controller;
 
-    public static void giveTimer(Timer givenTimer){
+    public static void setTimer(Timer givenTimer){
         timer = givenTimer;
     }
 
-    public static void giveScoreHandler(ScoreHandler givenScoreHandler){
+    public static void setScoreHandler(ScoreHandler givenScoreHandler){
         scoreHandler = givenScoreHandler;
+    }
+
+    public static void setViewController(ViewController viewcontroller){
+        controller = viewcontroller;
     }
   
     public static void autoClear(Cells[][] cells, int row, int col){
@@ -108,17 +114,14 @@ public class Minesweeper {
     }
 
     public static void victory(){
-        System.out.println("you won");
         timer.stopTimer();
-        Scanner scan = new Scanner(System.in);
-        System.out.println("Input Name to be Displayed on the LeaderBoards");
-        String name = scan.nextLine();
+        String name = controller.victory();
         scoreHandler.newScore(name, timer.getTime());
-        scan.close();
+        controller.updateScores();
     }
 
     public static void defeat(){
-        System.out.println("you lost");
+        controller.lose();
         timer.stopTimer();
     }
 }

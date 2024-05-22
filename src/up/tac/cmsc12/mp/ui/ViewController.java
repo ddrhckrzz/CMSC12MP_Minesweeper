@@ -8,9 +8,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import up.tac.cmsc12.mp.minesweeper.ScoreTable;
 import up.tac.cmsc12.mp.ui.frames.*;
 
 public class ViewController {
@@ -19,6 +21,7 @@ public class ViewController {
     private String currentView = null;
     private List<String> previousViews;
     private Map<String, Component> mapNames;
+    private ScoreTable[] scores = new ScoreTable[5];
 
     private MainFrame mainFrame;
     private Container parent;
@@ -48,6 +51,37 @@ public class ViewController {
     public void removeView(Component comp, String name) {
         mapNames.remove(name);
         getParent().remove(comp);
+    }
+
+    public void setScoreArray(ScoreTable[] scores) {
+        this.scores = scores;
+    }
+
+    public void updateScores() {
+        for (ScoreTable score : scores) {
+            score.updateTable();
+        }
+    }
+
+    public String victory() {
+        String name = JOptionPane.showInputDialog("Enter name here:");
+        return name;
+    }
+
+    public void lose() {
+        int choice = JOptionPane.showOptionDialog(null, 
+                "Restart game?",
+                "You lost!",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                new String[]{"RESTART", "GO BACK TO MAIN MENU"},
+                null);
+        if(choice == JOptionPane.YES_OPTION) {
+            view(ChooseDifficulty.DIFFICULTY_PANEL);
+        } else {
+            home();
+        }
     }
 
     private void clearCustomFields() {

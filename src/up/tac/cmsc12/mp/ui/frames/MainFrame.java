@@ -12,6 +12,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.ui.ViewController;
 
 public class MainFrame extends JFrame {
@@ -47,6 +48,7 @@ public class MainFrame extends JFrame {
         init_layout();
         add_panels();
         toggleNavVisiblity(); // navigation panel is invisble by default
+        Minesweeper.setViewController(viewController); // very important
     }
 
     public JPanel getCardPanel() {
@@ -82,11 +84,13 @@ public class MainFrame extends JFrame {
         gamePanel = new GamePanel();
         difficultyChooser = new ChooseDifficulty(viewController);
         mainMenu.bind_buttons(viewController);
+        scorePanel = new ScorePanel(viewController);
         navPanel = makeNavPanel();
 
         // add to controller
         viewController.addView(mainMenu, ViewController.HOME);
         viewController.addView(gamePanel, GAME_PANEL);
+        viewController.addView(scorePanel, SCORE_PANEL);
 
         // add cardPanel and navPanel to the frame
         add(cardPanel);

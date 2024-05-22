@@ -65,7 +65,12 @@ public class MainButtonPanel extends JPanel{
                 controller.view(ChooseDifficulty.DIFFICULTY_PANEL);
             }
         });
-        // scoreButton.addActionListener(mbl);
+        scoreButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                controller.view(MainFrame.SCORE_PANEL);
+            }
+        });
         // optionsButton.addActionListener(mbl);
         exitButton.addActionListener(new ActionListener() {
             @Override

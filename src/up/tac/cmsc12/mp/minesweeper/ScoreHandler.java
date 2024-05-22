@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ScoreHandler {
-    private final static String PATH = "src\\up\\tac\\cmsc12\\mp\\scorefiles\\";
+    public final static String PATH = "scores\\";
     private static String PATH_TO_EDIT;
     private File file, BEGINNGER_SCROREFILE, INTERMEDIATE_SCOREFILE, EXPERT_SCOREFILE, MASTER_SCOREFILE, LEGEND_SCOREFILE, fileToEdit;
     private int difficulty;

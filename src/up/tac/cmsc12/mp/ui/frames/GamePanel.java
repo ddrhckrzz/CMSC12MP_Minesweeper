@@ -48,7 +48,7 @@ public class GamePanel extends JPanel {
     public GamePanel(){
         init_layout();
         Timer = new Timer(timer);
-        Minesweeper.giveTimer(Timer);
+        Minesweeper.setTimer(Timer);
     }
 
     private void init_layout(){
@@ -110,7 +110,7 @@ public class GamePanel extends JPanel {
                 break;
         }
         ScoreHandler sh = new ScoreHandler(difficulty);   //moved here so the scorehandle is able to accept difficulty as a parameter
-        Minesweeper.giveScoreHandler(sh);
+        Minesweeper.setScoreHandler(sh);
 
         board = new Cells[rows][cols];
         boardPanel = new JPanel();
