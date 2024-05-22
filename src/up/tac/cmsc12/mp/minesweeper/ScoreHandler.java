@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class ScoreHandler {
-    private final static String PATH = "src\\up\\tac\\cmsc12\\mp\\scorefiles\\";
+    public final static String PATH = "scores\\";
     private static String PATH_TO_EDIT;
-    private File file, BEGINNGER_SCROREFILE, INTERMEDIATE_SCOREFILE, EXPERT_SCOREFILE, MASTER_SCOREFILE, LEGEND_SCOREFILE, FiletoEdit;
+    private File file, BEGINNGER_SCROREFILE, INTERMEDIATE_SCOREFILE, EXPERT_SCOREFILE, MASTER_SCOREFILE, LEGEND_SCOREFILE, fileToEdit;
     private int difficulty;
     public ScoreHandler(int difficulty){
         this.difficulty = difficulty;
@@ -44,7 +44,7 @@ public class ScoreHandler {
         boolean isLast = true;
         Scanner scan;
         try {
-            scan = new Scanner(FiletoEdit);
+            scan = new Scanner(fileToEdit);
         } catch (FileNotFoundException e) {
             System.out.println("Something has went wrong");
             return;
@@ -70,6 +70,7 @@ public class ScoreHandler {
         if(isLast){ //catcher if new score is lastplace
             try (FileWriter writer = new FileWriter(PATH_TO_EDIT, true)){
                 writer.write("\n" + toWrite);
+                System.out.println("Score Recorded");
                 return;
             } catch (IOException e) {
             }
@@ -78,7 +79,7 @@ public class ScoreHandler {
         try {
             File tempFile = new File(PATH + "tempScoreFile.txt");
             FileWriter tempFileWriter = new FileWriter(PATH + "tempScoreFile.txt");
-            scan = new Scanner(FiletoEdit); //reset scanners to top of file
+            scan = new Scanner(fileToEdit); //reset scanners to top of file
             tempFile.createNewFile();
 
             if(scan.hasNextLine()){  //eats up empty space at the top of the file
@@ -120,40 +121,39 @@ public class ScoreHandler {
         } catch (IOException e) {
             e.printStackTrace();
         } 
-        
         scan.close();
-
+        System.out.println("Score Recorded");
     }
 
     private void findFileDifficulty(){
         switch (difficulty) {
             case 1:
-                FiletoEdit = BEGINNGER_SCROREFILE;
+                fileToEdit = BEGINNGER_SCROREFILE;
                 PATH_TO_EDIT = PATH + "BeginnerScores.txt";
                 break;
             
             case 2:
-                FiletoEdit = INTERMEDIATE_SCOREFILE;
+                fileToEdit = INTERMEDIATE_SCOREFILE;
                 PATH_TO_EDIT = PATH + "IntermediateScores.txt";
                 break;
 
             case 3:
-                FiletoEdit = EXPERT_SCOREFILE;
+                fileToEdit = EXPERT_SCOREFILE;
                 PATH_TO_EDIT = PATH + "ExpertScores.txt";
                 break;
 
             case 4:
-                FiletoEdit = MASTER_SCOREFILE;
+                fileToEdit = MASTER_SCOREFILE;
                 PATH_TO_EDIT = PATH + "MasterScores.txt";
                 break;
 
             case 5:
-                FiletoEdit = LEGEND_SCOREFILE;
+                fileToEdit = LEGEND_SCOREFILE;
                 PATH_TO_EDIT = PATH + "LegendScores.txt";
                 break;
 
             default:
-                FiletoEdit = file;
+                fileToEdit = file;
                 PATH_TO_EDIT = PATH + "SampleDifficultyScores.txt";
                 break;
         }

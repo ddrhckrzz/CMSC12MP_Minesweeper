@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
 
 public class ChooseDifficulty {
@@ -90,20 +91,21 @@ public class ChooseDifficulty {
         // adding buttons to the button panel
         // GridBagConstraints is amazing but man...
         GridBagConstraints c = new GridBagConstraints();
+        GBCUtils u = new GBCUtils(c);
         c.insets = new Insets(12, 12, 12, 12);
         c.fill = GridBagConstraints.BOTH;
-        setGBC(c, 1.0, 1.0);
-        setGBC(c, 0, 0);
+        u.setGBC(1.0, 1.0);
+        u.setGBC(0, 0);
         buttonsPanel.add(beginner, c);
-        setGBC(c, 0, 1);
+        u.setGBC(0, 1);
         buttonsPanel.add(intermediate, c);
-        setGBC(c, 0, 2);
+        u.setGBC(0, 2);
         buttonsPanel.add(expert, c);
-        setGBC(c, 0, 3);
+        u.setGBC(0, 3);
         buttonsPanel.add(master, c);
-        setGBC(c, 0, 4);
+        u.setGBC(0, 4);
         buttonsPanel.add(legend, c);
-        setGBC(c, 0, 5);
+        u.setGBC(0, 5);
         buttonsPanel.add(custom, c);
         // finally...
         wrapper.add(buttonsPanel);
@@ -114,12 +116,12 @@ public class ChooseDifficulty {
         // even more panels within panels shenanigans
         JPanel gridwrapper = new JPanel();
         JPanel fieldsPanel = new JPanel();
-        JPanel wrapper = new JPanel();
         fieldsPanel.setLayout(new GridBagLayout());
-        fieldsPanel.setMaximumSize(new Dimension(360, 510));
+        fieldsPanel.setMaximumSize(new Dimension(420, 270));
         gridwrapper.setLayout(new BoxLayout(gridwrapper, BoxLayout.Y_AXIS));
         // gridbag stuff again wowee
         GridBagConstraints c = new GridBagConstraints();
+        GBCUtils u = new GBCUtils(c);
         c.fill = GridBagConstraints.BOTH;
         JLabel topLabel = new JLabel("CUSTOM GAME SETUP");
         JLabel rowsLabel = new JLabel("No. of Rows (max: " + GamePanel.MAX_DIMENSIONS + "): ");
@@ -129,27 +131,28 @@ public class ChooseDifficulty {
         rowsField = new JTextField(10);
         colsField = new JTextField(10);
         totalMinesField = new JTextField(10);
+        topLabel.setHorizontalAlignment(JLabel.CENTER);
         c.gridwidth = 2;
         c.gridheight = 1;
-        setGBC(c, 1.0, 1.0);
-        setGBC(c, 0, 0);
+        u.setGBC(0, 0);
+        u.setGBC(1.0, 0.5);
         fieldsPanel.add(topLabel, c);
         c.gridheight = 1;
         c.gridwidth = 1;
-        setGBC(c, 0, 1, 0.5, 0.5);
+        u.setGBC(0, 1, 0.5, 0.2);
         fieldsPanel.add(rowsLabel,c);
-        setGBC(c, 1, 1);
+        u.setGBC(1, 1);
         fieldsPanel.add(rowsField, c);
-        setGBC(c, 0, 2);
+        u.setGBC(0, 2);
         fieldsPanel.add(colsLabel, c);
-        setGBC(c, 1, 2);
+        u.setGBC(1, 2);
         fieldsPanel.add(colsField, c);
-        setGBC(c, 0, 3);
+        u.setGBC(0, 3);
         fieldsPanel.add(totalMinesLabel, c);
-        setGBC(c, 1, 3);
+        u.setGBC(1, 3);
         fieldsPanel.add(totalMinesField, c);
         c.gridwidth = 2;
-        setGBC(c, 0, 4);
+        u.setGBC(0, 4);
         fieldsPanel.add(startCustom, c);
         // add listeners to the start button
         startCustom.addActionListener(new ActionListener() {
@@ -160,25 +163,7 @@ public class ChooseDifficulty {
         });
         // finally
         gridwrapper.add(fieldsPanel);
-        wrapper.add(gridwrapper, BorderLayout.CENTER);
-        return wrapper;
-    }
-
-    private void setGBC(GridBagConstraints gbc, int gridx, int gridy){
-        gbc.gridx = gridx;
-        gbc.gridy = gridy;
-    }
-
-    private void setGBC(GridBagConstraints gbc, int gridx, int gridy, double weightx, double weighty){
-        gbc.gridx = gridx;
-        gbc.gridy = gridy;
-        gbc.weightx = weightx;
-        gbc.weighty = weighty;
-    }
-
-    private void setGBC(GridBagConstraints gbc, double weightx, double weighty){
-        gbc.weightx = weightx;
-        gbc.weighty = weighty;
+        return gridwrapper;
     }
 
     public void generateGamePanel(int difficulty) {
