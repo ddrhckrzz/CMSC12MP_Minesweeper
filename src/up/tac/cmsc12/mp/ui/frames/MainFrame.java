@@ -7,10 +7,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.text.View;
 
 import up.tac.cmsc12.mp.ui.ViewController;
 
@@ -95,6 +95,7 @@ public class MainFrame extends JFrame {
 
     private JPanel makeNavPanel() {
         JPanel navPanel = new JPanel();
+        // navPanel.setLayout(new BoxLayout(navPanel, BoxLayout.LINE_AXIS));
         JButton back = new JButton("Back");
         JButton home = new JButton("Main Menu");
         back.addActionListener(new ActionListener() {
@@ -109,8 +110,6 @@ public class MainFrame extends JFrame {
                 viewController.home();
             }
         });
-        navPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        navPanel.applyComponentOrientation(navPanel.getComponentOrientation());
         navPanel.add(back);
         navPanel.add(home);
         return navPanel;

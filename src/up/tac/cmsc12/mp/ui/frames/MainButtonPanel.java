@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
 
 public class MainButtonPanel extends JPanel{
@@ -39,20 +40,21 @@ public class MainButtonPanel extends JPanel{
         exitButton = new JButton("Exit");
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = 2;
-        setGBC(0, 0, GridBagConstraints.CENTER, 0.8, 0.8, GridBagConstraints.BOTH);
+        GBCUtils u = new GBCUtils(gbc);
+        u.setGBC(0, 0, GridBagConstraints.CENTER, 0.8, 0.8, GridBagConstraints.BOTH);
         logoPane.setHorizontalAlignment(JLabel.CENTER);
         add(logoPane, gbc);
         gbc.ipadx = 20;
         gbc.ipady = 30;
-        setGBC(0, 1, GridBagConstraints.CENTER, 0.4, 0.2, GridBagConstraints.BOTH);
+        u.setGBC(0, 1, GridBagConstraints.CENTER, 0.4, 0.2, GridBagConstraints.BOTH);
         add(startButton, gbc);
         gbc.gridwidth = 1;
-        setGBC(0, 2, 0.2, 0.2);
+        u.setGBC(0, 2, 0.2, 0.2);
         add(scoreButton, gbc);
-        setGBC(1, 2);
+        u.setGBC(1, 2);
         add(optionsButton, gbc);
         gbc.gridwidth = 2;
-        setGBC(0, 3, 0.4, 0.2);
+        u.setGBC(0, 3, 0.4, 0.2);
         add(exitButton, gbc);
     }
 
@@ -71,26 +73,5 @@ public class MainButtonPanel extends JPanel{
                 System.exit(0);
             }
         });
-    }
-
-    private void setGBC(int gridx, int gridy){
-        gbc.gridx = gridx;
-        gbc.gridy = gridy;
-    }
-
-    private void setGBC(int gridx, int gridy, double weightx, double weighty){
-        gbc.gridx = gridx;
-        gbc.gridy = gridy;
-        gbc.weightx = weightx;
-        gbc.weighty = weighty;
-    }
-
-    private void setGBC(int gridx, int gridy, int anchor, double weightx, double weighty, int fill){
-        gbc.gridx = gridx;
-        gbc.gridy = gridy;
-        gbc.anchor = anchor;
-        gbc.weightx = weightx;
-        gbc.weighty = weighty;
-        gbc.fill = fill;
     }
 }
