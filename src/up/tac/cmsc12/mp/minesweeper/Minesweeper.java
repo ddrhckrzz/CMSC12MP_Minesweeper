@@ -105,7 +105,7 @@ public class Minesweeper {
             }
             Cells.addNoOfFlags(-1);
         }
-        
+
         noOfFlags = Cells.getNoOfFlags();
         minesLeft.setText("Mines Left: " + (noOfMines - noOfFlags));
         cell.revFlag(); //reverses boolean flag value
@@ -117,7 +117,7 @@ public class Minesweeper {
     public static void victory(){
         timer.stopTimer();
         String name = controller.victory();
-        if (name != null) {
+        if (name != null && !name.isBlank()) {
             scoreHandler.newScore(name, timer.getTime());
             controller.updateScores();
         }

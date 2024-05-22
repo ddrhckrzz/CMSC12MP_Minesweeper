@@ -65,7 +65,7 @@ public class ViewController {
 
     public String victory() {
         String name = JOptionPane.showInputDialog("Enter name here:");
-        while (name != null) {
+        while (name == null || name.isBlank()) {
             int c;
             c = JOptionPane.showConfirmDialog(null,
                 "Are you sure you want to cancel this operation?\n(Your score will not be recorded)", 

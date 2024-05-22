@@ -111,7 +111,8 @@ public class GamePanel extends JPanel {
         }
         ScoreHandler sh = new ScoreHandler(difficulty);   //moved here so the scorehandle is able to accept difficulty as a parameter
         Minesweeper.setScoreHandler(sh);
-
+        Minesweeper.victory();
+        
         board = new Cells[rows][cols];
         boardPanel = new JPanel();
         boardPanel.setLayout(new GridLayout(rows, cols));
