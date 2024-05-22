@@ -13,6 +13,12 @@ public class Cells extends JButton {
         setMargin(new Insets(0, 0, 0, 0));
     }
 
+    public static void resetBoard(){
+        noOfMines = 0;
+        noOfFlags = 0;
+        noOfFound = 0;
+    }
+
     public void setVal(int val){
         this.val = val;
     }

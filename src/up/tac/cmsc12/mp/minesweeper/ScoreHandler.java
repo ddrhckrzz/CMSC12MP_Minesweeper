@@ -70,6 +70,7 @@ public class ScoreHandler {
         if(isLast){ //catcher if new score is lastplace
             try (FileWriter writer = new FileWriter(PATH_TO_EDIT, true)){
                 writer.write("\n" + toWrite);
+                System.out.println("Score Recorded");
                 return;
             } catch (IOException e) {
             }
@@ -120,9 +121,8 @@ public class ScoreHandler {
         } catch (IOException e) {
             e.printStackTrace();
         } 
-        
         scan.close();
-
+        System.out.println("Score Recorded");
     }
 
     private void findFileDifficulty(){

@@ -19,8 +19,14 @@ public class Timer extends Thread{
         this.start();
     }
 
+    public void rerun(){
+        timeSeconds = 0;
+        CellListener.resetFirstClicked();
+    }
+
     @Override
     public void run(){
+        running = true;
         while(running){
             if(paused || !CellListener.getFirstClicked()){//essentially disables the thread when paused
                 System.out.print(""); //i have no idea why i need this line of code im losing it

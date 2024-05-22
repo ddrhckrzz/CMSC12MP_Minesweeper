@@ -49,4 +49,8 @@ public class CellListener extends MouseAdapter{
     public static boolean getFirstClicked(){
         return first_clicked;
     }
+
+    public static void resetFirstClicked(){
+        first_clicked = false;
+    }
 }
