@@ -1,8 +1,6 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
