@@ -1,6 +1,5 @@
 package up.tac.cmsc12.mp.minesweeper;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.ViewController;
@@ -79,9 +78,6 @@ public class Minesweeper {
                 }    
             }
             catch(ArrayIndexOutOfBoundsException e){
-            }
-            catch(Exception e){
-                e.printStackTrace();
             }
         }
     }

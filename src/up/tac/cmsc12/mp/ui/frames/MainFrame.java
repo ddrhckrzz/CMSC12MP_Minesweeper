@@ -25,7 +25,7 @@ public class MainFrame extends JFrame {
     // environment constants
     private final static String TITLENAME = "Minesweeper! In Java™";
     public final static String GAME_PANEL = "Game Panel";
-    public final static String OPTIONS_PANEL = "Options Panel";
+    public final static String CREDITS_PANEL = "Credits Panel";
     public final static String SCORE_PANEL = "Score Panel";
 
     // class variables
@@ -39,7 +39,6 @@ public class MainFrame extends JFrame {
     private ScorePanel scorePanel;
 
     public MainFrame(){
-        // TODO: Add other UI stuff here and in this folder in general.
         setTitle(TITLENAME);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         init_layout();

@@ -28,7 +28,6 @@ public class ViewController {
     private MainFrame mainFrame;
     private Container parent;
     private CardLayout cardLayout;
-    private Background cardPanel;
 
     public ViewController(MainFrame mainFrame, CardLayout cardLayout) {
         this.mainFrame = mainFrame;

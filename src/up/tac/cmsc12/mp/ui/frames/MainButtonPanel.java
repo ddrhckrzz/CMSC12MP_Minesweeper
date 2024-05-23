@@ -35,7 +35,7 @@ public class MainButtonPanel extends JPanel{
     private void init_buttons(){
         startButton = new CustomButton("New Game");
         scoreButton = new CustomButton("Leaderboards",5,25);
-        optionsButton = new CustomButton("Options",5,25);
+        optionsButton = new CustomButton("Credits",5,25);
         exitButton = new CustomButton("Exit",5,30);
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = 2;

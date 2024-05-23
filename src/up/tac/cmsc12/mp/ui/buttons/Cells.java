@@ -2,7 +2,6 @@ package up.tac.cmsc12.mp.ui.buttons;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Insets;
 
 import javax.swing.ImageIcon;
