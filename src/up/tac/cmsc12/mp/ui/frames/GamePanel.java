@@ -4,11 +4,18 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.buttons.Cells;
+import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
 import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.minesweeper.ScoreHandler;
@@ -40,12 +47,15 @@ public class GamePanel extends JPanel {
     private int cols;
     private int totalMines;
     private Cells[][] board;
+    private JLayeredPane layeredPane;
     private JPanel boardPanel;
     private JPanel bottomPanel;
     private Timer Timer;
     private Font f = new Font("Impact", Font.BOLD, 25);
     private JLabel timer = new JLabel("Time Elapsed: 0s"); //moved because they need to be global to be updated(cant change text)
     private static JLabel minesLeft = new JLabel("Mines Left: ");
+    private PauseFrame pauseFrame = new PauseFrame();
+    private boolean paused = false;
 
     /**
      * Default constructor to initialize the GamePanel
@@ -65,14 +75,39 @@ public class GamePanel extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
+
+
     private void init_bottomPanel(){
         bottomPanel = new JPanel();
         bottomPanel.setBackground(new Color(0, 0, 0, 0));
-        
+
         timer.setHorizontalAlignment(JLabel.CENTER);
         minesLeft.setHorizontalAlignment(JLabel.CENTER);
         bottomPanel.add(timer);
         bottomPanel.add(minesLeft);
+        CustomButton pbutton = new CustomButton("pause");
+        pbutton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                pause();
+            }
+        });
+
+        bottomPanel.add(pbutton);
+
+    }
+
+    private void pause(){
+        if(!paused){
+            remove(boardPanel); 
+            add(pauseFrame);
+        }   
+        else{
+            remove(pauseFrame);
+            add(boardPanel);
+        }
+        paused = !paused;
+        Timer.togglePause();
     }
 
     public void generate_board(){
@@ -124,7 +159,7 @@ public class GamePanel extends JPanel {
         
         board = new Cells[rows][cols];
         Minesweeper.setCells(board);
-        boardPanel = new JPanel(new GridLayout(rows, cols));
+        boardPanel = new JPanel(new GridLayout(rows, cols));   
         add(boardPanel);
         boardPanel.setBackground(new Color(0, 0, 0 ,0));
         //boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
@@ -199,7 +234,8 @@ public class GamePanel extends JPanel {
     }
 
     public void resetBoard(){
-        timer.setText("Time Elapsed: 0s");
+        Timer.updateTime();
+        paused = false;
         Timer.rerun();
         Cells.resetBoard();
     }

@@ -20,8 +20,10 @@ public class Timer extends Thread{
     }
 
     public void rerun(){
+        paused = false;
         running = true;
         timeSeconds = 0;
+        timerLabel.setText("Time Elapsed: 0s");
         CellListener.resetFirstClicked();
     }
 
@@ -32,8 +34,8 @@ public class Timer extends Thread{
                 System.out.print(""); //i have no idea why i need this line of code im losing it
                 continue;
             }
-     
-            timerLabel.setText("Time Elapsed: " + timeSeconds + "s");
+                updateTime();
+            
             try {
                 Thread.sleep(1000);
                 timeSeconds += 1;
@@ -56,5 +58,9 @@ public class Timer extends Thread{
 
     public int getTime(){
         return timeSeconds;
+    }
+
+    public void updateTime(){
+        timerLabel.setText("Time Elapsed: " + timeSeconds + "s");
     }
 }
