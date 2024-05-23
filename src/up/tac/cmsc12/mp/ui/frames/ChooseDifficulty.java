@@ -48,12 +48,12 @@ public class ChooseDifficulty {
         buttonsPanel.setLayout(new GridBagLayout());
         buttonsPanel.setMaximumSize(new Dimension(360, 510));
         // making the different buttons
-        CustomButton beginner = new CustomButton("BEGINNER");
-        CustomButton intermediate = new CustomButton("INTERMEDIATE");
-        CustomButton expert = new CustomButton("EXPERT");
-        CustomButton master = new CustomButton("MASTER");
-        CustomButton legend = new CustomButton("LEGEND");
-        CustomButton custom = new CustomButton("CUSTOM");
+        CustomButton beginner = new CustomButton("BEGINNER", 5, 25);
+        CustomButton intermediate = new CustomButton("INTERMEDIATE", 5, 25);
+        CustomButton expert = new CustomButton("EXPERT", 5, 25);
+        CustomButton master = new CustomButton("MASTER", 5, 25);
+        CustomButton legend = new CustomButton("LEGEND", 5, 25);
+        CustomButton custom = new CustomButton("CUSTOM", 5, 25);
         // set ActionListeners
         beginner.addMouseListener(new MouseAdapter(){
             @Override
