@@ -97,7 +97,7 @@ public class ViewController {
                 new String[]{"RESTART", "GO BACK TO MAIN MENU"},
                 null);
         if(choice == JOptionPane.YES_OPTION) {
-            view(ChooseDifficulty.DIFFICULTY_PANEL);
+            home();
         } else {
             home();
         }

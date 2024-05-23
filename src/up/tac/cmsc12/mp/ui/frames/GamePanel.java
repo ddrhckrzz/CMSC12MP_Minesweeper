@@ -76,7 +76,7 @@ public class GamePanel extends JPanel {
 
     private void init_bottomPanel(){
         bottomPanel = new JPanel();
-        bottomPanel.setBackground(new Color(109, 139, 185));
+        bottomPanel.setBackground(new Color(198,188,108));
         timer.setHorizontalAlignment(JLabel.CENTER);
         minesLeft.setHorizontalAlignment(JLabel.CENTER);
         bottomPanel.add(timer);
@@ -133,7 +133,7 @@ public class GamePanel extends JPanel {
         board = new Cells[rows][cols];
         boardPanel = new JPanel(new GridLayout(rows, cols));
         add(boardPanel);
-        boardPanel.setBackground(new Color(109, 139, 185));
+        boardPanel.setBackground(new Color(198,188,108));
         //boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
