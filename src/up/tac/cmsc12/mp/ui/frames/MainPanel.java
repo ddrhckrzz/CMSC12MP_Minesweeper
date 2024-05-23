@@ -23,13 +23,13 @@ public class MainPanel extends JPanel {
         // BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
         // setLayout(boxlayout);
         setLayout(new GridBagLayout());
-        setBackground(null);
+        setBackground(new Color(0, 0, 0 ,0));
     }
 
     private void add_panels(){
         buttons = new MainButtonPanel();
         JPanel wrapper = new JPanel();
-        wrapper.setBackground(new Color(109, 139, 185));
+        wrapper.setBackground(new Color(0, 0, 0 ,0));
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.Y_AXIS));
         wrapper.add(buttons);
         add(wrapper);

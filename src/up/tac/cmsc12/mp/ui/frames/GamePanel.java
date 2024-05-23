@@ -69,7 +69,7 @@ public class GamePanel extends JPanel {
 
     private void init_bottomPanel(){
         bottomPanel = new JPanel();
-        bottomPanel.setBackground(new Color(198,188,108));
+        bottomPanel.setBackground(null);
         timer.setHorizontalAlignment(JLabel.CENTER);
         minesLeft.setHorizontalAlignment(JLabel.CENTER);
         bottomPanel.add(timer);

@@ -19,7 +19,7 @@ public class MainButtonPanel extends JPanel{
     private CustomButton scoreButton;
     private CustomButton optionsButton;
     private CustomButton exitButton;
-    private CustomButton logoPane = new CustomButton("MINESWEEPER");
+    private CustomButton logoPane = new CustomButton("MINESWEEPER", 1);
     public MainButtonPanel(){
         init_layout();
         init_buttons();
@@ -30,14 +30,14 @@ public class MainButtonPanel extends JPanel{
         gbc = new GridBagConstraints();
         setLayout(layout);
         setMaximumSize(new Dimension(390, 540));
-        setBackground(new Color(109, 139, 185));
+        setBackground(null);
     }
 
     private void init_buttons(){
         startButton = new CustomButton("New Game");
         scoreButton = new CustomButton("Leaderboards",5,25);
         optionsButton = new CustomButton("Options",5,25);
-        exitButton = new CustomButton("Exit",5,35);
+        exitButton = new CustomButton("Exit",5,30);
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = 2;
         GBCUtils u = new GBCUtils(gbc);
@@ -45,7 +45,7 @@ public class MainButtonPanel extends JPanel{
         //logoPane.setHorizontalAlignment(JLabel.CENTER);
         add(logoPane, gbc);
         gbc.ipadx = 20;
-        gbc.ipady = 20;
+        gbc.ipady = 30;
         u.setGBC(0, 1, GridBagConstraints.CENTER, 0.4, 0.2, GridBagConstraints.BOTH);
         add(startButton, gbc);
         gbc.gridwidth = 1;
