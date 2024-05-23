@@ -53,6 +53,8 @@ public class ScorePanel extends JPanel {
         cellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         scoreTable.setDefaultRenderer(scoreTable.getColumnClass(0), cellRenderer);
         scoreTable.setRowHeight(fontSize + 4);
+        scoreTable.setShowGrid(false);
+        scoreTable.getTableHeader().setResizingAllowed(false);
     }
 
     private void init_layout() {
