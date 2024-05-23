@@ -16,7 +16,6 @@ import up.tac.cmsc12.mp.minesweeper.ScoreHandler;
 import up.tac.cmsc12.mp.minesweeper.Timer;
 
 public class GamePanel extends JPanel {
-    // TODO: add creation of different board sizes.
     // ----------------- OVERALL BOARD CONSTANTS -------------------------- //
     private static final int DEFAULT_ROWS = 9;
     private static final int DEFAULT_COLS = 9;
