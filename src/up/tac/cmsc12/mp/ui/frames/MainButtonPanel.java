@@ -16,7 +16,7 @@ public class MainButtonPanel extends JPanel{
     private GridBagConstraints gbc;
     private CustomButton startButton;
     private CustomButton scoreButton;
-    private CustomButton optionsButton;
+    private CustomButton creditsButton;
     private CustomButton exitButton;
     private CustomButton logoPane = new CustomButton("MINESWEEPER", 1);
     public MainButtonPanel(){
@@ -35,7 +35,7 @@ public class MainButtonPanel extends JPanel{
     private void init_buttons(){
         startButton = new CustomButton("New Game");
         scoreButton = new CustomButton("Leaderboards",5,25);
-        optionsButton = new CustomButton("Credits",5,25);
+        creditsButton = new CustomButton("Credits",5,25);
         exitButton = new CustomButton("Exit",5,30);
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = 2;
@@ -51,7 +51,7 @@ public class MainButtonPanel extends JPanel{
         u.setGBC(0, 2, 0.2, 0.2);
         add(scoreButton, gbc);
         u.setGBC(1, 2);
-        add(optionsButton, gbc);
+        add(creditsButton, gbc);
         gbc.gridwidth = 2;
         u.setGBC(0, 3, 0.4, 0.2);
         add(exitButton, gbc);
@@ -72,7 +72,12 @@ public class MainButtonPanel extends JPanel{
                 controller.view(MainFrame.SCORE_PANEL);
             }
         });
-        // optionsButton.addActionListener(mbl);
+        creditsButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                controller.view(MainFrame.CREDITS_PANEL);
+            }
+        });
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {
