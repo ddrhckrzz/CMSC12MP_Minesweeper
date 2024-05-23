@@ -1,6 +1,7 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -130,15 +131,20 @@ public class ChooseDifficulty {
         GBCUtils u = new GBCUtils(c);
         c.fill = GridBagConstraints.BOTH;
         c.insets = new Insets(6, 6, 6, 6);
-        JLabel topLabel = new JLabel("CUSTOM GAME SETUP");
+        CustomButton topLabel = new CustomButton("CUSTOM GAME SETUP", 5, 20);
         JLabel rowsLabel = new JLabel("No. of Rows (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel colsLabel = new JLabel("No. of Columns (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel totalMinesLabel = new JLabel("No. of Mines (max: (rows * cols) - 1): ");
-        CustomButton startCustom = new CustomButton("START");
+        Font f = new Font("Impact", Font.PLAIN, 18);
+        rowsLabel.setFont(f);
+        colsLabel.setFont(f);
+        totalMinesLabel.setFont(f);
+        
+        CustomButton startCustom = new CustomButton("START", 5, 30);
         rowsField = new JTextField(10);
         colsField = new JTextField(10);
         totalMinesField = new JTextField(10);
-        topLabel.setHorizontalAlignment(JLabel.CENTER);
+        //topLabel.setHorizontalAlignment(JLabel.CENTER);
         c.gridwidth = 2;
         c.gridheight = 1;
         u.setGBC(0, 0);
