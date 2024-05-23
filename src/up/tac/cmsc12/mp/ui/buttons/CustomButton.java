@@ -1,8 +1,9 @@
 package up.tac.cmsc12.mp.ui.buttons;
 
+import static java.awt.Color.white;
+
 import java.awt.BasicStroke;
 import java.awt.Color;
-import static java.awt.Color.*;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -10,7 +11,6 @@ import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -18,12 +18,15 @@ import javax.swing.SwingUtilities;
 
 public final class CustomButton extends JPanel{
 
-    private int r=80,g=80,b=200, grade=30,border_width=5,fontSize=50;
+    private int r=198,g=188,b=108, grade=30,border_width=5,fontSize=50;
+    //196, 188, 108
     private Color main_color = new Color(r,g,b);
     private Color top_color = convertTopColor(r,g,b);
     private Color bottom_color = convertBotColor(r,g,b);
     private Color clicked_color = convertColor(r,g,b,20);
-    private Font f = new Font("Times New Roman", Font.PLAIN, fontSize);
+    //private Color text_color = convertColor(r,g,b,-50);
+    private Color text_shadow = convertColor(r,g,b,50);
+    private Font f = new Font("Impact", Font.BOLD, fontSize);
     private String text;
     
     public CustomButton(String name){
@@ -104,17 +107,26 @@ public final class CustomButton extends JPanel{
         g2D.fillPolygon(Top_Border);
         
         
-        g2D.setColor(white);
+        g2D.setColor(text_shadow);
           
         FontMetrics metrics = g.getFontMetrics(f);
         
-        int x = (getWidth() - metrics.stringWidth(text))/2;
-        int y = ((getHeight()-metrics.getHeight())/2)+metrics.getAscent();
-        g2D.drawString(text, x,y);
+        int x = ((getWidth() - metrics.stringWidth(text))/2)+4;
+        int y = ((getHeight()-metrics.getHeight())/2)+metrics.getAscent()+4;
+
+        g2D.drawString(text,x,y);
+
+        g2D.setColor(white);
+
+        int x2 = (getWidth() - metrics.stringWidth(text))/2;
+        int y2 = ((getHeight()-metrics.getHeight())/2)+metrics.getAscent();
+        g2D.drawString(text, x2,y2);
+
     }
     
     public void setForeGround(){
-        setFont(f);  
+        f = new Font("Impact", Font.BOLD, fontSize); 
+        setFont(f);
     }
     
     public void push(){

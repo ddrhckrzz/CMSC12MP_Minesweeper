@@ -1,5 +1,7 @@
 package up.tac.cmsc12.mp.ui.frames;
 
+import java.awt.Color;
+
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
@@ -16,6 +18,7 @@ public class MainPanel extends JPanel {
     private void init_layout(){
         BoxLayout boxlayout = new BoxLayout(this, BoxLayout.Y_AXIS);
         setLayout(boxlayout);
+        setBackground(new Color(109, 139, 185));
     }
 
     private void add_panels(){

@@ -1,7 +1,5 @@
 package up.tac.cmsc12.mp.minesweeper;
 
-import java.util.Scanner;
-
 import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.ViewController;
