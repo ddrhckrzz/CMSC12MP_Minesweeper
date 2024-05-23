@@ -4,12 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -34,7 +31,7 @@ public class MainFrame extends JFrame {
     // class variables
     private ViewController viewController;
     private CardLayout cardLayout;
-    private Background cardPanel;
+    private JPanel cardPanel;
     private JPanel navPanel;
     private MainPanel mainMenu;
     private OptionsPanel optionsPanel;
@@ -73,10 +70,10 @@ public class MainFrame extends JFrame {
     private void init_layout(){
         cardLayout = new CardLayout(10,10);
         cardPanel = new Background(cardLayout);
-        cardPanel.setBackground(new Color(0,0,0,0));
+        cardPanel.setBackground(new Color(0, 0, 0 ,0));
 
         viewController = new ViewController(this, cardLayout);
-        setPreferredSize(new Dimension(700, 700));
+        setPreferredSize(new Dimension(1280, 720));
         setSize(getPreferredSize());
         setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
