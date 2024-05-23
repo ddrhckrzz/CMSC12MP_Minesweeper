@@ -82,7 +82,7 @@ public class MainFrame extends JFrame {
 
     private void add_panels() {
         mainMenu = new MainPanel();
-        gamePanel = new GamePanel();
+        gamePanel = new GamePanel(viewController);
         new ChooseDifficulty(viewController);
         mainMenu.bind_buttons(viewController);
         scorePanel = new ScorePanel(viewController);
