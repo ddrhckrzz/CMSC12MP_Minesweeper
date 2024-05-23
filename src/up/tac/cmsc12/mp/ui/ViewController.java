@@ -126,9 +126,14 @@ public class ViewController {
     public void previous() {
         clearCustomFields();
         if (!previousViews.isEmpty()) {
-            String name = previousViews.removeLast();
-            getCardLayout().show(getParent(), name);
-            currentView = name;
+            if (!currentView.equals(previousViews.getLast())) {
+                String name = previousViews.removeLast();
+                getCardLayout().show(getParent(), name);
+                currentView = name;
+            } else {
+                previousViews.removeLast();
+                previous();
+            }
         } else {
             home();
         }
@@ -137,7 +142,11 @@ public class ViewController {
     public void view(String name) {
         if (mapNames.containsKey(name)) {
             if (currentView != null) {
-                previousViews.add(currentView);
+                if (!currentView.equals(MainFrame.GAME_PANEL) ) {
+                    if (!previousViews.contains(currentView)) {
+                        previousViews.add(currentView);
+                    }
+                }
             }
             getCardLayout().show(getParent(), name);
             currentView = name;
