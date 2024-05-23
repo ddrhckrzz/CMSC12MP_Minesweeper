@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
     // class variables
     private ViewController viewController;
     private CardLayout cardLayout;
-    private JPanel cardPanel;
+    private Background cardPanel;
     private JPanel navPanel;
     private MainPanel mainMenu;
     private OptionsPanel optionsPanel;
@@ -72,7 +72,7 @@ public class MainFrame extends JFrame {
 
     private void init_layout(){
         cardLayout = new CardLayout(10,10);
-        cardPanel = new JPanel(cardLayout);
+        cardPanel = new Background(cardLayout);
         cardPanel.setBackground(new Color(109, 139, 185));
 
         viewController = new ViewController(this, cardLayout);
@@ -128,7 +128,6 @@ public class MainFrame extends JFrame {
 
     public void start(){
         viewController.home();
-        pack();
         setVisible(true);
     }
 }
