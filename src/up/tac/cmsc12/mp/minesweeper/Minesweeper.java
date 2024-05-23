@@ -12,7 +12,6 @@ import up.tac.cmsc12.mp.ui.frames.GamePanel;
 
 public class Minesweeper {
     /*
-     * TODO: Add logic here.
      * This should be the main Minesweeper Model (in the MVC Framework)
      * that handles the boardstate, what to do when certain actions are
      * done, how the board is generated, and also constructors for
