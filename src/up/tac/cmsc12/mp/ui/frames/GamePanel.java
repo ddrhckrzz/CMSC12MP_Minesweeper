@@ -59,6 +59,7 @@ public class GamePanel extends JPanel {
         timer.setFont(f);
         minesLeft.setFont(f);
         Minesweeper.setTimer(Timer);
+        
     }
 
     private void init_layout(){
@@ -70,6 +71,7 @@ public class GamePanel extends JPanel {
     private void init_bottomPanel(){
         bottomPanel = new JPanel();
         bottomPanel.setBackground(new Color(109, 139, 185));
+        
         timer.setHorizontalAlignment(JLabel.CENTER);
         minesLeft.setHorizontalAlignment(JLabel.CENTER);
         bottomPanel.add(timer);

@@ -34,7 +34,7 @@ public class MainButtonPanel extends JPanel{
         gbc = new GridBagConstraints();
         setLayout(layout);
         setMaximumSize(new Dimension(390, 540));
-        setBackground(new Color(109, 139, 185));
+        setBackground(null);
     }
 
     private void init_buttons(){
