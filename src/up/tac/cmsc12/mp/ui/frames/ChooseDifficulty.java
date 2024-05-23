@@ -7,6 +7,8 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.InputMismatchException;
 
 import javax.swing.BoxLayout;
@@ -18,6 +20,7 @@ import javax.swing.JTextField;
 
 import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
+import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class ChooseDifficulty {
     public static final String DIFFICULTY_PANEL = "Difficulty Panel";
@@ -45,46 +48,46 @@ public class ChooseDifficulty {
         buttonsPanel.setLayout(new GridBagLayout());
         buttonsPanel.setMaximumSize(new Dimension(360, 510));
         // making the different buttons
-        JButton beginner = new JButton("BEGINNER");
-        JButton intermediate = new JButton("INTERMEDIATE");
-        JButton expert = new JButton("EXPERT");
-        JButton master = new JButton("MASTER");
-        JButton legend = new JButton("LEGEND");
-        JButton custom = new JButton("CUSTOM");
+        CustomButton beginner = new CustomButton("BEGINNER");
+        CustomButton intermediate = new CustomButton("INTERMEDIATE");
+        CustomButton expert = new CustomButton("EXPERT");
+        CustomButton master = new CustomButton("MASTER");
+        CustomButton legend = new CustomButton("LEGEND");
+        CustomButton custom = new CustomButton("CUSTOM");
         // set ActionListeners
-        beginner.addActionListener(new ActionListener() {
+        beginner.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(1);
             }
         });
-        intermediate.addActionListener(new ActionListener() {
+        intermediate.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(2);
             }
         });
-        expert.addActionListener(new ActionListener() {
+        expert.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(3);
             }
         });
-        master.addActionListener(new ActionListener() {
+        master.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(4);
             }
         });
-        legend.addActionListener(new ActionListener() {
+        legend.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(5);
             }
         });
-        custom.addActionListener(new ActionListener() {
+        custom.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 controller.view(CUSTOM_PANEL);
             }
         });
@@ -127,7 +130,7 @@ public class ChooseDifficulty {
         JLabel rowsLabel = new JLabel("No. of Rows (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel colsLabel = new JLabel("No. of Columns (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel totalMinesLabel = new JLabel("No. of Mines (max: (rows * cols) - 1): ");
-        JButton startCustom = new JButton("START");
+        CustomButton startCustom = new CustomButton("START");
         rowsField = new JTextField(10);
         colsField = new JTextField(10);
         totalMinesField = new JTextField(10);
@@ -155,9 +158,9 @@ public class ChooseDifficulty {
         u.setGBC(0, 4);
         fieldsPanel.add(startCustom, c);
         // add listeners to the start button
-        startCustom.addActionListener(new ActionListener() {
+        startCustom.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(0);
             }
         });
