@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -41,6 +42,10 @@ public class ViewController {
 
     public CardLayout getCardLayout() {
         return cardLayout;
+    }
+
+    public JFrame getFrame() {
+        return mainFrame;
     }
 
     public void addView(Component comp, String name) {
