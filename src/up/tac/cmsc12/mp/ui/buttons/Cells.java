@@ -32,7 +32,7 @@ public class Cells extends JButton {
             if(i==0) {
                 icon[i] = null;
             } else if (i < 9) {
-                String iconpath = ICON_PATH + (i) + ".png";
+                String iconpath = ICON_PATH + i + ".png";
                 icon[i] = new ImageIcon(iconpath);
             } else {
                 String iconpath = ICON_PATH + "mine.png";
