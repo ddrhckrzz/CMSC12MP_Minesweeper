@@ -2,12 +2,10 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -37,9 +35,7 @@ public class MainFrame extends JFrame {
     private MainPanel mainMenu;
     private OptionsPanel optionsPanel;
     private GamePanel gamePanel;
-    private ChooseDifficulty difficultyChooser;
     private ScorePanel scorePanel;
-    private String currentView;
 
     public MainFrame(){
         // TODO: Add other UI stuff here and in this folder in general.
@@ -82,7 +78,7 @@ public class MainFrame extends JFrame {
     private void add_panels() {
         mainMenu = new MainPanel();
         gamePanel = new GamePanel();
-        difficultyChooser = new ChooseDifficulty(viewController);
+        new ChooseDifficulty(viewController);
         mainMenu.bind_buttons(viewController);
         scorePanel = new ScorePanel(viewController);
         navPanel = makeNavPanel();
