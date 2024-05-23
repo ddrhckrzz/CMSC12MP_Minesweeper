@@ -67,7 +67,7 @@ public final class CustomButton extends JPanel{
     }
     
     public void initButtonDesign(){
-        setPreferredSize(new Dimension(fontSize*(text.length()), fontSize));
+        setPreferredSize(new Dimension(fontSize*(text.length()), fontSize + 12));
         setSize(getPreferredSize());
         setBackground(main_color);
         setForeGround();
