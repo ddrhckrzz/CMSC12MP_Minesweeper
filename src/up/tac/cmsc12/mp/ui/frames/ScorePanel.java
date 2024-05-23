@@ -16,6 +16,7 @@ import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.minesweeper.ScoreTable;
 import up.tac.cmsc12.mp.ui.ViewController;
 
@@ -35,7 +36,7 @@ public class ScorePanel extends JPanel {
         add_panels();
         this.controller.setScoreArray(scores);
         init_table();
-        setBackground(new Color(0, 0, 0, 0));
+        setBackground(new Color(0, 0, 0, 20));
     }
 
     private void init_table() {
@@ -79,24 +80,24 @@ public class ScorePanel extends JPanel {
             public void itemStateChanged(ItemEvent e) {
                 int index = comboBox.getSelectedIndex();
                 scoreTable.setModel(scores[index]);
-                repaint();
+                Minesweeper.refreshBackground();
             }
         });
         comboBox.addPopupMenuListener(new PopupMenuListener() {
 
             @Override
             public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                repaint();
+                Minesweeper.refreshBackground();
             }
 
             @Override
             public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                repaint();
+                Minesweeper.refreshBackground();
             }
 
             @Override
             public void popupMenuCanceled(PopupMenuEvent e) {
-                repaint();
+                Minesweeper.refreshBackground();
             }
             
         });
