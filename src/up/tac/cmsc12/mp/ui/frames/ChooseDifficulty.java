@@ -134,7 +134,7 @@ public class ChooseDifficulty {
         GridBagConstraints c = new GridBagConstraints();
         GBCUtils u = new GBCUtils(c);
         c.fill = GridBagConstraints.BOTH;
-        c.insets = new Insets(8, 8, 8, 8);
+        c.insets = new Insets(6, 6, 6, 6);
         JLabel topLabel = new JLabel("CUSTOM GAME SETUP");
         JLabel rowsLabel = new JLabel("No. of Rows (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel colsLabel = new JLabel("No. of Columns (max: " + GamePanel.MAX_DIMENSIONS + "): ");
