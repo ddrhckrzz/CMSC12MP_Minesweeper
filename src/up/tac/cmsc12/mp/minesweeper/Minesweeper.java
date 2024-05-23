@@ -1,5 +1,6 @@
 package up.tac.cmsc12.mp.minesweeper;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.ViewController;
@@ -27,6 +28,7 @@ public class Minesweeper {
     private static ScoreHandler scoreHandler;
     private static Background background;
     private static ViewController controller;
+    private static ImageIcon flagIcon = new ImageIcon(Cells.ICON_PATH + "flag.png");
 
     public static void setTimer(Timer givenTimer){
         timer = givenTimer;
@@ -100,14 +102,14 @@ public class Minesweeper {
                 minesLeft.setText("Mines Left: " + (noOfMines - noOfFlags));
                 return;
             }
-            cell.setText("🚩");
+            cell.setIcon(flagIcon);
             if(val == 9){
                 Cells.addNoOfFound(1);
             }
             Cells.addNoOfFlags(1);
         }
         else{
-            cell.setText("");
+            cell.setIcon(null);
             if(val == 9){
                 Cells.addNoOfFound(-1);
             }

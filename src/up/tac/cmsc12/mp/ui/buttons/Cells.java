@@ -18,15 +18,8 @@ public class Cells extends JButton {
     private boolean isClear = false, flagged = false;
     private static int noOfMines = 0, noOfFlags = 0, noOfFound = 0;
     private int r=244,g=240,b=225, h=getHeight();
-    
-    private ImageIcon icon1 = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_1.png");
-    private ImageIcon icon2 = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_2.png");
-    private ImageIcon icon3 = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_3.png");
-    private ImageIcon icon4 = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_4.png");
-    private ImageIcon icon5 = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_5.png");
-    private ImageIcon icon6 = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_6.png");
-    private ImageIcon icon7 = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_7.png");
-    private ImageIcon icon8 = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_8.png");
+    public static final String ICON_PATH = "src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_";
+    private ImageIcon icon[] = new ImageIcon[10];
     
 
     private Color c = new Color(r,g,b);
@@ -35,6 +28,22 @@ public class Cells extends JButton {
         setFocusable(false);
         setMargin(new Insets(0, 0, 0, 0));
         colorButton();
+        fetchIcons();
+    }
+
+    private void fetchIcons() {
+        for (int i = 0; i < icon.length; i++) {
+            if(i==0) {
+                icon[i] = null;
+            } else if (i < 9) {
+                String iconpath = ICON_PATH + (i+1) + ".png";
+                icon[i] = new ImageIcon(iconpath);
+            } else {
+                String iconpath = ICON_PATH + "mine.png";
+                icon[i] = new ImageIcon(iconpath);
+            }
+            
+        }
     }
 
     public static void resetBoard(){
@@ -101,30 +110,8 @@ public class Cells extends JButton {
         if(flagged){  //cannot clear a flagged cell
             return;
         }
-        if (val==0) {
-            setText("");
-        } else if (val < 9) {
-            //setIcon(icon1);
-            switch(val){
-                case 1:
-                    setIcon(icon1);
-                    break;
-                case 2:
-                    setIcon(icon2);
-                    break;
-                case 3:
-                    setIcon(icon3);
-                    break;
-                case 4:
-                    setIcon(icon4);
-                    break;
-                case 5:
-                    setIcon(icon5);
-                    break;
-            }
-            
-        } else {
-            setText("💣");
+        setIcon(icon[val]);
+        if (val==9) {
             Minesweeper.defeat();
         }
         convertColor();
