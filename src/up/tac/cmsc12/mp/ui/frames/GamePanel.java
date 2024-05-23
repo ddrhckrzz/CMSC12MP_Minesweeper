@@ -1,12 +1,17 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.LineBorder;
 
 import up.tac.cmsc12.mp.ui.buttons.Cells;
+import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
 import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.minesweeper.ScoreHandler;
@@ -19,6 +24,7 @@ public class GamePanel extends JPanel {
     private static final int DEFAULT_COLS = 9;
     private static final int DEFAULT_NO_OF_MINES = 10;
     public static final int MAX_DIMENSIONS = 250; // width and height
+    public static final int CELL_DIMENSIONS = 30;
     // ---------------- BOARD DIFFICULTY CONSTANTS ------------------------ //
     public static final int BEGINNER_DIMENSIONS = 9;
     public static final int BEGINNER_NO_OF_MINES = 10;
@@ -114,12 +120,18 @@ public class GamePanel extends JPanel {
         
         board = new Cells[rows][cols];
         boardPanel = new JPanel();
-        boardPanel.setLayout(new GridLayout(rows, cols));
+        boardPanel.setLayout(new GridBagLayout());
+        boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
+        GridBagConstraints c = new GridBagConstraints();
+        GBCUtils gbcu = new GBCUtils(c);
+        gbcu.setAnchorAndFill(GridBagConstraints.CENTER, GridBagConstraints.NONE);
+        gbcu.setInnerPadding(CELL_DIMENSIONS, CELL_DIMENSIONS);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 board[i][j] = new Cells();
                 new CellListener(board, board[i][j], i, j);
-                boardPanel.add(board[i][j]);
+                gbcu.setGBC(i, j);
+                boardPanel.add(board[i][j], c);
             }
         }
         add(boardPanel, BorderLayout.CENTER);

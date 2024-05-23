@@ -1,6 +1,7 @@
 package up.tac.cmsc12.mp.ui;
 
 import java.awt.GridBagConstraints;
+import java.awt.Insets;
 
 public class GBCUtils {
     GridBagConstraints gbc;
@@ -33,5 +34,19 @@ public class GBCUtils {
     public void setGBC(double weightx, double weighty){
         gbc.weightx = weightx;
         gbc.weighty = weighty;
+    }
+
+    public void setAnchorAndFill(int anchor, int fill) {
+        gbc.anchor = anchor;
+        gbc.fill = fill;
+    }
+
+    public void setInsets(int top, int left, int bottom, int right) {
+        gbc.insets = new Insets(top, left, bottom, right);
+    }
+
+    public void setInnerPadding(int ipadx, int ipady) {
+        gbc.ipadx = ipadx;
+        gbc.ipady = ipady;
     }
 }
