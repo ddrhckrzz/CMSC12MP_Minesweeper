@@ -39,7 +39,8 @@ public final class CustomButton extends JPanel{
         this.text = name;
         this.border_width = border_width;
         this.fontSize = fontSize;
-        initButtonDesign(); 
+        initButtonDesign();
+        setDefaultMouseListeners();
     }
     
     private void setDefaultMouseListeners(){

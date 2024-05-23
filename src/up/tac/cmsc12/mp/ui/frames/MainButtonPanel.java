@@ -73,24 +73,14 @@ public class MainButtonPanel extends JPanel{
 
         scoreButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e){
-                scoreButton.push();
-            }
-            @Override
             public void mouseReleased(MouseEvent e) {
-                scoreButton.unpush();
                 controller.view(MainFrame.SCORE_PANEL);
             }
         });
         // optionsButton.addActionListener(mbl);
         exitButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e){
-                exitButton.push();
-            }
-            @Override
             public void mouseReleased(MouseEvent e) {
-                exitButton.unpush();
                 System.exit(0);
             }
         });
