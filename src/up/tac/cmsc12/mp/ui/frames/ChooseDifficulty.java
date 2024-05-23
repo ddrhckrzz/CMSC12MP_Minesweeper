@@ -127,7 +127,6 @@ public class ChooseDifficulty {
         JPanel fieldsPanel = new JPanel();
         fieldsPanel.setBackground(null); //around the components
         gridwrapper.setBackground(null); //the empty space
-
         fieldsPanel.setLayout(new GridBagLayout());
         fieldsPanel.setMaximumSize(new Dimension(420, 270));
         gridwrapper.setLayout(new BoxLayout(gridwrapper, BoxLayout.Y_AXIS));
@@ -135,6 +134,7 @@ public class ChooseDifficulty {
         GridBagConstraints c = new GridBagConstraints();
         GBCUtils u = new GBCUtils(c);
         c.fill = GridBagConstraints.BOTH;
+        c.insets = new Insets(8, 8, 8, 8);
         JLabel topLabel = new JLabel("CUSTOM GAME SETUP");
         JLabel rowsLabel = new JLabel("No. of Rows (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel colsLabel = new JLabel("No. of Columns (max: " + GamePanel.MAX_DIMENSIONS + "): ");
