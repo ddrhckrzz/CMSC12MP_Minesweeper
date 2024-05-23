@@ -2,6 +2,7 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,6 +49,7 @@ public class MainFrame extends JFrame {
         add_panels();
         toggleNavVisiblity(); // navigation panel is invisble by default
         Minesweeper.setViewController(viewController); // very important
+        
     }
 
     public JPanel getCardPanel() {
@@ -74,6 +76,7 @@ public class MainFrame extends JFrame {
         viewController = new ViewController(this, cardLayout);
         setPreferredSize(new Dimension(640, 480));
         setSize(getPreferredSize());
+        setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
     }
 
@@ -100,7 +103,8 @@ public class MainFrame extends JFrame {
         JPanel navPanel = new JPanel();
         // navPanel.setLayout(new BoxLayout(navPanel, BoxLayout.LINE_AXIS));
         CustomButton back = new CustomButton("Back", 5, 25);
-        CustomButton home = new CustomButton("Main Menu",5 ,25);
+        CustomButton home = new CustomButton("Main Menu", 5, 25);
+        
         back.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {

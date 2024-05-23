@@ -1,6 +1,7 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -46,6 +47,8 @@ public class ChooseDifficulty {
         JPanel wrapper = new JPanel();
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.Y_AXIS));
         buttonsPanel.setLayout(new GridBagLayout());
+        buttonsPanel.setBackground(new Color(109, 139, 185));
+
         buttonsPanel.setMaximumSize(new Dimension(360, 510));
         // making the different buttons
         CustomButton beginner = new CustomButton("BEGINNER", 5, 25);
