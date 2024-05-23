@@ -83,6 +83,7 @@ public class ViewController {
                 name = JOptionPane.showInputDialog("Enter name here:");
             }
         }
+        home();
         return name;
     }
 
