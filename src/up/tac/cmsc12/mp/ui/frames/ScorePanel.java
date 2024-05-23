@@ -3,8 +3,6 @@ package up.tac.cmsc12.mp.ui.frames;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
@@ -14,6 +12,8 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import javax.swing.table.DefaultTableCellRenderer;
 
 import up.tac.cmsc12.mp.minesweeper.ScoreTable;
@@ -23,7 +23,8 @@ public class ScorePanel extends JPanel {
     private ViewController controller;
     private ScoreTable[] scores = new ScoreTable[5];
     private JTable scoreTable;
-    private Font f = new Font("Impact", Font.BOLD, 24);
+    private final int fontSize = 24;
+    private Font f = new Font("Impact", Font.BOLD, fontSize);
     public ScorePanel(ViewController controller) {
         this.controller = controller;
         for (int i = 0; i < scores.length; i++) {
@@ -51,7 +52,7 @@ public class ScorePanel extends JPanel {
         DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
         cellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
         scoreTable.setDefaultRenderer(scoreTable.getColumnClass(0), cellRenderer);
-        scoreTable.setRowHeight(30);
+        scoreTable.setRowHeight(fontSize + 4);
     }
 
     private void init_layout() {
@@ -79,11 +80,23 @@ public class ScorePanel extends JPanel {
                 repaint();
             }
         });
-        comboBox.addActionListener(new ActionListener() {
+        comboBox.addPopupMenuListener(new PopupMenuListener() {
+
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
                 repaint();
             }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+                repaint();
+            }
+
+            @Override
+            public void popupMenuCanceled(PopupMenuEvent e) {
+                repaint();
+            }
+            
         });
         bottomPanel.add(label);
         bottomPanel.add(comboBox);
