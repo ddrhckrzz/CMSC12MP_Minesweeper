@@ -123,6 +123,7 @@ public class GamePanel extends JPanel {
         Minesweeper.setScoreHandler(sh);
         
         board = new Cells[rows][cols];
+        Minesweeper.setCells(board);
         boardPanel = new JPanel(new GridLayout(rows, cols));
         add(boardPanel);
         boardPanel.setBackground(new Color(0, 0, 0 ,0));
