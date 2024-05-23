@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
+import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class Timer extends Thread{
     private int timeSeconds = 0;

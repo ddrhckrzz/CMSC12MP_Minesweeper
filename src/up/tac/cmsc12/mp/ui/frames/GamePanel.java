@@ -52,7 +52,6 @@ public class GamePanel extends JPanel {
         init_layout();
         Timer = new Timer(timer);
         Minesweeper.setTimer(Timer);
-        
     }
 
     private void init_layout(){
@@ -121,7 +120,7 @@ public class GamePanel extends JPanel {
         boardPanel = new JPanel();
         boardPanel.setBackground(new Color(109, 139, 185));
         boardPanel.setLayout(new GridLayout(rows, cols));
-        boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
+        //boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 board[i][j] = new Cells();
