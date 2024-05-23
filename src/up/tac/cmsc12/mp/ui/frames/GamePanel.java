@@ -72,10 +72,6 @@ public class GamePanel extends JPanel {
         setLayout(new BorderLayout());
         init_bottomPanel();
         add(bottomPanel, BorderLayout.SOUTH);
-        centerPane = new JPanel(new GridBagLayout()); // f*ck me
-        add(centerPane, BorderLayout.CENTER);
-        validate();
-        centerPane.setBackground(new Color(109, 139, 185));
     }
 
     private void init_bottomPanel(){
@@ -90,7 +86,7 @@ public class GamePanel extends JPanel {
     public void generate_board(){
         resetBoard();
         if (boardPanel != null) {
-            centerPane.remove(boardPanel);
+            remove(boardPanel);
         }
         switch (difficulty) {
             case 0:
@@ -135,41 +131,8 @@ public class GamePanel extends JPanel {
         Minesweeper.setScoreHandler(sh);
         
         board = new Cells[rows][cols];
-        boardPanel = new JPanel(new GridLayout(rows, cols)){
-            @Override
-            public Dimension getPreferredSize() {
-                // squarify it lmao
-                Dimension d = super.getPreferredSize();
-                Dimension prefSize = null;
-                Component c = this.getParent();
-                if (c == null) {
-                    prefSize = new Dimension((int)d.getWidth(), (int)d.getHeight());
-                } else if (c != null && c.getWidth() > d.getWidth() && c.getHeight() > d.getHeight()) {
-                    prefSize = c.getSize();
-                } else {
-                    prefSize = d;
-                }
-                int w = (int) prefSize.getWidth() - 40;
-                int h = (int) prefSize.getHeight() - 10;
-                Dimension newPrefSize;
-                if (rows == cols) {
-                    int s = (w>h ? h : w);
-                    newPrefSize = new Dimension(s, s);
-                } else {
-                    // comparing ratios... if it actually worked
-                    if ( (w / h) > (cols / rows) ) {
-                        // too wide, use height as basis for the final width
-                        w = (int)(h * (cols / (double) rows));
-                    } else {
-                        // too tall, use width as basis for final height
-                        h = (int)(w * (rows / (double) cols));
-                    }
-                    newPrefSize = new Dimension(w, h);
-                }
-                return newPrefSize;
-            }
-        };
-        centerPane.add(boardPanel);
+        boardPanel = new JPanel(new GridLayout(rows, cols));
+        add(boardPanel);
         boardPanel.setBackground(new Color(109, 139, 185));
         //boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
         for (int i = 0; i < rows; i++) {
