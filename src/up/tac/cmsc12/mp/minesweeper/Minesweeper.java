@@ -4,6 +4,7 @@ import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.ViewController;
 import up.tac.cmsc12.mp.ui.buttons.Cells;
+import up.tac.cmsc12.mp.ui.frames.Background;
 import up.tac.cmsc12.mp.ui.frames.GamePanel;
 
 public class Minesweeper {
@@ -24,6 +25,7 @@ public class Minesweeper {
      */
     private static Timer timer;
     private static ScoreHandler scoreHandler;
+    private static Background background;
     private static ViewController controller;
 
     public static void setTimer(Timer givenTimer){
@@ -38,6 +40,14 @@ public class Minesweeper {
         controller = viewcontroller;
     }
   
+    public static void setBackground(Background givenBackground){
+        background = givenBackground;
+    }
+
+    public static void refreshBackground(){
+        background.repaint();
+    }
+
     public static void autoClear(Cells[][] cells, int row, int col){
         int[] xAdjacency = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
         int[] yAdjacency = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
@@ -106,6 +116,7 @@ public class Minesweeper {
 
         noOfFlags = Cells.getNoOfFlags();
         minesLeft.setText("Mines Left: " + (noOfMines - noOfFlags));
+        refreshBackground();
         cell.revFlag(); //reverses boolean flag value
         if(Cells.getNoOfFound() == Cells.getNoOfMines()){
             victory();

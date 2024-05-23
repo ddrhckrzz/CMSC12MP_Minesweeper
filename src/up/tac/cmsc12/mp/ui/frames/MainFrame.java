@@ -31,7 +31,7 @@ public class MainFrame extends JFrame {
     // class variables
     private ViewController viewController;
     private CardLayout cardLayout;
-    private JPanel cardPanel;
+    private Background cardPanel;
     private JPanel navPanel;
     private MainPanel mainMenu;
     private OptionsPanel optionsPanel;
@@ -70,6 +70,7 @@ public class MainFrame extends JFrame {
     private void init_layout(){
         cardLayout = new CardLayout(10,10);
         cardPanel = new Background(cardLayout);
+        Minesweeper.setBackground(cardPanel);
         cardPanel.setBackground(new Color(0, 0, 0 ,0));
 
         viewController = new ViewController(this, cardLayout);

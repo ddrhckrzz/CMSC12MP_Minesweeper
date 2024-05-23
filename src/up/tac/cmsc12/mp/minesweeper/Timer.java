@@ -5,6 +5,7 @@ import java.text.DecimalFormat;
 import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
+import up.tac.cmsc12.mp.ui.frames.Background;
 
 public class Timer extends Thread{
     private int timeSeconds = 0;
@@ -34,6 +35,7 @@ public class Timer extends Thread{
             }
                         
             timerLabel.setText("Time Elapsed: " + timeSeconds + "s");
+            Minesweeper.refreshBackground();
             try {
                 Thread.sleep(1000);
                 timeSeconds += 1;

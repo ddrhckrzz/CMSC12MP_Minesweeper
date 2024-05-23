@@ -13,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.minesweeper.ScoreTable;
 import up.tac.cmsc12.mp.ui.frames.*;
 
@@ -27,6 +28,7 @@ public class ViewController {
     private MainFrame mainFrame;
     private Container parent;
     private CardLayout cardLayout;
+    private Background cardPanel;
 
     public ViewController(MainFrame mainFrame, CardLayout cardLayout) {
         this.mainFrame = mainFrame;
@@ -97,7 +99,8 @@ public class ViewController {
                 new String[]{"RESTART", "GO BACK TO MAIN MENU"},
                 null);
         if(choice == JOptionPane.YES_OPTION) {
-            home();
+            previous();
+            Minesweeper.refreshBackground();
         } else {
             home();
         }
