@@ -43,6 +43,12 @@ public final class CustomButton extends JPanel{
         initButtonDesign();
         setDefaultMouseListeners();
     }
+
+    public void setText(String name){
+        this.text = name;
+        repaint();
+        updateFrameUI();
+    }
     
     private void setDefaultMouseListeners(){
         addMouseListener(new MouseAdapter() {
