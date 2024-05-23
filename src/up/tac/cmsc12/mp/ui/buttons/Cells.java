@@ -1,4 +1,6 @@
 package up.tac.cmsc12.mp.ui.buttons;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Insets;
 import javax.swing.JButton;
 
@@ -8,9 +10,13 @@ public class Cells extends JButton {
     private int val; // 0 means empty, 9 means mine, everything else just tells how many mines there are around it
     private boolean isClear = false, flagged = false;
     private static int noOfMines = 0, noOfFlags = 0, noOfFound = 0;
+    private Color c = new Color(80,80,200);
+
     public Cells(){
         setFocusable(false);
         setMargin(new Insets(0, 0, 0, 0));
+        colorButton();
+        changeSize();
     }
 
     public static void resetBoard(){
@@ -120,5 +126,17 @@ public class Cells extends JButton {
         }
         setEnabled(false);
         isClear = true;
+    }
+
+    public void colorButton(){
+        setBackground(c);
+    }
+
+    public void changeColor(int r,int g, int b){
+        this.c = new Color(r,g,b);
+        colorButton();
+    }
+    public void changeSize(){
+        setPreferredSize(new Dimension(25,25));
     }
 }
