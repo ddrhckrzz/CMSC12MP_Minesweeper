@@ -1,23 +1,29 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.GBCUtils;
-import up.tac.cmsc12.mp.ui.ViewController;
 import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class CreditsPanel extends JPanel {
-    ViewController controller;
+    private final String FB_LINK = "https://www.facebook.com/";
+    CustomButton avila, lagramada, lagarto, martillo;
 
-    public CreditsPanel(ViewController controller) {
-        this.controller = controller;
+    public CreditsPanel() {
         init_layout();
         add_buttons();
+        addFBLinks();
     }
 
     private void init_layout() {
@@ -33,10 +39,10 @@ public class CreditsPanel extends JPanel {
         GBCUtils gbcu = new GBCUtils(c);
 
         CustomButton credits = new CustomButton("CREDITS");
-        CustomButton avila = new CustomButton("AVILA, ALEX IAN");
-        CustomButton lagramada = new CustomButton("LAGRAMADA, JUDE ANTHONY");
-        CustomButton lagarto = new CustomButton("LAGARTO, NYK DAVID");
-        CustomButton martillo = new CustomButton("MARTILLO, ANDREI ERNEST");
+        avila = new CustomButton("AVILA, ALEX IAN");
+        lagramada = new CustomButton("LAGRAMADA, JUDE ANTHONY");
+        lagarto = new CustomButton("LAGARTO, NYK DAVID");
+        martillo = new CustomButton("MARTILLO, ANDREI ERNEST");
 
         gbcu.setInsets(4, 0, 4, 0);
         gbcu.setAnchorAndFill(GridBagConstraints.CENTER, GridBagConstraints.BOTH);
@@ -57,5 +63,57 @@ public class CreditsPanel extends JPanel {
         buttonWrapper.add(martillo, c);
 
         add(buttonWrapper);
+    }
+
+    private void addFBLinks() {
+        Desktop desktop = Desktop.getDesktop();
+        avila.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                try {
+                    URI uri = new URI(FB_LINK + "alexian.avila");
+                    desktop.browse(uri.resolve(uri));
+                } catch (URISyntaxException | IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        });
+        lagramada.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                try {
+                    URI uri = new URI(FB_LINK + "actuallyjudeanthony0327");
+                    desktop.browse(uri.resolve(uri));
+                } catch (URISyntaxException | IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        });
+        lagarto.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                try {
+                    URI uri = new URI(FB_LINK + "profile.php?id=100009643459604");
+                    desktop.browse(uri.resolve(uri));
+                } catch (URISyntaxException | IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        });
+        martillo.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                try {
+                    URI uri = new URI(FB_LINK + "ddrhckrzz");
+                    desktop.browse(uri.resolve(uri));
+                } catch (URISyntaxException | IOException e1) {
+                    // TODO Auto-generated catch block
+                    e1.printStackTrace();
+                }
+            }
+        });
     }
 }

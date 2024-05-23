@@ -86,7 +86,7 @@ public class MainFrame extends JFrame {
         new ChooseDifficulty(viewController);
         mainMenu.bind_buttons(viewController);
         scorePanel = new ScorePanel(viewController);
-        creditsPanel = new CreditsPanel(viewController);
+        creditsPanel = new CreditsPanel();
         navPanel = makeNavPanel();
 
         // add to controller
