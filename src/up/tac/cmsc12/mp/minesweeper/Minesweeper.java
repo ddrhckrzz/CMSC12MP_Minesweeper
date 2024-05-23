@@ -28,7 +28,7 @@ public class Minesweeper {
     private static ScoreHandler scoreHandler;
     private static Background background;
     private static ViewController controller;
-    private static ImageIcon flagIcon = new ImageIcon(Cells.ICON_PATH + "flag.png");
+    
 
     public static void setTimer(Timer givenTimer){
         timer = givenTimer;
@@ -102,7 +102,7 @@ public class Minesweeper {
                 minesLeft.setText("Mines Left: " + (noOfMines - noOfFlags));
                 return;
             }
-            cell.setIcon(flagIcon);
+            cell.flag();
             if(val == 9){
                 Cells.addNoOfFound(1);
             }
