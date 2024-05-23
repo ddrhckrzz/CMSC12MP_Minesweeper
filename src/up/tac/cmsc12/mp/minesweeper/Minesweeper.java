@@ -1,5 +1,8 @@
 package up.tac.cmsc12.mp.minesweeper;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.ViewController;
@@ -27,7 +30,8 @@ public class Minesweeper {
     private static ScoreHandler scoreHandler;
     private static Background background;
     private static ViewController controller;
-    
+    private static Cells[][] cells;
+    ExecutorService executorService = Executors.newFixedThreadPool(10);
 
     public static void setTimer(Timer givenTimer){
         timer = givenTimer;
@@ -45,11 +49,15 @@ public class Minesweeper {
         background = givenBackground;
     }
 
+    public static void setCells(Cells[][] givenCells){
+        cells = givenCells;
+    }
+
     public static void refreshBackground(){
         background.repaint();
     }
 
-    public static void autoClear(Cells[][] cells, int row, int col){
+    public static void autoClear(int row, int col){
         int[] xAdjacency = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
         int[] yAdjacency = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
         int rowToUpdate;
@@ -74,7 +82,7 @@ public class Minesweeper {
                     cells[rowToUpdate][colToUpdate].updateText();
                 }
                 if(cellVal < 1 && !isClear){
-                    autoClear(cells, rowToUpdate, colToUpdate);
+                    autoClear(rowToUpdate, colToUpdate);
                 }    
             }
             catch(ArrayIndexOutOfBoundsException e){
@@ -131,6 +139,11 @@ public class Minesweeper {
     }
 
     public static void defeat(){
+        for(Cells[] cellrow: cells){
+            for(Cells cell : cellrow){
+                cell.revealMine();
+            }
+        }
         timer.stopTimer();
         controller.lose();
     }

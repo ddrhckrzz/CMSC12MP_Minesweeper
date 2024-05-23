@@ -120,6 +120,11 @@ public class Cells extends JButton {
         isClear = true;
     }
 
+    public void revealMine(){
+        if(val == 9)
+        setIcon(icon[val]);
+    }
+
     public void colorButton(){
         setBackground(c);
     }

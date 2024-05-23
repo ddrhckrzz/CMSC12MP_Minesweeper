@@ -39,7 +39,7 @@ public class CellListener extends MouseAdapter{
         }
         cell.updateText();
         if(cell.getVal()==0){ //auto clear only executes if the cell pressed is empty
-            Minesweeper.autoClear(board, row, col);
+            Minesweeper.autoClear(row, col);
         }
     }
     public void flagCell(){
