@@ -1,12 +1,9 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.GridBagLayout;
-import java.awt.Image;
 
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.ViewController;

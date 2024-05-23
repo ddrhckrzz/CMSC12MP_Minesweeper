@@ -9,7 +9,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.buttons.Cells;
-import up.tac.cmsc12.mp.ui.ViewController;
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
 import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.minesweeper.ScoreHandler;
@@ -43,7 +42,6 @@ public class GamePanel extends JPanel {
     private Cells[][] board;
     private JPanel boardPanel;
     private JPanel bottomPanel;
-    private ViewController controller;
     private Timer Timer;
     private Font f = new Font("Impact", Font.BOLD, 25);
     private JLabel timer = new JLabel("Time Elapsed: 0s"); //moved because they need to be global to be updated(cant change text)
@@ -52,8 +50,7 @@ public class GamePanel extends JPanel {
     /**
      * Default constructor to initialize the GamePanel
      */
-    public GamePanel(ViewController controller){
-        this.controller = controller;
+    public GamePanel(){
         init_layout();
         Timer = new Timer(timer);
         timer.setFont(f);

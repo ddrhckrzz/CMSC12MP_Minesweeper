@@ -7,10 +7,10 @@ import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.ViewController;
 
-public class OptionsPanel extends JPanel {
+public class CreditsPanel extends JPanel {
     ViewController controller;
 
-    public OptionsPanel(ViewController controller) {
+    public CreditsPanel(ViewController controller) {
         this.controller = controller;
         init_layout();
     }

@@ -34,7 +34,7 @@ public class MainFrame extends JFrame {
     private Background cardPanel;
     private JPanel navPanel;
     private MainPanel mainMenu;
-    private OptionsPanel optionsPanel;
+    private CreditsPanel creditsPanel;
     private GamePanel gamePanel;
     private ScorePanel scorePanel;
 
@@ -83,7 +83,7 @@ public class MainFrame extends JFrame {
 
     private void add_panels() {
         mainMenu = new MainPanel();
-        gamePanel = new GamePanel(viewController);
+        gamePanel = new GamePanel();
         new ChooseDifficulty(viewController);
         mainMenu.bind_buttons(viewController);
         scorePanel = new ScorePanel(viewController);
