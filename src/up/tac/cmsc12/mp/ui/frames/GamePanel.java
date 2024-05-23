@@ -27,6 +27,8 @@ public class GamePanel extends JPanel {
     private static final int DEFAULT_COLS = 9;
     private static final int DEFAULT_NO_OF_MINES = 10;
     public static final int MAX_DIMENSIONS = 250; // width and height
+    public static final int MAX_ROWS = 25;
+    public static final int MAX_COLS = 50;
     public static final int CELL_DIMENSIONS = 30;
     // ---------------- BOARD DIFFICULTY CONSTANTS ------------------------ //
     public static final int BEGINNER_DIMENSIONS = 9;
@@ -64,24 +66,17 @@ public class GamePanel extends JPanel {
         timer.setFont(f);
         minesLeft.setFont(f);
         Minesweeper.setTimer(Timer);
-        
     }
 
     private void init_layout(){
         setLayout(new BorderLayout());
         init_bottomPanel();
         add(bottomPanel, BorderLayout.SOUTH);
-        centerPane = new JPanel(new GridBagLayout()); // f*ck me
-        centerPane.setPreferredSize(controller.getFrame().getSize());
-        centerPane.setSize(centerPane.getPreferredSize());
-        centerPane.setBackground(new Color(109, 139, 185));
-        add(centerPane, BorderLayout.CENTER);
     }
 
     private void init_bottomPanel(){
         bottomPanel = new JPanel();
         bottomPanel.setBackground(new Color(109, 139, 185));
-        
         timer.setHorizontalAlignment(JLabel.CENTER);
         minesLeft.setHorizontalAlignment(JLabel.CENTER);
         bottomPanel.add(timer);
@@ -91,7 +86,7 @@ public class GamePanel extends JPanel {
     public void generate_board(){
         resetBoard();
         if (boardPanel != null) {
-            centerPane.remove(boardPanel);
+            remove(boardPanel);
         }
         switch (difficulty) {
             case 0:
@@ -136,41 +131,8 @@ public class GamePanel extends JPanel {
         Minesweeper.setScoreHandler(sh);
         
         board = new Cells[rows][cols];
-        boardPanel = new JPanel(new GridLayout(rows, cols)){
-            @Override
-            public Dimension getPreferredSize() {
-                // squarify it lmao
-                Dimension d = super.getPreferredSize();
-                Dimension prefSize = null;
-                Component c = getParent();
-                if (c == null) {
-                    prefSize = new Dimension((int)d.getWidth(), (int)d.getHeight());
-                } else if (c != null && c.getWidth() > d.getWidth() && c.getHeight() > d.getHeight()) {
-                    prefSize = c.getSize();
-                } else {
-                    prefSize = d;
-                }
-                int w = (int) prefSize.getWidth();
-                int h = (int) prefSize.getHeight();
-                Dimension newPrefSize;
-                if (rows == cols) {
-                    int s = (w>h ? h : w);
-                    newPrefSize = new Dimension(s, s);
-                } else {
-                    // comparing ratios... if it actually worked
-                    if ( (w / h) > (cols / rows) ) {
-                        // too wide, use height as basis for the final width
-                        w = (int)(h * (cols / (double) rows));
-                    } else {
-                        // too tall, use width as basis for final height
-                        h = (int)(w * (rows / (double) cols));
-                    }
-                    newPrefSize = new Dimension(w, h);
-                }
-                return newPrefSize;
-            }
-        };
-        centerPane.add(boardPanel);
+        boardPanel = new JPanel(new GridLayout(rows, cols));
+        add(boardPanel);
         boardPanel.setBackground(new Color(109, 139, 185));
         //boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
         for (int i = 0; i < rows; i++) {

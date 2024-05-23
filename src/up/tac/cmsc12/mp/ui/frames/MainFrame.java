@@ -125,6 +125,8 @@ public class MainFrame extends JFrame {
 
     public void start(){
         viewController.home();
+        validate();
+        pack();
         setVisible(true);
     }
 }
