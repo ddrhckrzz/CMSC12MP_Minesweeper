@@ -99,8 +99,8 @@ public class MainFrame extends JFrame {
     private JPanel makeNavPanel() {
         JPanel navPanel = new JPanel();
         // navPanel.setLayout(new BoxLayout(navPanel, BoxLayout.LINE_AXIS));
-        CustomButton back = new CustomButton("Back");
-        CustomButton home = new CustomButton("Main Menu");
+        CustomButton back = new CustomButton("Back", 5, 25);
+        CustomButton home = new CustomButton("Main Menu",5 ,25);
         back.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {

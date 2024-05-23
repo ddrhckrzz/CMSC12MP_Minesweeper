@@ -4,6 +4,7 @@ import static java.awt.Color.white;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -66,6 +67,8 @@ public final class CustomButton extends JPanel{
     }
     
     public void initButtonDesign(){
+        setPreferredSize(new Dimension(fontSize*(text.length()), fontSize));
+        setSize(getPreferredSize());
         setBackground(main_color);
         setForeGround();
         repaint();
