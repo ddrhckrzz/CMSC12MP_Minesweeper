@@ -23,7 +23,7 @@ public class MainButtonPanel extends JPanel{
     private CustomButton scoreButton;
     private CustomButton optionsButton;
     private CustomButton exitButton;
-    private CustomButton logoPane = new CustomButton("MINESWEEPER");
+    private CustomButton logoPane = new CustomButton("MINESWEEPER", 1);
     public MainButtonPanel(){
         init_layout();
         init_buttons();
