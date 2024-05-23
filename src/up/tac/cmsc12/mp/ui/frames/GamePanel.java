@@ -6,6 +6,9 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -85,19 +88,9 @@ public class GamePanel extends JPanel {
         minesLeft.setHorizontalAlignment(JLabel.CENTER);
         bottomPanel.add(timer);
         bottomPanel.add(minesLeft);
-        CustomButton pbutton = new CustomButton("pause");
-        pbutton.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                pause();
-            }
-        });
-
-        bottomPanel.add(pbutton);
-
     }
 
-    private void pause(){
+    public void pause(){
         if(!paused){
             remove(boardPanel); 
             add(pauseFrame);
@@ -108,12 +101,16 @@ public class GamePanel extends JPanel {
         }
         paused = !paused;
         Timer.togglePause();
+        updateUI();
     }
 
     public void generate_board(){
         resetBoard();
         if (boardPanel != null) {
             remove(boardPanel);
+        }
+        if(pauseFrame != null){
+            remove(pauseFrame);
         }
         switch (difficulty) {
             case 0:

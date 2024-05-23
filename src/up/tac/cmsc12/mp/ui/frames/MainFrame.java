@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -45,7 +47,6 @@ public class MainFrame extends JFrame {
         add_panels();
         toggleNavVisiblity(); // navigation panel is invisble by default
         Minesweeper.setViewController(viewController); // very important
-        
     }
 
     public JPanel getCardPanel() {
@@ -98,6 +99,14 @@ public class MainFrame extends JFrame {
         // add cardPanel and navPanel to the frame
         add(cardPanel);
         add(navPanel, BorderLayout.NORTH);
+        addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode() == 32){
+                    gamePanel.pause();
+                }
+            }
+        });
     }
 
     private JPanel makeNavPanel() {
