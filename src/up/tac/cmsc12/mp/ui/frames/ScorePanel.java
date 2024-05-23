@@ -2,6 +2,7 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -12,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 
 import up.tac.cmsc12.mp.minesweeper.ScoreTable;
 import up.tac.cmsc12.mp.ui.ViewController;
@@ -20,6 +23,7 @@ public class ScorePanel extends JPanel {
     private ViewController controller;
     private ScoreTable[] scores = new ScoreTable[5];
     private JTable scoreTable;
+    private Font f = new Font("Impact", Font.BOLD, 24);
     public ScorePanel(ViewController controller) {
         this.controller = controller;
         for (int i = 0; i < scores.length; i++) {
@@ -29,6 +33,11 @@ public class ScorePanel extends JPanel {
         init_layout();
         add_panels();
         this.controller.setScoreArray(scores);
+        init_table();
+        setBackground(new Color(0, 0, 0, 0));
+    }
+
+    private void init_table() {
         scoreTable.setVisible(true);
         scoreTable.setEnabled(false);
         scoreTable.getTableHeader().setReorderingAllowed(false);
@@ -36,7 +45,13 @@ public class ScorePanel extends JPanel {
         scoreTable.setFillsViewportHeight(true);
         scoreTable.setBackground(new Color(0, 0, 0, 0));
         scoreTable.getTableHeader().setBackground(new Color(0, 0, 0, 0));
-        setBackground(new Color(0, 0, 0, 0));
+        scoreTable.getTableHeader().setFont(f);
+        scoreTable.setFont(f);
+
+        DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
+        cellRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+        scoreTable.setDefaultRenderer(scoreTable.getColumnClass(0), cellRenderer);
+        scoreTable.setRowHeight(30);
     }
 
     private void init_layout() {

@@ -53,7 +53,20 @@ public class ScoreTable extends DefaultTableModel{
                     while(reader.hasNextLine()) {
                         data = reader.nextLine().split(", ");
                         if(!data[0].isEmpty()){
-                            addRow(data);
+                            try {
+                                int m, s;
+                                int t = Integer.parseInt(data[0]);
+                                m = t / 60;
+                                s = t % 60;
+                                if (m > 0) {
+                                    data[0] = m + "m " + s + "s";
+                                } else {
+                                    data[0] = s + "s";
+                                }
+                                addRow(data);
+                            } catch (NumberFormatException e) {
+                                // eh
+                            }
                         }
                     }
                     reader.close();
