@@ -2,17 +2,11 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import javax.swing.border.LineBorder;
 
 import up.tac.cmsc12.mp.ui.buttons.Cells;
 import up.tac.cmsc12.mp.ui.ViewController;
@@ -49,7 +43,6 @@ public class GamePanel extends JPanel {
     private Cells[][] board;
     private JPanel boardPanel;
     private JPanel bottomPanel;
-    private JPanel centerPane;
     private ViewController controller;
     private Timer Timer;
     private Font f = new Font("Impact", Font.BOLD, 25);
