@@ -27,6 +27,8 @@ public class GamePanel extends JPanel {
     private static final int DEFAULT_COLS = 9;
     private static final int DEFAULT_NO_OF_MINES = 10;
     public static final int MAX_DIMENSIONS = 250; // width and height
+    public static final int MAX_ROWS = 25;
+    public static final int MAX_COLS = 50;
     public static final int CELL_DIMENSIONS = 30;
     // ---------------- BOARD DIFFICULTY CONSTANTS ------------------------ //
     public static final int BEGINNER_DIMENSIONS = 9;
@@ -71,10 +73,9 @@ public class GamePanel extends JPanel {
         init_bottomPanel();
         add(bottomPanel, BorderLayout.SOUTH);
         centerPane = new JPanel(new GridBagLayout()); // f*ck me
-        centerPane.setPreferredSize(controller.getFrame().getSize());
-        centerPane.setSize(centerPane.getPreferredSize());
-        centerPane.setBackground(new Color(109, 139, 185));
         add(centerPane, BorderLayout.CENTER);
+        validate();
+        centerPane.setBackground(new Color(109, 139, 185));
     }
 
     private void init_bottomPanel(){
@@ -140,7 +141,7 @@ public class GamePanel extends JPanel {
                 // squarify it lmao
                 Dimension d = super.getPreferredSize();
                 Dimension prefSize = null;
-                Component c = getParent();
+                Component c = this.getParent();
                 if (c == null) {
                     prefSize = new Dimension((int)d.getWidth(), (int)d.getHeight());
                 } else if (c != null && c.getWidth() > d.getWidth() && c.getHeight() > d.getHeight()) {
@@ -148,8 +149,8 @@ public class GamePanel extends JPanel {
                 } else {
                     prefSize = d;
                 }
-                int w = (int) prefSize.getWidth();
-                int h = (int) prefSize.getHeight();
+                int w = (int) prefSize.getWidth() - 40;
+                int h = (int) prefSize.getHeight() - 10;
                 Dimension newPrefSize;
                 if (rows == cols) {
                     int s = (w>h ? h : w);

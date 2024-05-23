@@ -1,18 +1,21 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Image;
 
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.ViewController;
 
 public class MainPanel extends JPanel {
     private MainButtonPanel buttons;
-
     public MainPanel(){
         init_layout();
         add_panels();
+
     }
 
     private void init_layout(){
