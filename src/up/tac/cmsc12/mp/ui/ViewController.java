@@ -65,20 +65,17 @@ public class ViewController {
 
     public String victory() {
         String name = JOptionPane.showInputDialog("Enter name here:");
-        boolean bool = true;
-        while (bool) {
-            if (name == null) {
-                int c;
-                c = JOptionPane.showConfirmDialog(null,
-                    "Are you sure you want to cancel this operation?\n(Your score will not be recorded)", 
-                    "Confirm", 
-                    JOptionPane.YES_NO_OPTION);
-                if (c == JOptionPane.YES_OPTION) {
-                    bool = false;
-                }
-                if (bool) {
-                    name = JOptionPane.showInputDialog("Enter name here:");
-                }
+        while (name == null || name.isBlank()) {
+            int c;
+            c = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to cancel this operation?\n(Your score will not be recorded)", 
+                "Confirm", 
+                JOptionPane.YES_NO_OPTION);
+            if (c == JOptionPane.YES_OPTION) {
+                break;
+            }
+            else {
+                name = JOptionPane.showInputDialog("Enter name here:");
             }
         }
         return name;
@@ -129,9 +126,14 @@ public class ViewController {
     public void previous() {
         clearCustomFields();
         if (!previousViews.isEmpty()) {
-            String name = previousViews.removeLast();
-            getCardLayout().show(getParent(), name);
-            currentView = name;
+            if (!currentView.equals(previousViews.getLast())) {
+                String name = previousViews.removeLast();
+                getCardLayout().show(getParent(), name);
+                currentView = name;
+            } else {
+                previousViews.removeLast();
+                previous();
+            }
         } else {
             home();
         }
@@ -140,7 +142,11 @@ public class ViewController {
     public void view(String name) {
         if (mapNames.containsKey(name)) {
             if (currentView != null) {
-                previousViews.add(currentView);
+                if (!currentView.equals(MainFrame.GAME_PANEL) ) {
+                    if (!previousViews.contains(currentView)) {
+                        previousViews.add(currentView);
+                    }
+                }
             }
             getCardLayout().show(getParent(), name);
             currentView = name;

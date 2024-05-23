@@ -61,7 +61,7 @@ public class Cells extends JButton {
     }
 
     public static int getNoOfFound(){
-        return noOfFlags;
+        return noOfFound;
     }
     
     /*public void setFlagged(){         //keep this here incase the logic goes wrong                             
