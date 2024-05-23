@@ -128,6 +128,7 @@ public class MainFrame extends JFrame {
 
     public void start(){
         viewController.home();
+        pack();
         setVisible(true);
     }
 }
