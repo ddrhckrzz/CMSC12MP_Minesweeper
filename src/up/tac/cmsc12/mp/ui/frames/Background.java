@@ -20,4 +20,5 @@ public class Background extends JPanel{
     public void paintComponent(Graphics g){
         g.drawImage(backGroundImage, 0, 0, null);
     }
+
 }
