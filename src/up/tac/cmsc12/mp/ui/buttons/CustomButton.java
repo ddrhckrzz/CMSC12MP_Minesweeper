@@ -35,6 +35,11 @@ public final class CustomButton extends JPanel{
         initButtonDesign();
         setDefaultMouseListeners();
     }
+
+    public CustomButton(String name, int no){
+        this.text = name;
+        initButtonDesign();
+    }
     
     public CustomButton(String name, int border_width, int fontSize){
         this.text = name;
@@ -43,7 +48,12 @@ public final class CustomButton extends JPanel{
         initButtonDesign();
         setDefaultMouseListeners();
     }
-    
+
+    public void setText(String name){
+        this.text = name;
+        repaint();
+    }
+
     private void setDefaultMouseListeners(){
         addMouseListener(new MouseAdapter() {
             @Override

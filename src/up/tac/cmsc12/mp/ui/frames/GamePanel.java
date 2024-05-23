@@ -2,8 +2,13 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.LineBorder;
@@ -15,7 +20,6 @@ import up.tac.cmsc12.mp.minesweeper.ScoreHandler;
 import up.tac.cmsc12.mp.minesweeper.Timer;
 
 public class GamePanel extends JPanel {
-    // TODO: add creation of different board sizes.
     // ----------------- OVERALL BOARD CONSTANTS -------------------------- //
     private static final int DEFAULT_ROWS = 9;
     private static final int DEFAULT_COLS = 9;
@@ -39,9 +43,10 @@ public class GamePanel extends JPanel {
     private int cols;
     private int totalMines;
     private Cells[][] board;
-    private JPanel boardPanel;
     private JPanel bottomPanel;
+    private JPanel centerPane;
     private Timer Timer;
+    private Font f = new Font("Impact", Font.BOLD, 25);
     private JLabel timer = new JLabel("Time Elapsed: 0s"); //moved because they need to be global to be updated(cant change text)
     private static JLabel minesLeft = new JLabel("Mines Left: ");
 
@@ -51,8 +56,9 @@ public class GamePanel extends JPanel {
     public GamePanel(){
         init_layout();
         Timer = new Timer(timer);
+        timer.setFont(f);
+        minesLeft.setFont(f);
         Minesweeper.setTimer(Timer);
-        
     }
 
     private void init_layout(){
@@ -72,9 +78,11 @@ public class GamePanel extends JPanel {
 
     public void generate_board(){
         resetBoard();
-        if (boardPanel != null) {
-            remove(boardPanel);
+        if (centerPane != null) {
+            remove(centerPane);
         }
+        centerPane = new JPanel(new GridBagLayout()); // f*ck me
+        centerPane.setBackground(new Color(109, 139, 185)); // set transparent bg
         switch (difficulty) {
             case 0:
                 break;
@@ -118,10 +126,28 @@ public class GamePanel extends JPanel {
         Minesweeper.setScoreHandler(sh);
         
         board = new Cells[rows][cols];
-        boardPanel = new JPanel();
+        JPanel boardPanel = new JPanel(new GridLayout(rows, cols)){
+            @Override
+            public Dimension getPreferredSize() {
+                // squarify it lmao
+                Dimension d = super.getPreferredSize();
+                Dimension prefSize = null;
+                Component c = getParent();
+                if (c == null) {
+                    prefSize = new Dimension((int)d.getWidth(), (int)d.getHeight());
+                } else if (c != null && c.getWidth() > d.getWidth() && c.getHeight() > d.getHeight()) {
+                    prefSize = c.getSize();
+                } else {
+                    prefSize = d;
+                }
+                int w = (int) prefSize.getWidth();
+                int h = (int) prefSize.getHeight();
+                int s = (w>h ? h : w);
+                return new Dimension(s, s);
+            }
+        };
         boardPanel.setBackground(new Color(109, 139, 185));
-        boardPanel.setLayout(new GridLayout(rows, cols));
-        boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
+        //boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 board[i][j] = new Cells();
@@ -129,7 +155,8 @@ public class GamePanel extends JPanel {
                 boardPanel.add(board[i][j]);
             }
         }
-        add(boardPanel, BorderLayout.CENTER);
+        centerPane.add(boardPanel);
+        add(centerPane, BorderLayout.CENTER);
         addMines();
         revalidate();
         repaint();

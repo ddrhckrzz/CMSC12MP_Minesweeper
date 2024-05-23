@@ -48,8 +48,8 @@ public class ChooseDifficulty {
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.Y_AXIS));
         buttonsPanel.setLayout(new GridBagLayout());
 
-        buttonsPanel.setBackground(new Color(109, 139, 185)); //around the difficulty buttons
-        wrapper.setBackground(new Color(109, 139, 185)); //the empty space
+        buttonsPanel.setBackground(null); //around the difficulty buttons
+        wrapper.setBackground(null); //the empty space
 
         buttonsPanel.setMaximumSize(new Dimension(360, 510));
         // making the different buttons
@@ -125,9 +125,8 @@ public class ChooseDifficulty {
         
         JPanel gridwrapper = new JPanel();
         JPanel fieldsPanel = new JPanel();
-        fieldsPanel.setBackground(new Color(109, 139, 185)); //around the components
-        gridwrapper.setBackground(new Color(109, 139, 185)); //the empty space
-
+        fieldsPanel.setBackground(null); //around the components
+        gridwrapper.setBackground(null); //the empty space
         fieldsPanel.setLayout(new GridBagLayout());
         fieldsPanel.setMaximumSize(new Dimension(420, 270));
         gridwrapper.setLayout(new BoxLayout(gridwrapper, BoxLayout.Y_AXIS));
@@ -135,6 +134,7 @@ public class ChooseDifficulty {
         GridBagConstraints c = new GridBagConstraints();
         GBCUtils u = new GBCUtils(c);
         c.fill = GridBagConstraints.BOTH;
+        c.insets = new Insets(6, 6, 6, 6);
         JLabel topLabel = new JLabel("CUSTOM GAME SETUP");
         JLabel rowsLabel = new JLabel("No. of Rows (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel colsLabel = new JLabel("No. of Columns (max: " + GamePanel.MAX_DIMENSIONS + "): ");

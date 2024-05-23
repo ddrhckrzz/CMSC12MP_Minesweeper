@@ -32,7 +32,7 @@ public class Timer extends Thread{
                 System.out.print(""); //i have no idea why i need this line of code im losing it
                 continue;
             }
-            
+                        
             timerLabel.setText("Time Elapsed: " + timeSeconds + "s");
             try {
                 Thread.sleep(1000);

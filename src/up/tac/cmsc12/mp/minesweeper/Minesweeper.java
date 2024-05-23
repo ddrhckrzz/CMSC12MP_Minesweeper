@@ -122,8 +122,8 @@ public class Minesweeper {
     }
 
     public static void defeat(){
-        controller.lose();
         timer.stopTimer();
+        controller.lose();
     }
 }
 
