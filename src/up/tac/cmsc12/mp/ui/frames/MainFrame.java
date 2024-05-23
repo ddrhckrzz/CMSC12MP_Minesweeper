@@ -86,12 +86,14 @@ public class MainFrame extends JFrame {
         new ChooseDifficulty(viewController);
         mainMenu.bind_buttons(viewController);
         scorePanel = new ScorePanel(viewController);
+        creditsPanel = new CreditsPanel(viewController);
         navPanel = makeNavPanel();
 
         // add to controller
         viewController.addView(mainMenu, ViewController.HOME);
         viewController.addView(gamePanel, GAME_PANEL);
         viewController.addView(scorePanel, SCORE_PANEL);
+        viewController.addView(creditsPanel, CREDITS_PANEL);
 
         // add cardPanel and navPanel to the frame
         add(cardPanel);
