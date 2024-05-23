@@ -4,6 +4,9 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
@@ -12,11 +15,12 @@ import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
+import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class MainButtonPanel extends JPanel{
     private GridBagLayout layout;
     private GridBagConstraints gbc;
-    private JButton startButton;
+    private CustomButton startButton;
     private JButton scoreButton;
     private JButton optionsButton;
     private JButton exitButton;
@@ -34,7 +38,7 @@ public class MainButtonPanel extends JPanel{
     }
 
     private void init_buttons(){
-        startButton = new JButton("New Game");
+        startButton = new CustomButton("New Game");
         scoreButton = new JButton("Leaderboards");
         optionsButton = new JButton("Options");
         exitButton = new JButton("Exit");
@@ -59,12 +63,22 @@ public class MainButtonPanel extends JPanel{
     }
 
     protected void bind_buttons(ViewController controller){
-        startButton.addActionListener(new ActionListener() {
+        
+
+        startButton.addMouseListener(new MouseAdapter() {
+            
             @Override
-            public void actionPerformed(ActionEvent e) {
-                controller.view(ChooseDifficulty.DIFFICULTY_PANEL);
+            public void mousePressed(MouseEvent e) {
+                startButton.push();
+                
+            }
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                startButton.unpush();
+                //controller.view(ChooseDifficulty.DIFFICULTY_PANEL);
             }
         });
+
         scoreButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
