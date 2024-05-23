@@ -47,7 +47,9 @@ public class ChooseDifficulty {
         JPanel wrapper = new JPanel();
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.Y_AXIS));
         buttonsPanel.setLayout(new GridBagLayout());
-        buttonsPanel.setBackground(new Color(109, 139, 185));
+
+        buttonsPanel.setBackground(new Color(109, 139, 185)); //around the difficulty buttons
+        wrapper.setBackground(new Color(109, 139, 185)); //the empty space
 
         buttonsPanel.setMaximumSize(new Dimension(360, 510));
         // making the different buttons
@@ -120,8 +122,12 @@ public class ChooseDifficulty {
 
     private JPanel makeCustomDifficultyPanel(){
         // even more panels within panels shenanigans
+        
         JPanel gridwrapper = new JPanel();
         JPanel fieldsPanel = new JPanel();
+        fieldsPanel.setBackground(new Color(109, 139, 185)); //around the components
+        gridwrapper.setBackground(new Color(109, 139, 185)); //the empty space
+
         fieldsPanel.setLayout(new GridBagLayout());
         fieldsPanel.setMaximumSize(new Dimension(420, 270));
         gridwrapper.setLayout(new BoxLayout(gridwrapper, BoxLayout.Y_AXIS));

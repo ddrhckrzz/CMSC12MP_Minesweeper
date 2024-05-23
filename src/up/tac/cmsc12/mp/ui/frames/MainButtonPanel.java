@@ -23,7 +23,7 @@ public class MainButtonPanel extends JPanel{
     private CustomButton scoreButton;
     private CustomButton optionsButton;
     private CustomButton exitButton;
-    private JLabel logoPane = new JLabel("MINESWEEPER");
+    private CustomButton logoPane = new CustomButton("MINESWEEPER");
     public MainButtonPanel(){
         init_layout();
         init_buttons();
@@ -46,10 +46,10 @@ public class MainButtonPanel extends JPanel{
         gbc.gridwidth = 2;
         GBCUtils u = new GBCUtils(gbc);
         u.setGBC(0, 0, GridBagConstraints.CENTER, 0.8, 0.8, GridBagConstraints.BOTH);
-        logoPane.setHorizontalAlignment(JLabel.CENTER);
+        //logoPane.setHorizontalAlignment(JLabel.CENTER);
         add(logoPane, gbc);
         gbc.ipadx = 20;
-        gbc.ipady = 30;
+        gbc.ipady = 20;
         u.setGBC(0, 1, GridBagConstraints.CENTER, 0.4, 0.2, GridBagConstraints.BOTH);
         add(startButton, gbc);
         gbc.gridwidth = 1;

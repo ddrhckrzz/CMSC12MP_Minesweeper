@@ -73,6 +73,8 @@ public class MainFrame extends JFrame {
     private void init_layout(){
         cardLayout = new CardLayout(10,10);
         cardPanel = new JPanel(cardLayout);
+        cardPanel.setBackground(new Color(109, 139, 185));
+
         viewController = new ViewController(this, cardLayout);
         setPreferredSize(new Dimension(640, 480));
         setSize(getPreferredSize());
