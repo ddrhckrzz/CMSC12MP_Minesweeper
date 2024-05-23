@@ -9,7 +9,8 @@ public class Cells extends JButton {
     private int val; // 0 means empty, 9 means mine, everything else just tells how many mines there are around it
     private boolean isClear = false, flagged = false;
     private static int noOfMines = 0, noOfFlags = 0, noOfFound = 0;
-    private int r=80, g=80, b=200;
+    private int r=235, g=229, b=171;
+    //235, 229, 171
     private Color c = new Color(r,g,b);
 
     public Cells(){
