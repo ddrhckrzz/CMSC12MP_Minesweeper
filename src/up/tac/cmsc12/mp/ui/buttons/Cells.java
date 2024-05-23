@@ -16,6 +16,7 @@ public class Cells extends JButton {
     private int r=244,g=240,b=225;
     public static final String ICON_PATH = "src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_";
     private ImageIcon icon[] = new ImageIcon[10];
+    private static ImageIcon flagIcon = new ImageIcon(ICON_PATH + "flag.png");
     
 
     private Color c = new Color(r,g,b);
@@ -61,8 +62,13 @@ public class Cells extends JButton {
         val = 9;
         noOfMines++;
     }
+
     public static int getNoOfMines(){
         return noOfMines;
+    }
+
+    public void flag() {
+        setIcon(flagIcon);
     }
 
     public void setFlagged(){
@@ -102,7 +108,6 @@ public class Cells extends JButton {
     }
 
     public void updateText(){
-        
         if(flagged){  //cannot clear a flagged cell
             return;
         }
@@ -131,6 +136,7 @@ public class Cells extends JButton {
         changeColor(200,200,200);
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
         super.paintComponent(g2d);

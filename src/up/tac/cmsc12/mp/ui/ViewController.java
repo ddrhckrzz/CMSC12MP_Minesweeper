@@ -28,7 +28,6 @@ public class ViewController {
     private MainFrame mainFrame;
     private Container parent;
     private CardLayout cardLayout;
-    private Background cardPanel;
 
     public ViewController(MainFrame mainFrame, CardLayout cardLayout) {
         this.mainFrame = mainFrame;
@@ -36,6 +35,14 @@ public class ViewController {
         this.cardLayout = cardLayout;
         previousViews = new ArrayList<>(5);
         mapNames = new HashMap<>(10);
+        Thread t = new Thread(){
+            public void run(){
+                while(true){
+                    Minesweeper.refreshBackground();
+                }    
+            }
+        };
+        t.start();
     }
 
     public Container getParent() {
