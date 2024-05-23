@@ -8,6 +8,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -15,7 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 
-public final class CustomButton extends JPanel implements MouseListener{
+public final class CustomButton extends JPanel{
 
     private int r=80,g=80,b=200, grade=30,border_width=5,fontSize=50;
     private Color main_color = new Color(r,g,b);
@@ -28,6 +29,7 @@ public final class CustomButton extends JPanel implements MouseListener{
     public CustomButton(String name){
         this.text = name;
         initButtonDesign();
+        setDefaultMouseListeners();
     }
     
     public CustomButton(String name, int border_width, int fontSize){
@@ -37,7 +39,19 @@ public final class CustomButton extends JPanel implements MouseListener{
         initButtonDesign(); 
     }
     
+    private void setDefaultMouseListeners(){
+        addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                push();
+            }
 
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                unpush();
+            }
+        });
+    }
 
     public void setColor(int r, int g, int b){
         this.main_color = new Color(r,g,b);
@@ -109,7 +123,7 @@ public final class CustomButton extends JPanel implements MouseListener{
         this.top_color = tcolor;
         setBackground(clicked_color);
         repaint();
-        SwingUtilities.updateComponentTreeUI(this);
+        updateFrameUI();
 
     }
     
@@ -119,33 +133,10 @@ public final class CustomButton extends JPanel implements MouseListener{
         this.top_color = tcolor;
         setBackground(main_color);
         repaint();
-        updateUI();
+        updateFrameUI();
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseClicked'");
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        unpush();
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseEntered'");
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'mouseExited'");
+    private void updateFrameUI() {
+        SwingUtilities.updateComponentTreeUI(SwingUtilities.getWindowAncestor(this));
     }
 }

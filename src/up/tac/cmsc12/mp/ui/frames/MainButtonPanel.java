@@ -12,6 +12,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
 import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
@@ -66,16 +67,9 @@ public class MainButtonPanel extends JPanel{
         
 
         startButton.addMouseListener(new MouseAdapter() {
-            
-            @Override
-            public void mousePressed(MouseEvent e) {
-                startButton.push();
-                
-            }
             @Override
             public void mouseReleased(MouseEvent e) {
-                startButton.unpush();
-                //controller.view(ChooseDifficulty.DIFFICULTY_PANEL);
+                controller.view(ChooseDifficulty.DIFFICULTY_PANEL);
             }
         });
 
