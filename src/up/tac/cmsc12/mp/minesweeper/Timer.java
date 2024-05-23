@@ -5,7 +5,6 @@ import java.text.DecimalFormat;
 import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
-import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class Timer extends Thread{
     private int timeSeconds = 0;
@@ -33,7 +32,7 @@ public class Timer extends Thread{
                 System.out.print(""); //i have no idea why i need this line of code im losing it
                 continue;
             }
-            
+                        
             timerLabel.setText("Time Elapsed: " + timeSeconds + "s");
             try {
                 Thread.sleep(1000);

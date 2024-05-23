@@ -47,9 +47,8 @@ public final class CustomButton extends JPanel{
     public void setText(String name){
         this.text = name;
         repaint();
-        updateFrameUI();
     }
-    
+
     private void setDefaultMouseListeners(){
         addMouseListener(new MouseAdapter() {
             @Override

@@ -2,6 +2,7 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -42,6 +43,7 @@ public class GamePanel extends JPanel {
     private JPanel boardPanel;
     private JPanel bottomPanel;
     private Timer Timer;
+    private Font f = new Font("Impact", Font.BOLD, 25);
     private JLabel timer = new JLabel("Time Elapsed: 0s"); //moved because they need to be global to be updated(cant change text)
     private static JLabel minesLeft = new JLabel("Mines Left: ");
 
@@ -51,6 +53,8 @@ public class GamePanel extends JPanel {
     public GamePanel(){
         init_layout();
         Timer = new Timer(timer);
+        timer.setFont(f);
+        minesLeft.setFont(f);
         Minesweeper.setTimer(Timer);
     }
 
