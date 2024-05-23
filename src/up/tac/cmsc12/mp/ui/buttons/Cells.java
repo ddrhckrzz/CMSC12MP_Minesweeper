@@ -1,13 +1,9 @@
 package up.tac.cmsc12.mp.ui.buttons;
 import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.Insets;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -17,7 +13,7 @@ public class Cells extends JButton {
     private int val; // 0 means empty, 9 means mine, everything else just tells how many mines there are around it
     private boolean isClear = false, flagged = false;
     private static int noOfMines = 0, noOfFlags = 0, noOfFound = 0;
-    private int r=244,g=240,b=225, h=getHeight();
+    private int r=244,g=240,b=225;
     public static final String ICON_PATH = "src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_";
     private ImageIcon icon[] = new ImageIcon[10];
     
@@ -36,7 +32,7 @@ public class Cells extends JButton {
             if(i==0) {
                 icon[i] = null;
             } else if (i < 9) {
-                String iconpath = ICON_PATH + (i+1) + ".png";
+                String iconpath = ICON_PATH + (i) + ".png";
                 icon[i] = new ImageIcon(iconpath);
             } else {
                 String iconpath = ICON_PATH + "mine.png";
