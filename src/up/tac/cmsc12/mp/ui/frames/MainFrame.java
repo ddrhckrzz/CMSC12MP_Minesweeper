@@ -101,6 +101,8 @@ public class MainFrame extends JFrame {
 
     private JPanel makeNavPanel() {
         JPanel navPanel = new JPanel();
+        navPanel.setBackground(new Color(109, 139, 185));
+
         // navPanel.setLayout(new BoxLayout(navPanel, BoxLayout.LINE_AXIS));
         CustomButton back = new CustomButton("Back", 5, 25);
         CustomButton home = new CustomButton("Main Menu", 5, 25);
