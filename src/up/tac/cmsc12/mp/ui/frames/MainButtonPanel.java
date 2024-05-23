@@ -2,15 +2,11 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
@@ -23,7 +19,7 @@ public class MainButtonPanel extends JPanel{
     private CustomButton scoreButton;
     private CustomButton optionsButton;
     private CustomButton exitButton;
-    private CustomButton logoPane = new CustomButton("MINESWEEPER", 1);
+    private CustomButton logoPane = new CustomButton("MINESWEEPER");
     public MainButtonPanel(){
         init_layout();
         init_buttons();
@@ -34,7 +30,7 @@ public class MainButtonPanel extends JPanel{
         gbc = new GridBagConstraints();
         setLayout(layout);
         setMaximumSize(new Dimension(390, 540));
-        setBackground(null);
+        setBackground(new Color(109, 139, 185));
     }
 
     private void init_buttons(){
