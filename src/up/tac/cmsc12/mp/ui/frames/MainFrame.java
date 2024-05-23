@@ -2,9 +2,12 @@ package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +15,7 @@ import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.ui.ViewController;
+import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class MainFrame extends JFrame {
     /*
@@ -45,6 +49,7 @@ public class MainFrame extends JFrame {
         add_panels();
         toggleNavVisiblity(); // navigation panel is invisble by default
         Minesweeper.setViewController(viewController); // very important
+        
     }
 
     public JPanel getCardPanel() {
@@ -68,9 +73,12 @@ public class MainFrame extends JFrame {
     private void init_layout(){
         cardLayout = new CardLayout(10,10);
         cardPanel = new JPanel(cardLayout);
+        cardPanel.setBackground(new Color(109, 139, 185));
+
         viewController = new ViewController(this, cardLayout);
         setPreferredSize(new Dimension(640, 480));
         setSize(getPreferredSize());
+        setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);
     }
 
@@ -95,18 +103,21 @@ public class MainFrame extends JFrame {
 
     private JPanel makeNavPanel() {
         JPanel navPanel = new JPanel();
+        navPanel.setBackground(new Color(109, 139, 185));
+
         // navPanel.setLayout(new BoxLayout(navPanel, BoxLayout.LINE_AXIS));
-        JButton back = new JButton("Back");
-        JButton home = new JButton("Main Menu");
-        back.addActionListener(new ActionListener() {
+        CustomButton back = new CustomButton("Back", 5, 25);
+        CustomButton home = new CustomButton("Main Menu", 5, 25);
+        
+        back.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 viewController.previous();
             }
         });
-        home.addActionListener(new ActionListener() {
+        home.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 viewController.home();
             }
         });

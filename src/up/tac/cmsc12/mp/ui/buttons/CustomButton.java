@@ -4,6 +4,7 @@ import static java.awt.Color.white;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -39,7 +40,8 @@ public final class CustomButton extends JPanel{
         this.text = name;
         this.border_width = border_width;
         this.fontSize = fontSize;
-        initButtonDesign(); 
+        initButtonDesign();
+        setDefaultMouseListeners();
     }
     
     private void setDefaultMouseListeners(){
@@ -65,6 +67,8 @@ public final class CustomButton extends JPanel{
     }
     
     public void initButtonDesign(){
+        setPreferredSize(new Dimension(fontSize*(text.length()), fontSize + 12));
+        setSize(getPreferredSize());
         setBackground(main_color);
         setForeGround();
         repaint();

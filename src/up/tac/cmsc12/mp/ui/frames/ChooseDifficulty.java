@@ -1,12 +1,15 @@
 package up.tac.cmsc12.mp.ui.frames;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.InputMismatchException;
 
 import javax.swing.BoxLayout;
@@ -18,6 +21,7 @@ import javax.swing.JTextField;
 
 import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
+import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class ChooseDifficulty {
     public static final String DIFFICULTY_PANEL = "Difficulty Panel";
@@ -43,48 +47,52 @@ public class ChooseDifficulty {
         JPanel wrapper = new JPanel();
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.Y_AXIS));
         buttonsPanel.setLayout(new GridBagLayout());
+
+        buttonsPanel.setBackground(new Color(109, 139, 185)); //around the difficulty buttons
+        wrapper.setBackground(new Color(109, 139, 185)); //the empty space
+
         buttonsPanel.setMaximumSize(new Dimension(360, 510));
         // making the different buttons
-        JButton beginner = new JButton("BEGINNER");
-        JButton intermediate = new JButton("INTERMEDIATE");
-        JButton expert = new JButton("EXPERT");
-        JButton master = new JButton("MASTER");
-        JButton legend = new JButton("LEGEND");
-        JButton custom = new JButton("CUSTOM");
+        CustomButton beginner = new CustomButton("BEGINNER", 5, 25);
+        CustomButton intermediate = new CustomButton("INTERMEDIATE", 5, 25);
+        CustomButton expert = new CustomButton("EXPERT", 5, 25);
+        CustomButton master = new CustomButton("MASTER", 5, 25);
+        CustomButton legend = new CustomButton("LEGEND", 5, 25);
+        CustomButton custom = new CustomButton("CUSTOM", 5, 25);
         // set ActionListeners
-        beginner.addActionListener(new ActionListener() {
+        beginner.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(1);
             }
         });
-        intermediate.addActionListener(new ActionListener() {
+        intermediate.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(2);
             }
         });
-        expert.addActionListener(new ActionListener() {
+        expert.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(3);
             }
         });
-        master.addActionListener(new ActionListener() {
+        master.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(4);
             }
         });
-        legend.addActionListener(new ActionListener() {
+        legend.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(5);
             }
         });
-        custom.addActionListener(new ActionListener() {
+        custom.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 controller.view(CUSTOM_PANEL);
             }
         });
@@ -114,8 +122,12 @@ public class ChooseDifficulty {
 
     private JPanel makeCustomDifficultyPanel(){
         // even more panels within panels shenanigans
+        
         JPanel gridwrapper = new JPanel();
         JPanel fieldsPanel = new JPanel();
+        fieldsPanel.setBackground(new Color(109, 139, 185)); //around the components
+        gridwrapper.setBackground(new Color(109, 139, 185)); //the empty space
+
         fieldsPanel.setLayout(new GridBagLayout());
         fieldsPanel.setMaximumSize(new Dimension(420, 270));
         gridwrapper.setLayout(new BoxLayout(gridwrapper, BoxLayout.Y_AXIS));
@@ -127,7 +139,7 @@ public class ChooseDifficulty {
         JLabel rowsLabel = new JLabel("No. of Rows (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel colsLabel = new JLabel("No. of Columns (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel totalMinesLabel = new JLabel("No. of Mines (max: (rows * cols) - 1): ");
-        JButton startCustom = new JButton("START");
+        CustomButton startCustom = new CustomButton("START");
         rowsField = new JTextField(10);
         colsField = new JTextField(10);
         totalMinesField = new JTextField(10);
@@ -155,9 +167,9 @@ public class ChooseDifficulty {
         u.setGBC(0, 4);
         fieldsPanel.add(startCustom, c);
         // add listeners to the start button
-        startCustom.addActionListener(new ActionListener() {
+        startCustom.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(0);
             }
         });

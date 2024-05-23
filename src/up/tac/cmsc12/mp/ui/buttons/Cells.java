@@ -9,8 +9,8 @@ public class Cells extends JButton {
     private int val; // 0 means empty, 9 means mine, everything else just tells how many mines there are around it
     private boolean isClear = false, flagged = false;
     private static int noOfMines = 0, noOfFlags = 0, noOfFound = 0;
-    private int r=235, g=229, b=171;
-    //235, 229, 171
+    //private int r=80, g=80, b=200;
+    private int r=198,g=188,b=108;
     private Color c = new Color(r,g,b);
 
     public Cells(){
@@ -44,10 +44,6 @@ public class Cells extends JButton {
 
     public void setFlagged(){
         Minesweeper.flagging(this, isClear);
-        // if(noOfFound == noOfMines){
-        //     Minesweeper.victory();
-        //     return;
-        // }
     }
 
     public void revFlag(){
@@ -69,36 +65,6 @@ public class Cells extends JButton {
     public static int getNoOfFound(){
         return noOfFound;
     }
-    
-    /*public void setFlagged(){         //keep this here incase the logic goes wrong                             
-        if(isClear){  //cant flag if it is a cleared cell
-            return;
-        }
-        if(!flagged){
-            if(noOfFlags == noOfMines){ //cannot flag more than the number of mines
-                return;
-            }
-            setText("F");
-            setEnabled(false);
-            if(val == 9){
-                noOfFound++;
-            }
-            noOfFlags++;
-        }
-        else{
-            setText("");
-            setEnabled(true);
-            if(val == 9){
-                noOfFound--;
-            }
-            noOfFlags--;
-        }
-        flagged = !flagged; //reverses boolean flag value
-        if(noOfFound == noOfMines){
-            System.out.println("You Win");
-            return;
-        }
-    }*/
 
     public boolean getFlagged(){
        return flagged;
