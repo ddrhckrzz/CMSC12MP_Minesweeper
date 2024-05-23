@@ -74,7 +74,7 @@ public class MainFrame extends JFrame {
         cardPanel.setBackground(new Color(0, 0, 0 ,0));
 
         viewController = new ViewController(this, cardLayout);
-        setPreferredSize(new Dimension(1280, 720));
+        setPreferredSize(new Dimension(720, 720));
         setSize(getPreferredSize());
         setMinimumSize(getPreferredSize());
         setLocationRelativeTo(null);

@@ -32,9 +32,10 @@ public class Timer extends Thread{
                 System.out.print(""); //i have no idea why i need this line of code im losing it
                 continue;
             }
-                        
+            Minesweeper.refreshBackground();                
             timerLabel.setText("Time Elapsed: " + timeSeconds + "s");
             Minesweeper.refreshBackground();
+            
             try {
                 Thread.sleep(1000);
                 timeSeconds += 1;
