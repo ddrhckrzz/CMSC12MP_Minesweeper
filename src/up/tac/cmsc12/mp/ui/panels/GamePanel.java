@@ -144,7 +144,7 @@ public class GamePanel extends JPanel {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 board[i][j] = new Cells();
-                new CellListener(board, board[i][j], i, j);
+                new CellListener(board[i][j], i, j);
                 boardPanel.add(board[i][j]);
             }
         }

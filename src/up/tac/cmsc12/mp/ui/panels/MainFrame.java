@@ -18,7 +18,6 @@ import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class MainFrame extends JFrame {
     /*
-     * TODO: Complete this thing idk
      * 
      * To access the assets folder from here the path is:
      * "assets/"

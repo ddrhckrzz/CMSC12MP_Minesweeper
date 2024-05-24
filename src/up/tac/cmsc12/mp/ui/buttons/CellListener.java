@@ -8,13 +8,11 @@ import javax.swing.SwingUtilities;
 import up.tac.cmsc12.mp.minesweeper.*;
 
 public class CellListener extends MouseAdapter{
-    private Cells[][] board; // should be removed as it's not being used
     private Cells cell;
     private int row, col;
     private static boolean first_clicked = false;
 
-    public CellListener(Cells[][] board, Cells cell, int row, int col){
-        this.board = board;
+    public CellListener(Cells cell, int row, int col){
         this.cell = cell;
         this.row = row;
         this.col = col;
