@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
 import up.tac.cmsc12.mp.ui.buttons.CustomButton;
@@ -29,12 +30,18 @@ public class ChooseDifficulty {
     private JTextField totalMinesField;
     private ViewController controller;
 
-    public ChooseDifficulty(ViewController controller) {
-        this.controller = controller;
+    public ChooseDifficulty() {
+        this.controller = Minesweeper.getViewController();
         difficultyPanel = makeDifficultyPanel();
         customDifficultyPanel = makeCustomDifficultyPanel();
-        controller.addView(difficultyPanel, DIFFICULTY_PANEL);
-        controller.addView(customDifficultyPanel, CUSTOM_PANEL);
+    }
+
+    protected JPanel getDifficultyPanel() {
+        return difficultyPanel;
+    }
+
+    protected JPanel getCustomDifficultyPanel() {
+        return customDifficultyPanel;
     }
 
     private JPanel makeDifficultyPanel(){
@@ -185,18 +192,39 @@ public class ChooseDifficulty {
                 int rows = Integer.parseInt(rowsField.getText());
                 int cols = Integer.parseInt(colsField.getText());
                 int totalMines = Integer.parseInt(totalMinesField.getText());
-                if (rows <= 0 | rows > GamePanel.MAX_DIMENSIONS | cols <= 0 | cols > GamePanel.MAX_DIMENSIONS) {
+                if (rows <= 0 | rows > GamePanel.MAX_DIMENSIONS | cols <= 0 | cols > GamePanel.MAX_DIMENSIONS | rows * cols == 1) {
                     throw new InputMismatchException();
                 }
-                if (totalMines > (rows * cols) - 1) {
-                    throw new InputMismatchException();
+                if ((totalMines > (rows * cols) - 1) | totalMines <= 0) {
+                    throw new InputMismatchException(String.valueOf(totalMines));
                 }
                 controller.generateGameBoard(rows, cols, totalMines);
                 controller.view(MainFrame.GAME_PANEL);
             } catch (InputMismatchException ime) {
-                JOptionPane.showMessageDialog(controller.getParent(), "Numbers must be within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+                if (ime.getMessage() != null) {
+                    int totalMines = Integer.parseInt(totalMinesField.getText());
+                    if (totalMines <= 0) {
+                        JOptionPane.showMessageDialog(controller.getParent(), 
+                            "Total Mines cannot be less than one.",
+                            "INPUT ERROR",
+                            JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(controller.getParent(),
+                        "Numbers must be within specified bounds",
+                        "INPUT ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(controller.getParent(),
+                        "Numbers must be within specified bounds\n(rows * cols cannot equal to 1)",
+                        "INPUT ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+                }
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(controller.getParent(), "Input in the fields must be integers within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(controller.getParent(),
+                    "Input in the fields must be integers within specified bounds",
+                    "INPUT ERROR",
+                    JOptionPane.ERROR_MESSAGE);
             }
         } else {
             controller.generateGameBoard(difficulty);

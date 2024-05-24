@@ -43,6 +43,10 @@ public class Minesweeper {
     public static void setViewController(ViewController viewcontroller){
         controller = viewcontroller;
     }
+
+    public static ViewController getViewController() { 
+        return controller;
+    }
   
     public static void setBackground(Background givenBackground){
         background = givenBackground;
@@ -112,7 +116,7 @@ public class Minesweeper {
             Cells.addNoOfFlags(1);
         }
         else{
-            cell.setIcon(null);
+            cell.setCurrentIcon(null);
             if(val == 9){
                 Cells.addNoOfFound(-1);
             }

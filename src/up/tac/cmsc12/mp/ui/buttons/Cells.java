@@ -14,9 +14,11 @@ public class Cells extends JButton {
     private boolean isClear = false, flagged = false;
     private static int noOfMines = 0, noOfFlags = 0, noOfFound = 0;
     private int r=244,g=240,b=225;
-    public static final String ICON_PATH = "src\\up\\tac\\cmsc12\\mp\\assets\\Minesweeper_";
+    public static final String ICON_PATH = "assets\\Minesweeper_";
     private ImageIcon icon[] = new ImageIcon[10];
-    private static ImageIcon flagIcon = new ImageIcon(ICON_PATH + "flag.png");
+    private ImageIcon flagIcon = new ImageIcon(ICON_PATH + "flag.png");
+    private ImageIcon currentIcon;
+
     
 
     private Color c = new Color(r,g,b);
@@ -68,7 +70,7 @@ public class Cells extends JButton {
     }
 
     public void flag() {
-        setIcon(flagIcon);
+        setCurrentIcon(flagIcon);
     }
 
     public void setFlagged(){
@@ -111,7 +113,7 @@ public class Cells extends JButton {
         if(flagged){  //cannot clear a flagged cell
             return;
         }
-        setIcon(icon[val]);
+        setCurrentIcon(icon[val]);
         if (val==9) {
             Minesweeper.defeat();
         }
@@ -121,8 +123,9 @@ public class Cells extends JButton {
     }
 
     public void revealMine(){
-        if(val == 9)
-        setIcon(icon[val]);
+        if (val == 9) {
+            setCurrentIcon(icon[val]);
+        }
     }
 
     public void colorButton(){
@@ -141,20 +144,28 @@ public class Cells extends JButton {
         changeColor(200,200,200);
     }
 
+    public void setCurrentIcon(ImageIcon currentIcon) {
+        this.currentIcon = currentIcon;
+    }
+
+    public ImageIcon getCurrentIcon() {
+        return currentIcon;
+    }
+
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g.create();
         super.paintComponent(g2d);
-        if (getIcon() != null) {
-            double scaleFactor = Math.min(1.0 * getWidth() / getIcon().getIconWidth(),
-                                          1.0 * getHeight() / getIcon().getIconHeight());
-            int scaledWidth = (int) (getIcon().getIconWidth() * scaleFactor);
-            int scaledHeight = (int) (getIcon().getIconHeight() * scaleFactor);
+        if (getCurrentIcon() != null) {
+            double scaleFactor = Math.min(1.0 * getWidth() / getCurrentIcon().getIconWidth(),
+                                          1.0 * getHeight() / getCurrentIcon().getIconHeight());
+            int scaledWidth = (int) (getCurrentIcon().getIconWidth() * scaleFactor);
+            int scaledHeight = (int) (getCurrentIcon().getIconHeight() * scaleFactor);
             
             int x = (getWidth() - scaledWidth) / 2;
             int y = (getHeight() - scaledHeight) / 2;
             
-            g2d.drawImage(((ImageIcon) getIcon()).getImage(), x, y, scaledWidth, scaledHeight, this);
+            g2d.drawImage(getCurrentIcon().getImage(), x, y, scaledWidth, scaledHeight, this);
         }
         g2d.dispose();
     }

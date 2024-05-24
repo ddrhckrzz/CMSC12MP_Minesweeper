@@ -10,12 +10,12 @@ import javax.swing.JPanel;
 public class Background extends JPanel{
     Image backGroundImage;
     public Background(){
-        backGroundImage = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\841032800_preview_Desert 1.png").getImage();
+        backGroundImage = new ImageIcon("assets\\desert.png").getImage();
     }
 
     public Background(CardLayout cardLayout){
         super(cardLayout);
-        backGroundImage = new ImageIcon("src\\up\\tac\\cmsc12\\mp\\841032800_preview_Desert 1.png").getImage();
+        backGroundImage = new ImageIcon("assets\\desert.png").getImage();
     }
     public void paintComponent(Graphics g){
         g.drawImage(backGroundImage, 0, 0, null);

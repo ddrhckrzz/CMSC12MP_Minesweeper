@@ -74,7 +74,6 @@ public class CreditsPanel extends JPanel {
                     URI uri = new URI(FB_LINK + "alexian.avila");
                     desktop.browse(uri.resolve(uri));
                 } catch (URISyntaxException | IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
@@ -86,7 +85,6 @@ public class CreditsPanel extends JPanel {
                     URI uri = new URI(FB_LINK + "actuallyjudeanthony0327");
                     desktop.browse(uri.resolve(uri));
                 } catch (URISyntaxException | IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
@@ -98,7 +96,6 @@ public class CreditsPanel extends JPanel {
                     URI uri = new URI(FB_LINK + "profile.php?id=100009643459604");
                     desktop.browse(uri.resolve(uri));
                 } catch (URISyntaxException | IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }
@@ -110,7 +107,6 @@ public class CreditsPanel extends JPanel {
                     URI uri = new URI(FB_LINK + "ddrhckrzz");
                     desktop.browse(uri.resolve(uri));
                 } catch (URISyntaxException | IOException e1) {
-                    // TODO Auto-generated catch block
                     e1.printStackTrace();
                 }
             }

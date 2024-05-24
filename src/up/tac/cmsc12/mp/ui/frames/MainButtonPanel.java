@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import javax.swing.JPanel;
+
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
 import up.tac.cmsc12.mp.ui.buttons.CustomButton;
@@ -22,6 +24,7 @@ public class MainButtonPanel extends JPanel{
     public MainButtonPanel(){
         init_layout();
         init_buttons();
+        bind_buttons();
     }
 
     private void init_layout(){
@@ -57,8 +60,8 @@ public class MainButtonPanel extends JPanel{
         add(exitButton, gbc);
     }
 
-    protected void bind_buttons(ViewController controller){
-        
+    protected void bind_buttons(){
+        ViewController controller = Minesweeper.getViewController();
         startButton.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseReleased(MouseEvent e) {

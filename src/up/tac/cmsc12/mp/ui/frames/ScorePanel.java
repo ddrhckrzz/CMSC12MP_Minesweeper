@@ -26,8 +26,8 @@ public class ScorePanel extends JPanel {
     private JTable scoreTable;
     private final int fontSize = 24;
     private Font f = new Font("Impact", Font.BOLD, fontSize);
-    public ScorePanel(ViewController controller) {
-        this.controller = controller;
+    public ScorePanel() {
+        this.controller = Minesweeper.getViewController();
         for (int i = 0; i < scores.length; i++) {
             scores[i] = new ScoreTable(i + 1);
         }

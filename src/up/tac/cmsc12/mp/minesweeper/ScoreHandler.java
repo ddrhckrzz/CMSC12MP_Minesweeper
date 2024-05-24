@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
 
 public class ScoreHandler {
@@ -22,9 +20,9 @@ public class ScoreHandler {
         MASTER_SCOREFILE = new File(PATH + "MasterScores.txt");
         LEGEND_SCOREFILE = new File(PATH + "LegendScores.txt");
         try {
-            if(Files.createDirectories(Paths.get(PATH)) != null){ //automatically creates folder directory if DNE
-                // System.out.println("Folder Directory Exists");
-            }  
+            // if(Files.createDirectories(Paths.get(PATH)) != null){ //automatically creates folder directory if DNE
+            //     // System.out.println("Folder Directory Exists");
+            // }
             file.createNewFile();
             BEGINNGER_SCROREFILE.createNewFile();
             INTERMEDIATE_SCOREFILE.createNewFile();
@@ -32,7 +30,6 @@ public class ScoreHandler {
             MASTER_SCOREFILE.createNewFile();
             LEGEND_SCOREFILE.createNewFile();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }

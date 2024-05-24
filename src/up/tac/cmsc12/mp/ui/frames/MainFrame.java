@@ -37,6 +37,7 @@ public class MainFrame extends JFrame {
     private JPanel navPanel;
     private MainPanel mainMenu;
     private CreditsPanel creditsPanel;
+    private ChooseDifficulty difficultyChooser;
     private GamePanel gamePanel;
     private ScorePanel scorePanel;
 
@@ -44,9 +45,9 @@ public class MainFrame extends JFrame {
         setTitle(TITLENAME);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         init_layout();
+        Minesweeper.setViewController(viewController); // very important
         add_panels();
         toggleNavVisiblity(); // navigation panel is invisble by default
-        Minesweeper.setViewController(viewController); // very important
     }
 
     public JPanel getCardPanel() {
@@ -72,7 +73,6 @@ public class MainFrame extends JFrame {
         cardPanel = new Background(cardLayout);
         Minesweeper.setBackground(cardPanel);
         cardPanel.setBackground(new Color(0, 0, 0 ,0));
-
         viewController = new ViewController(this, cardLayout);
         setPreferredSize(new Dimension(1280, 720));
         setSize(getPreferredSize());
@@ -84,9 +84,8 @@ public class MainFrame extends JFrame {
     private void add_panels() {
         mainMenu = new MainPanel();
         gamePanel = new GamePanel();
-        new ChooseDifficulty(viewController);
-        mainMenu.bind_buttons(viewController);
-        scorePanel = new ScorePanel(viewController);
+        difficultyChooser = new ChooseDifficulty();
+        scorePanel = new ScorePanel();
         creditsPanel = new CreditsPanel();
         navPanel = makeNavPanel();
 
@@ -95,6 +94,8 @@ public class MainFrame extends JFrame {
         viewController.addView(gamePanel, GAME_PANEL);
         viewController.addView(scorePanel, SCORE_PANEL);
         viewController.addView(creditsPanel, CREDITS_PANEL);
+        viewController.addView(difficultyChooser.getDifficultyPanel(), ChooseDifficulty.DIFFICULTY_PANEL);
+        viewController.addView(difficultyChooser.getCustomDifficultyPanel(), ChooseDifficulty.CUSTOM_PANEL);
 
         // add cardPanel and navPanel to the frame
         add(cardPanel);
