@@ -1,4 +1,4 @@
-import up.tac.cmsc12.mp.ui.frames.MainFrame;
+import up.tac.cmsc12.mp.ui.panels.MainFrame;
 
 public class Main {
     /*
@@ -6,6 +6,6 @@ public class Main {
      */
     public static void main(String[] args) throws Exception {
         MainFrame mainframe = new MainFrame();
-        mainframe.start(); // doesn't really do anything right now.
+        mainframe.start();
     }
 }
