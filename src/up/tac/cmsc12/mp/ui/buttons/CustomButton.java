@@ -95,7 +95,8 @@ public final class CustomButton extends JPanel{
     public Color convertColor(int r,int g,int b,int custom_grade){
         return new Color(r-custom_grade,g-custom_grade,b-custom_grade);
     }
-    
+
+    @Override
     public void paint(Graphics g){
         super.paintComponent(g);
         

@@ -67,8 +67,6 @@ public class GamePanel extends JPanel {
         add(bottomPanel, BorderLayout.SOUTH);
     }
 
-
-
     private void init_bottomPanel(){
         bottomPanel = new JPanel();
         bottomPanel.setBackground(new Color(0, 0, 0, 0));
@@ -142,13 +140,11 @@ public class GamePanel extends JPanel {
         }
         ScoreHandler sh = new ScoreHandler(difficulty);   //moved here so the scorehandle is able to accept difficulty as a parameter
         Minesweeper.setScoreHandler(sh);
-        
         board = new Cells[rows][cols];
         Minesweeper.setCells(board);
         boardPanel = new JPanel(new GridLayout(rows, cols));   
         add(boardPanel);
         boardPanel.setBackground(new Color(0, 0, 0 ,0));
-        //boardPanel.setBorder(new LineBorder(Color.BLACK, 1));
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 board[i][j] = new Cells();

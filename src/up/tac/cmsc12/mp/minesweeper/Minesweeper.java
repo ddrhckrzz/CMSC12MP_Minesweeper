@@ -25,6 +25,7 @@ public class Minesweeper {
      * extensions it should automatically add the package line at
      * the very top for you.
      */
+    public static final String ASSETS_PATH = "assets\\";
     private static Timer timer;
     private static ScoreHandler scoreHandler;
     private static Background background;
