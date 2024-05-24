@@ -12,7 +12,7 @@ import up.tac.cmsc12.mp.ui.SquareLayout;
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
 import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.minesweeper.ScoreHandler;
-import up.tac.cmsc12.mp.minesweeper.Timer;
+import up.tac.cmsc12.mp.minesweeper.TimeHandler;
 
 public class GamePanel extends JPanel {
     // ----------------- OVERALL BOARD CONSTANTS -------------------------- //
@@ -39,7 +39,7 @@ public class GamePanel extends JPanel {
     private Cells[][] board;
     private JPanel boardPanel;
     private JPanel bottomPanel;
-    private Timer Timer;
+    private TimeHandler Timer;
     private Font f = new Font("Impact", Font.BOLD, 25);
     private JLabel timer = new JLabel("Time Elapsed: 0s"); //moved because they need to be global to be updated(cant change text)
     private static JLabel minesLeft = new JLabel("Mines Left: ");
@@ -51,7 +51,7 @@ public class GamePanel extends JPanel {
      */
     public GamePanel(){
         init_layout();
-        Timer = new Timer(timer);
+        Timer = new TimeHandler(timer);
         timer.setFont(f);
         minesLeft.setFont(f);
         Minesweeper.setTimer(Timer);

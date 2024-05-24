@@ -26,15 +26,19 @@ public class Minesweeper {
      * the very top for you.
      */
     public static final String ASSETS_PATH = "assets\\";
-    private static Timer timer;
+    private static TimeHandler timer;
     private static ScoreHandler scoreHandler;
     private static Background background;
     private static ViewController controller;
     private static Cells[][] cells;
     ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-    public static void setTimer(Timer givenTimer){
+    public static void setTimer(TimeHandler givenTimer){
         timer = givenTimer;
+    }
+
+    public static void startTimer() {
+        timer.startTimer();
     }
 
     public static void setScoreHandler(ScoreHandler givenScoreHandler){

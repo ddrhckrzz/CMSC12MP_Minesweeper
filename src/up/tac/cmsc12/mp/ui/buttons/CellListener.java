@@ -28,6 +28,7 @@ public class CellListener extends MouseAdapter{
         }
         if(!first_clicked){
             first_clicked = true;
+            Minesweeper.startTimer();
         }
     }
 
