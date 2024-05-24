@@ -8,13 +8,11 @@ import javax.swing.SwingUtilities;
 import up.tac.cmsc12.mp.minesweeper.*;
 
 public class CellListener extends MouseAdapter{
-    private Cells[][] board;
     private Cells cell;
     private int row, col;
     private static boolean first_clicked = false;
 
-    public CellListener(Cells[][] board, Cells cell, int row, int col){
-        this.board = board;
+    public CellListener(Cells cell, int row, int col){
         this.cell = cell;
         this.row = row;
         this.col = col;
@@ -30,6 +28,7 @@ public class CellListener extends MouseAdapter{
         }
         if(!first_clicked){
             first_clicked = true;
+            Minesweeper.startTimer();
         }
     }
 
@@ -39,7 +38,7 @@ public class CellListener extends MouseAdapter{
         }
         cell.updateText();
         if(cell.getVal()==0){ //auto clear only executes if the cell pressed is empty
-            Minesweeper.autoClear(board, row, col);
+            Minesweeper.autoClear(row, col);
         }
     }
     public void flagCell(){

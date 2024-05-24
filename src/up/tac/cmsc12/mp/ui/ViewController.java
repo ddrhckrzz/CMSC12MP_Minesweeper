@@ -8,12 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.minesweeper.ScoreTable;
-import up.tac.cmsc12.mp.ui.frames.*;
+import up.tac.cmsc12.mp.ui.panels.*;
 
 public class ViewController {
     public static final String HOME = "HOME";
@@ -33,6 +35,14 @@ public class ViewController {
         this.cardLayout = cardLayout;
         previousViews = new ArrayList<>(5);
         mapNames = new HashMap<>(10);
+        Thread t = new Thread(){
+            public void run(){
+                while(true){
+                    Minesweeper.refreshBackground();
+                }    
+            }
+        };
+        t.start();
     }
 
     public Container getParent() {
@@ -41,6 +51,10 @@ public class ViewController {
 
     public CardLayout getCardLayout() {
         return cardLayout;
+    }
+
+    public JFrame getFrame() {
+        return mainFrame;
     }
 
     public void addView(Component comp, String name) {
@@ -65,6 +79,20 @@ public class ViewController {
 
     public String victory() {
         String name = JOptionPane.showInputDialog("Enter name here:");
+        while (name == null || name.isBlank()) {
+            int c;
+            c = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to cancel this operation?\n(Your score will not be recorded)", 
+                "Confirm", 
+                JOptionPane.YES_NO_OPTION);
+            if (c == JOptionPane.YES_OPTION) {
+                break;
+            }
+            else {
+                name = JOptionPane.showInputDialog("Enter name here:");
+            }
+        }
+        home();
         return name;
     }
 
@@ -78,7 +106,8 @@ public class ViewController {
                 new String[]{"RESTART", "GO BACK TO MAIN MENU"},
                 null);
         if(choice == JOptionPane.YES_OPTION) {
-            view(ChooseDifficulty.DIFFICULTY_PANEL);
+            previous();
+            Minesweeper.refreshBackground();
         } else {
             home();
         }
@@ -113,9 +142,14 @@ public class ViewController {
     public void previous() {
         clearCustomFields();
         if (!previousViews.isEmpty()) {
-            String name = previousViews.removeLast();
-            getCardLayout().show(getParent(), name);
-            currentView = name;
+            if (!currentView.equals(previousViews.getLast())) {
+                String name = previousViews.removeLast();
+                getCardLayout().show(getParent(), name);
+                currentView = name;
+            } else {
+                previousViews.removeLast();
+                previous();
+            }
         } else {
             home();
         }
@@ -124,7 +158,11 @@ public class ViewController {
     public void view(String name) {
         if (mapNames.containsKey(name)) {
             if (currentView != null) {
-                previousViews.add(currentView);
+                if (!currentView.equals(MainFrame.GAME_PANEL) ) {
+                    if (!previousViews.contains(currentView)) {
+                        previousViews.add(currentView);
+                    }
+                }
             }
             getCardLayout().show(getParent(), name);
             currentView = name;

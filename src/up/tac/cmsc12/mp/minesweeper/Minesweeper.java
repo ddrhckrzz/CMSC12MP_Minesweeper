@@ -1,16 +1,17 @@
 package up.tac.cmsc12.mp.minesweeper;
 
-import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.ViewController;
 import up.tac.cmsc12.mp.ui.buttons.Cells;
-import up.tac.cmsc12.mp.ui.frames.GamePanel;
+import up.tac.cmsc12.mp.ui.panels.Background;
+import up.tac.cmsc12.mp.ui.panels.GamePanel;
 
 public class Minesweeper {
     /*
-     * TODO: Add logic here.
      * This should be the main Minesweeper Model (in the MVC Framework)
      * that handles the boardstate, what to do when certain actions are
      * done, how the board is generated, and also constructors for
@@ -24,12 +25,20 @@ public class Minesweeper {
      * extensions it should automatically add the package line at
      * the very top for you.
      */
-    private static Timer timer;
+    public static final String ASSETS_PATH = "assets\\";
+    private static TimeHandler timer;
     private static ScoreHandler scoreHandler;
+    private static Background background;
     private static ViewController controller;
+    private static Cells[][] cells;
+    ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-    public static void setTimer(Timer givenTimer){
+    public static void setTimer(TimeHandler givenTimer){
         timer = givenTimer;
+    }
+
+    public static void startTimer() {
+        timer.startTimer();
     }
 
     public static void setScoreHandler(ScoreHandler givenScoreHandler){
@@ -39,8 +48,24 @@ public class Minesweeper {
     public static void setViewController(ViewController viewcontroller){
         controller = viewcontroller;
     }
+
+    public static ViewController getViewController() { 
+        return controller;
+    }
   
-    public static void autoClear(Cells[][] cells, int row, int col){
+    public static void setBackground(Background givenBackground){
+        background = givenBackground;
+    }
+
+    public static void setCells(Cells[][] givenCells){
+        cells = givenCells;
+    }
+
+    public static void refreshBackground(){
+        background.repaint();
+    }
+
+    public static void autoClear(int row, int col){
         int[] xAdjacency = {-1, -1, -1, 0, 0, 0, 1, 1, 1};
         int[] yAdjacency = {-1, 0, 1, -1, 0, 1, -1, 0, 1};
         int rowToUpdate;
@@ -65,13 +90,10 @@ public class Minesweeper {
                     cells[rowToUpdate][colToUpdate].updateText();
                 }
                 if(cellVal < 1 && !isClear){
-                    autoClear(cells, rowToUpdate, colToUpdate);
+                    autoClear(rowToUpdate, colToUpdate);
                 }    
             }
             catch(ArrayIndexOutOfBoundsException e){
-            }
-            catch(Exception e){
-                e.printStackTrace();
             }
         }
     }
@@ -92,21 +114,23 @@ public class Minesweeper {
                 minesLeft.setText("Mines Left: " + (noOfMines - noOfFlags));
                 return;
             }
-            cell.setText("🚩");
+            cell.flag();
             if(val == 9){
                 Cells.addNoOfFound(1);
             }
             Cells.addNoOfFlags(1);
         }
         else{
-            cell.setText("");
+            cell.setCurrentIcon(null);
             if(val == 9){
                 Cells.addNoOfFound(-1);
             }
             Cells.addNoOfFlags(-1);
         }
+
         noOfFlags = Cells.getNoOfFlags();
         minesLeft.setText("Mines Left: " + (noOfMines - noOfFlags));
+        refreshBackground();
         cell.revFlag(); //reverses boolean flag value
         if(Cells.getNoOfFound() == Cells.getNoOfMines()){
             victory();
@@ -116,13 +140,20 @@ public class Minesweeper {
     public static void victory(){
         timer.stopTimer();
         String name = controller.victory();
-        scoreHandler.newScore(name, timer.getTime());
-        controller.updateScores();
+        if (name != null && !name.isBlank()) {
+            scoreHandler.newScore(name, timer.getTime());
+            controller.updateScores();
+        }
     }
 
     public static void defeat(){
-        controller.lose();
+        for(Cells[] cellrow: cells){
+            for(Cells cell : cellrow){
+                cell.revealMine();
+            }
+        }
         timer.stopTimer();
+        controller.lose();
     }
 }
 

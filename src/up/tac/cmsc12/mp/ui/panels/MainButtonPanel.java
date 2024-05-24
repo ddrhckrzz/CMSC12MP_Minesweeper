@@ -1,29 +1,30 @@
-package up.tac.cmsc12.mp.ui.frames;
+package up.tac.cmsc12.mp.ui.panels;
 
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
-import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
+import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class MainButtonPanel extends JPanel{
     private GridBagLayout layout;
     private GridBagConstraints gbc;
-    private JButton startButton;
-    private JButton scoreButton;
-    private JButton optionsButton;
-    private JButton exitButton;
-    private JLabel logoPane = new JLabel("MINESWEEPER");
+    private CustomButton startButton;
+    private CustomButton scoreButton;
+    private CustomButton creditsButton;
+    private CustomButton exitButton;
+    private CustomButton logoPane = new CustomButton("MINESWEEPER", 1);
     public MainButtonPanel(){
         init_layout();
         init_buttons();
+        bind_buttons();
     }
 
     private void init_layout(){
@@ -31,18 +32,19 @@ public class MainButtonPanel extends JPanel{
         gbc = new GridBagConstraints();
         setLayout(layout);
         setMaximumSize(new Dimension(390, 540));
+        setBackground(null);
     }
 
     private void init_buttons(){
-        startButton = new JButton("New Game");
-        scoreButton = new JButton("Leaderboards");
-        optionsButton = new JButton("Options");
-        exitButton = new JButton("Exit");
+        startButton = new CustomButton("New Game");
+        scoreButton = new CustomButton("Leaderboards",5,25);
+        creditsButton = new CustomButton("Credits",5,25);
+        exitButton = new CustomButton("Exit",5,30);
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.gridwidth = 2;
         GBCUtils u = new GBCUtils(gbc);
         u.setGBC(0, 0, GridBagConstraints.CENTER, 0.8, 0.8, GridBagConstraints.BOTH);
-        logoPane.setHorizontalAlignment(JLabel.CENTER);
+        //logoPane.setHorizontalAlignment(JLabel.CENTER);
         add(logoPane, gbc);
         gbc.ipadx = 20;
         gbc.ipady = 30;
@@ -52,29 +54,36 @@ public class MainButtonPanel extends JPanel{
         u.setGBC(0, 2, 0.2, 0.2);
         add(scoreButton, gbc);
         u.setGBC(1, 2);
-        add(optionsButton, gbc);
+        add(creditsButton, gbc);
         gbc.gridwidth = 2;
         u.setGBC(0, 3, 0.4, 0.2);
         add(exitButton, gbc);
     }
 
-    protected void bind_buttons(ViewController controller){
-        startButton.addActionListener(new ActionListener() {
+    protected void bind_buttons(){
+        ViewController controller = Minesweeper.getViewController();
+        startButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 controller.view(ChooseDifficulty.DIFFICULTY_PANEL);
             }
         });
-        scoreButton.addActionListener(new ActionListener() {
+
+        scoreButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 controller.view(MainFrame.SCORE_PANEL);
             }
         });
-        // optionsButton.addActionListener(mbl);
-        exitButton.addActionListener(new ActionListener() {
+        creditsButton.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
+                controller.view(MainFrame.CREDITS_PANEL);
+            }
+        });
+        exitButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
                 System.exit(0);
             }
         });

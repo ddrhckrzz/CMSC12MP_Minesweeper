@@ -7,9 +7,6 @@ import java.util.Scanner;
 import javax.swing.table.DefaultTableModel;
 
 public class ScoreTable extends DefaultTableModel{
-    /*
-     * TODO: add file I/O to this so we can save scoredata to and from a file.
-     */
     private int difficulty;
     public ScoreTable(int difficulty){
         super(new String[]{"Time", "Username"}, 0);
@@ -53,7 +50,20 @@ public class ScoreTable extends DefaultTableModel{
                     while(reader.hasNextLine()) {
                         data = reader.nextLine().split(", ");
                         if(!data[0].isEmpty()){
-                            addRow(data);
+                            try {
+                                int m, s;
+                                int t = Integer.parseInt(data[0]);
+                                m = t / 60;
+                                s = t % 60;
+                                if (m > 0) {
+                                    data[0] = m + "m " + s + "s";
+                                } else {
+                                    data[0] = s + "s";
+                                }
+                                addRow(data);
+                            } catch (NumberFormatException e) {
+                                // eh
+                            }
                         }
                     }
                     reader.close();

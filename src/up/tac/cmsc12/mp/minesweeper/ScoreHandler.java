@@ -20,6 +20,9 @@ public class ScoreHandler {
         MASTER_SCOREFILE = new File(PATH + "MasterScores.txt");
         LEGEND_SCOREFILE = new File(PATH + "LegendScores.txt");
         try {
+            // if(Files.createDirectories(Paths.get(PATH)) != null){ //automatically creates folder directory if DNE
+            //     // System.out.println("Folder Directory Exists");
+            // }
             file.createNewFile();
             BEGINNGER_SCROREFILE.createNewFile();
             INTERMEDIATE_SCOREFILE.createNewFile();
@@ -27,13 +30,8 @@ public class ScoreHandler {
             MASTER_SCOREFILE.createNewFile();
             LEGEND_SCOREFILE.createNewFile();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
-
-    public void readScores(){
-
     }
 
     public void newScore(String nameToSort, int timeToSort){
@@ -70,7 +68,7 @@ public class ScoreHandler {
         if(isLast){ //catcher if new score is lastplace
             try (FileWriter writer = new FileWriter(PATH_TO_EDIT, true)){
                 writer.write("\n" + toWrite);
-                System.out.println("Score Recorded");
+                // System.out.println("Score Recorded"); 
                 return;
             } catch (IOException e) {
             }
@@ -111,18 +109,19 @@ public class ScoreHandler {
 
             writer.close(); 
             scan.close();
-            if(tempFile.delete()){
-                System.out.println("Deleted");
-            }
-            else {
-                System.out.println("not deleted");
-            }
+            
+            // if(tempFile.delete()){
+            //     System.out.println("Deleted");
+            // }
+            // else {
+            //     System.out.println("not deleted");
+            // }
 
         } catch (IOException e) {
             e.printStackTrace();
         } 
         scan.close();
-        System.out.println("Score Recorded");
+        // System.out.println("Score Recorded");
     }
 
     private void findFileDifficulty(){
