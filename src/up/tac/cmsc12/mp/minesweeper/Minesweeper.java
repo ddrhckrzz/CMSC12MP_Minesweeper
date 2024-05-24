@@ -7,8 +7,8 @@ import javax.swing.JLabel;
 
 import up.tac.cmsc12.mp.ui.ViewController;
 import up.tac.cmsc12.mp.ui.buttons.Cells;
-import up.tac.cmsc12.mp.ui.frames.Background;
-import up.tac.cmsc12.mp.ui.frames.GamePanel;
+import up.tac.cmsc12.mp.ui.panels.Background;
+import up.tac.cmsc12.mp.ui.panels.GamePanel;
 
 public class Minesweeper {
     /*

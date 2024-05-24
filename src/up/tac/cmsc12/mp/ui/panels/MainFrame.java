@@ -1,4 +1,4 @@
-package up.tac.cmsc12.mp.ui.frames;
+package up.tac.cmsc12.mp.ui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;

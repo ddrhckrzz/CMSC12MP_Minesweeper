@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.minesweeper.ScoreTable;
-import up.tac.cmsc12.mp.ui.frames.*;
+import up.tac.cmsc12.mp.ui.panels.*;
 
 public class ViewController {
     public static final String HOME = "HOME";

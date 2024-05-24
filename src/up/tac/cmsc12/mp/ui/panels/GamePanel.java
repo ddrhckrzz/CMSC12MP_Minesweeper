@@ -1,14 +1,17 @@
-package up.tac.cmsc12.mp.ui.frames;
+package up.tac.cmsc12.mp.ui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import up.tac.cmsc12.mp.ui.buttons.Cells;
+import up.tac.cmsc12.mp.ui.SquareLayout;
 import up.tac.cmsc12.mp.ui.buttons.CellListener;
 import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.minesweeper.ScoreHandler;
@@ -41,6 +44,7 @@ public class GamePanel extends JPanel {
     private int totalMines;
     private Cells[][] board;
     private JPanel boardPanel;
+    private JPanel boardWrapper;
     private JPanel bottomPanel;
     private Timer Timer;
     private Font f = new Font("Impact", Font.BOLD, 25);
@@ -63,6 +67,10 @@ public class GamePanel extends JPanel {
 
     private void init_layout(){
         setLayout(new BorderLayout());
+        boardWrapper = new JPanel();
+        boardWrapper.setLayout(new BoxLayout(boardWrapper, BoxLayout.Y_AXIS));
+        boardWrapper.setBackground(new Color(0, 0, 0, 0));
+        add(boardWrapper, BorderLayout.CENTER);
         init_bottomPanel();
         add(bottomPanel, BorderLayout.SOUTH);
     }
@@ -70,7 +78,6 @@ public class GamePanel extends JPanel {
     private void init_bottomPanel(){
         bottomPanel = new JPanel();
         bottomPanel.setBackground(new Color(0, 0, 0, 0));
-
         timer.setHorizontalAlignment(JLabel.CENTER);
         minesLeft.setHorizontalAlignment(JLabel.CENTER);
         bottomPanel.add(timer);
@@ -94,7 +101,7 @@ public class GamePanel extends JPanel {
     public void generate_board(){
         resetBoard();
         if (boardPanel != null) {
-            remove(boardPanel);
+            boardWrapper.remove(boardPanel);
         }
         if(pauseFrame != null){
             remove(pauseFrame);
@@ -142,8 +149,8 @@ public class GamePanel extends JPanel {
         Minesweeper.setScoreHandler(sh);
         board = new Cells[rows][cols];
         Minesweeper.setCells(board);
-        boardPanel = new JPanel(new GridLayout(rows, cols));   
-        add(boardPanel);
+        boardPanel = new JPanel(new SquareLayout(rows, cols));   
+        boardWrapper.add(boardPanel);
         boardPanel.setBackground(new Color(0, 0, 0 ,0));
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {

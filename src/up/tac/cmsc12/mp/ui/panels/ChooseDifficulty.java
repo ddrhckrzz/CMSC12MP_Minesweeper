@@ -1,4 +1,4 @@
-package up.tac.cmsc12.mp.ui.frames;
+package up.tac.cmsc12.mp.ui.panels;
 
 import java.awt.Dimension;
 import java.awt.Font;
