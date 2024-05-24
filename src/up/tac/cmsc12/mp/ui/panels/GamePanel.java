@@ -2,11 +2,8 @@ package up.tac.cmsc12.mp.ui.panels;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,10 +19,7 @@ public class GamePanel extends JPanel {
     private static final int DEFAULT_ROWS = 9;
     private static final int DEFAULT_COLS = 9;
     private static final int DEFAULT_NO_OF_MINES = 10;
-    public static final int MAX_DIMENSIONS = 250; // width and height
-    public static final int MAX_ROWS = 25;
-    public static final int MAX_COLS = 50;
-    public static final int CELL_DIMENSIONS = 30;
+    public static final int MAX_DIMENSIONS = 100; // width and height
     // ---------------- BOARD DIFFICULTY CONSTANTS ------------------------ //
     public static final int BEGINNER_DIMENSIONS = 9;
     public static final int BEGINNER_NO_OF_MINES = 10;
@@ -33,10 +27,10 @@ public class GamePanel extends JPanel {
     public static final int INTERMEDIATE_NO_OF_MINES = 40;
     public static final int EXPERT_DIMENSIONS = 24;
     public static final int EXPERT_NO_OF_MINES = 99;
-    public static final int MASTER_DIMENSIONS = 50;
-    public static final int MASTER_NO_OF_MINES = 450;
-    public static final int LEGEND_DIMENSIONS = 100;
-    public static final int LEGEND_NO_OF_MINES = 2000;
+    public static final int MASTER_DIMENSIONS = 45;
+    public static final int MASTER_NO_OF_MINES = 420;
+    public static final int LEGEND_DIMENSIONS = 75;
+    public static final int LEGEND_NO_OF_MINES = 1000;
     // ------------------------ class variables ---------------------------- //
     private int difficulty;
     private int rows;
@@ -44,7 +38,6 @@ public class GamePanel extends JPanel {
     private int totalMines;
     private Cells[][] board;
     private JPanel boardPanel;
-    private JPanel boardWrapper;
     private JPanel bottomPanel;
     private Timer Timer;
     private Font f = new Font("Impact", Font.BOLD, 25);
@@ -67,10 +60,6 @@ public class GamePanel extends JPanel {
 
     private void init_layout(){
         setLayout(new BorderLayout());
-        boardWrapper = new JPanel();
-        boardWrapper.setLayout(new BoxLayout(boardWrapper, BoxLayout.Y_AXIS));
-        boardWrapper.setBackground(new Color(0, 0, 0, 0));
-        add(boardWrapper, BorderLayout.CENTER);
         init_bottomPanel();
         add(bottomPanel, BorderLayout.SOUTH);
     }
@@ -101,7 +90,7 @@ public class GamePanel extends JPanel {
     public void generate_board(){
         resetBoard();
         if (boardPanel != null) {
-            boardWrapper.remove(boardPanel);
+            remove(boardPanel);
         }
         if(pauseFrame != null){
             remove(pauseFrame);
@@ -150,7 +139,7 @@ public class GamePanel extends JPanel {
         board = new Cells[rows][cols];
         Minesweeper.setCells(board);
         boardPanel = new JPanel(new SquareLayout(rows, cols));   
-        boardWrapper.add(boardPanel);
+        add(boardPanel, BorderLayout.CENTER);
         boardPanel.setBackground(new Color(0, 0, 0 ,0));
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {

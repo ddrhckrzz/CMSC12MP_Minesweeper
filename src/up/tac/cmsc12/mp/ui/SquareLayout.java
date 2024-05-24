@@ -27,22 +27,21 @@ public class SquareLayout extends GridLayout{
                 nrows = (ncomponents + ncols - 1) / ncols;
             }
             // magic happens here
-
+            // in case there are gaps in between components
+            // or insets in the grid panel itself
             int totalGapsWidth = (ncols - 1) * getHgap();
             int widthWOInsets = parent.getWidth() - (insets.left + insets.right);
-            int widthOnComponent = (widthWOInsets - totalGapsWidth) / ncols;
-
             int totalGapsHeight = (nrows - 1) * getVgap();
             int heightWOInsets = parent.getHeight() - (insets.top + insets.bottom);
+            // calculate the width needed
+            int widthOnComponent = (widthWOInsets - totalGapsWidth) / ncols;
             int heightOnComponent = (heightWOInsets - totalGapsHeight) / nrows;
-
+            // get the smallest of the two and use it as the size. it becomes square now yay.
             int size = Math.min(widthOnComponent, heightOnComponent);
             widthOnComponent = size;
             heightOnComponent = size;
             
             int extraWidthAvailable = (widthWOInsets - (widthOnComponent * ncols + totalGapsWidth)) / 2;
-    
-            
             int extraHeightAvailable = (heightWOInsets - (heightOnComponent * nrows + totalGapsHeight)) / 2;
             
             if (ltr) {
