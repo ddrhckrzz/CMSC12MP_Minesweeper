@@ -1,23 +1,24 @@
-package up.tac.cmsc12.mp.ui.frames;
+package up.tac.cmsc12.mp.ui.panels;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.InputMismatchException;
 
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import up.tac.cmsc12.mp.minesweeper.Minesweeper;
 import up.tac.cmsc12.mp.ui.GBCUtils;
 import up.tac.cmsc12.mp.ui.ViewController;
+import up.tac.cmsc12.mp.ui.buttons.CustomButton;
 
 public class ChooseDifficulty {
     public static final String DIFFICULTY_PANEL = "Difficulty Panel";
@@ -29,12 +30,18 @@ public class ChooseDifficulty {
     private JTextField totalMinesField;
     private ViewController controller;
 
-    public ChooseDifficulty(ViewController controller) {
-        this.controller = controller;
+    public ChooseDifficulty() {
+        this.controller = Minesweeper.getViewController();
         difficultyPanel = makeDifficultyPanel();
         customDifficultyPanel = makeCustomDifficultyPanel();
-        controller.addView(difficultyPanel, DIFFICULTY_PANEL);
-        controller.addView(customDifficultyPanel, CUSTOM_PANEL);
+    }
+
+    protected JPanel getDifficultyPanel() {
+        return difficultyPanel;
+    }
+
+    protected JPanel getCustomDifficultyPanel() {
+        return customDifficultyPanel;
     }
 
     private JPanel makeDifficultyPanel(){
@@ -43,48 +50,52 @@ public class ChooseDifficulty {
         JPanel wrapper = new JPanel();
         wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.Y_AXIS));
         buttonsPanel.setLayout(new GridBagLayout());
+
+        buttonsPanel.setBackground(null); //around the difficulty buttons
+        wrapper.setBackground(null); //the empty space
+
         buttonsPanel.setMaximumSize(new Dimension(360, 510));
         // making the different buttons
-        JButton beginner = new JButton("BEGINNER");
-        JButton intermediate = new JButton("INTERMEDIATE");
-        JButton expert = new JButton("EXPERT");
-        JButton master = new JButton("MASTER");
-        JButton legend = new JButton("LEGEND");
-        JButton custom = new JButton("CUSTOM");
+        CustomButton beginner = new CustomButton("BEGINNER", 5, 25);
+        CustomButton intermediate = new CustomButton("INTERMEDIATE", 5, 25);
+        CustomButton expert = new CustomButton("EXPERT", 5, 25);
+        CustomButton master = new CustomButton("MASTER", 5, 25);
+        CustomButton legend = new CustomButton("LEGEND", 5, 25);
+        CustomButton custom = new CustomButton("CUSTOM", 5, 25);
         // set ActionListeners
-        beginner.addActionListener(new ActionListener() {
+        beginner.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(1);
             }
         });
-        intermediate.addActionListener(new ActionListener() {
+        intermediate.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(2);
             }
         });
-        expert.addActionListener(new ActionListener() {
+        expert.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(3);
             }
         });
-        master.addActionListener(new ActionListener() {
+        master.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(4);
             }
         });
-        legend.addActionListener(new ActionListener() {
+        legend.addMouseListener(new MouseAdapter(){
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(5);
             }
         });
-        custom.addActionListener(new ActionListener() {
+        custom.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 controller.view(CUSTOM_PANEL);
             }
         });
@@ -114,8 +125,11 @@ public class ChooseDifficulty {
 
     private JPanel makeCustomDifficultyPanel(){
         // even more panels within panels shenanigans
+        
         JPanel gridwrapper = new JPanel();
         JPanel fieldsPanel = new JPanel();
+        fieldsPanel.setBackground(null); //around the components
+        gridwrapper.setBackground(null); //the empty space
         fieldsPanel.setLayout(new GridBagLayout());
         fieldsPanel.setMaximumSize(new Dimension(420, 270));
         gridwrapper.setLayout(new BoxLayout(gridwrapper, BoxLayout.Y_AXIS));
@@ -123,15 +137,21 @@ public class ChooseDifficulty {
         GridBagConstraints c = new GridBagConstraints();
         GBCUtils u = new GBCUtils(c);
         c.fill = GridBagConstraints.BOTH;
-        JLabel topLabel = new JLabel("CUSTOM GAME SETUP");
+        c.insets = new Insets(6, 6, 6, 6);
+        CustomButton topLabel = new CustomButton("CUSTOM GAME SETUP", 5, 20);
         JLabel rowsLabel = new JLabel("No. of Rows (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel colsLabel = new JLabel("No. of Columns (max: " + GamePanel.MAX_DIMENSIONS + "): ");
         JLabel totalMinesLabel = new JLabel("No. of Mines (max: (rows * cols) - 1): ");
-        JButton startCustom = new JButton("START");
+        Font f = new Font("Impact", Font.PLAIN, 18);
+        rowsLabel.setFont(f);
+        colsLabel.setFont(f);
+        totalMinesLabel.setFont(f);
+        
+        CustomButton startCustom = new CustomButton("START", 5, 30);
         rowsField = new JTextField(10);
         colsField = new JTextField(10);
         totalMinesField = new JTextField(10);
-        topLabel.setHorizontalAlignment(JLabel.CENTER);
+        //topLabel.setHorizontalAlignment(JLabel.CENTER);
         c.gridwidth = 2;
         c.gridheight = 1;
         u.setGBC(0, 0);
@@ -155,9 +175,9 @@ public class ChooseDifficulty {
         u.setGBC(0, 4);
         fieldsPanel.add(startCustom, c);
         // add listeners to the start button
-        startCustom.addActionListener(new ActionListener() {
+        startCustom.addMouseListener(new MouseAdapter() {
             @Override
-            public void actionPerformed(ActionEvent e) {
+            public void mouseReleased(MouseEvent e) {
                 generateGamePanel(0);
             }
         });
@@ -172,18 +192,39 @@ public class ChooseDifficulty {
                 int rows = Integer.parseInt(rowsField.getText());
                 int cols = Integer.parseInt(colsField.getText());
                 int totalMines = Integer.parseInt(totalMinesField.getText());
-                if (rows <= 0 | rows > GamePanel.MAX_DIMENSIONS | cols <= 0 | cols > GamePanel.MAX_DIMENSIONS) {
+                if (rows <= 0 | rows > GamePanel.MAX_DIMENSIONS | cols <= 0 | cols > GamePanel.MAX_DIMENSIONS | rows * cols == 1) {
                     throw new InputMismatchException();
                 }
-                if (totalMines > (rows * cols) - 1) {
-                    throw new InputMismatchException();
+                if ((totalMines > (rows * cols) - 1) | totalMines <= 0) {
+                    throw new InputMismatchException(String.valueOf(totalMines));
                 }
                 controller.generateGameBoard(rows, cols, totalMines);
                 controller.view(MainFrame.GAME_PANEL);
             } catch (InputMismatchException ime) {
-                JOptionPane.showMessageDialog(controller.getParent(), "Numbers must be within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+                if (ime.getMessage() != null) {
+                    int totalMines = Integer.parseInt(totalMinesField.getText());
+                    if (totalMines <= 0) {
+                        JOptionPane.showMessageDialog(controller.getParent(), 
+                            "Total Mines cannot be less than one.",
+                            "INPUT ERROR",
+                            JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(controller.getParent(),
+                        "Numbers must be within specified bounds",
+                        "INPUT ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(controller.getParent(),
+                        "Numbers must be within specified bounds\n(rows * cols cannot equal to 1)",
+                        "INPUT ERROR",
+                        JOptionPane.ERROR_MESSAGE);
+                }
             } catch (NumberFormatException nfe) {
-                JOptionPane.showMessageDialog(controller.getParent(), "Input in the fields must be integers within specified bounds", "INPUT ERROR", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(controller.getParent(),
+                    "Input in the fields must be integers within specified bounds",
+                    "INPUT ERROR",
+                    JOptionPane.ERROR_MESSAGE);
             }
         } else {
             controller.generateGameBoard(difficulty);
