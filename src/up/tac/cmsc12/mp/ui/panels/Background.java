@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 
 public class Background extends JPanel{
     private Image backGroundImage;
-    private static final String BACKGROUND_PATH = "backgrounds\\";
+    private static final String BACKGROUND_PATH = "backgrounds/";
     public Background(){
         backGroundImage = new ImageIcon(getClass().getClassLoader().getResource(BACKGROUND_PATH + "desert.png")).getImage();
     }

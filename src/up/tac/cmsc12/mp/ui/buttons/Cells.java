@@ -14,7 +14,7 @@ public class Cells extends JButton {
     private boolean isClear = false, flagged = false;
     private static int noOfMines = 0, noOfFlags = 0, noOfFound = 0;
     private int r=244,g=240,b=225;
-    public static final String ICON_PATH = "icons\\Minesweeper_";
+    public static final String ICON_PATH = "icons/Minesweeper_";
     private ImageIcon icon[] = new ImageIcon[10];
     private ImageIcon flagIcon = new ImageIcon(ICON_PATH + "flag.png");
     private ImageIcon currentIcon;
