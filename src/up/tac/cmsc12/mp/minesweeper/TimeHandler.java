@@ -31,6 +31,9 @@ public class TimeHandler{
         timeListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(CellListener.getFirstClicked() == false){
+                    return;
+                }
                 timeSeconds += 1;
                 updateTime();
             }
@@ -45,7 +48,7 @@ public class TimeHandler{
         paused = false;
         running = false;
         timeSeconds = 0;
-        swingTimer = new Timer(1000, timeListener);
+        updateTime();
         CellListener.resetFirstClicked();
     }
 
